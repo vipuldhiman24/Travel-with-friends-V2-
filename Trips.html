@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manali Mountain Escape - WanderWithFriends</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                    "primary": "#f47b25",
+                    "background-light": "#f8f7f5",
+                    "background-dark": "#221710",
+                },
+                fontFamily: {
+                    "display": ["Plus Jakarta Sans", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#1c130d] dark:text-white antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full bg-[#fcfaf8]/90 dark:bg-[#1c130d]/90 backdrop-blur-md border-b border-[#f4ece7] dark:border-[#3a2d26]">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">hiking</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight text-[#1c130d] dark:text-white">WanderWithFriends</h2>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Destinations</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Groups</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Blog</a>
+</nav>
+<!-- Action -->
+<div class="hidden md:flex items-center gap-4">
+<button class="text-sm font-bold text-primary hover:text-primary/80">
+                        Login
+                    </button>
+<button class="bg-primary text-white text-sm font-bold px-5 py-2.5 rounded-full hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+                        Find a Trip
+                    </button>
+</div>
+<!-- Mobile Menu Button -->
+<button class="md:hidden p-2 text-gray-600 dark:text-gray-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="min-h-screen pb-20">
+<!-- Hero Section -->
+<div class="relative w-full h-[500px] md:h-[600px] group">
+<div   id="pkg-image" class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Snow capped mountain landscape in Manali" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvPMZ3ho1C5avrSwtUC7Zo4gQQ-Sm6E2K4rO2DZmkFbNGPr0mv-6HfKV_lCgMay5hw98_vnJGpX9W0yqgEyEY5gMWV-hHQjKygvJXP7JJqUIAzJayREKoregNX8L7BTx_Grz-3x0jLOMtp-V5xoFIFLpA4sk8X_OgmYU40frJ4E2Q1W0xrZ96UFfap9tq-tSHL4YbDpbgAL6cfxF1ozOZ090aNSmmxTvVfw3PyViJ_mjN9hkoC_FrZKE-eK66JhfWEJdnu6N4zXaEw");'></div>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="relative h-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-12 md:pb-16">
+<!-- Badge -->
+<div class="mb-4">
+<span class="inline-flex items-center gap-1 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+<span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                        Trending Now
+                    </span>
+</div>
+<!-- Title -->
+<h1   id="pkg-title" 
+       class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-2 tracking-tight">
+                    Manali Mountain Escape
+</h1>
+<!-- Location -->
+<div class="flex items-center gap-2 text-white/90">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span  id="pkg-location" class="text-lg font-medium">Himachal Pradesh, India</span>
+</div>
+</div>
+</div>
+<!-- Main Content Layout -->
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column (Content) -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Trip Summary Card (Floating) -->
+<div class="bg-white dark:bg-[#2a201a] rounded-xl shadow-xl p-6 border border-gray-100 dark:border-gray-800">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-gray-700">
+<!-- Price -->
+<div class="flex items-center gap-4 px-2">
+<div class="bg-primary/10 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Starting From</p>
+<p id="pkg-price" class="text-xl font-bold text-gray-900 dark:text-white ">onwards<span class="text-sm font-normal text-gray-500 dark:text-gray-400">/person</span></p>
+</div>
+</div>
+<!-- Duration -->
+<div class="flex items-center gap-4 px-2 pt-4 md:pt-0">
+<div class="bg-primary/10 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Duration</p>
+<p  id="pkg-duration" class="text-lg font-bold text-gray-900 dark:text-white">4 Days / 3 Nights</p>
+</div>
+</div>
+<!-- Group Size -->
+<div class="flex items-center gap-4 px-2 pt-4 md:pt-0">
+<div class="bg-primary/10 p-3 rounded-full text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">Group Size</p>
+<p class="text-lg font-bold text-gray-900 dark:text-white">Best for 4+ Friends</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Breadcrumbs -->
+<!-- <div class="flex flex-wrap gap-2 text-sm text-gray-500 dark:text-gray-400">
+<a class="hover:text-primary" href="#">Home</a>
+<span>/</span>
+<a class="hover:text-primary" href="#">India</a>
+<span>/</span>
+<a class="hover:text-primary" href="#">Himachal Pradesh</a>
+<span>/</span>
+<span class="text-gray-900 dark:text-white font-medium">Manali</span>
+</div> -->
+<!-- About The Trip -->
+<section class="bg-white dark:bg-[#2a201a] rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">sentiment_satisfied</span>
+<h2 class="text-2xl font-bold text-gray-900 dark:text-white">The Vibe</h2>
+</div>
+<p  id="pkg-desc" class="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+                            Ditch the mundane and pack your bags for the ultimate <strong class="text-gray-900 dark:text-white font-semibold">Manali Mountain Escape</strong>. Experience the snow-capped peaks and vibrant cafe culture of Old Manali. This trip is designed for squads looking for adventure and chill vibes. From Solang Valley thrills to spiritual vibes at Manikaran, we've got it all covered. Whether you're a foodie, an adventurer, or just looking to relax by the river, Manali has something for every member of your group.
+                        </p>
+<!-- Highlights Pills -->
+<div class="flex flex-wrap gap-3 mt-6">
+<span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-base">landscape</span> Mountain Views
+                            </span>
+<span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-base">restaurant</span> Cafe Hopping
+                            </span>
+<span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-base">temple_hindu</span> Cultural Sites
+                            </span>
+<span class="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-base">hiking</span> Trekking
+                            </span>
+</div>
+</section>
+<!-- Itinerary -->
+<section class="bg-white dark:bg-[#2a201a] rounded-xl p-6 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-800">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="material-symbols-outlined text-primary text-2xl">map</span>
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+      Trip Itinerary
+    </h2>
+  </div>
+
+  <!-- Itinerary Container -->
+  <div
+    id="pkg-itinerary"
+    class="relative border-l-2 border-primary/20 ml-3 space-y-12">
+  </div>
+</section>
+
+</div>
+<!-- Right Column (Sticky Sidebar) -->
+<div class="lg:col-span-4 relative">
+<div class="sticky top-24 space-y-6">
+<!-- Booking Card -->
+<div class="bg-white dark:bg-[#2a201a] rounded-xl shadow-xl border border-primary/10 overflow-hidden">
+<div class="bg-gradient-to-r from-primary/10 to-transparent p-6 border-b border-primary/10">
+<h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Ready to explore?</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300">Gather your friends and book your spot.</p>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="flex items-end justify-between">
+<div>
+<p class="text-sm text-gray-500 mb-1">Total Price</p>
+<p class="text-3xl font-extrabold text-primary">₹9,999</p>
+</div>
+<div class="text-right">
+<p class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-bold">Best Price</p>
+</div>
+</div>
+<hr class="border-gray-100 dark:border-gray-700"/>
+<div class="flex flex-col gap-3">
+<!-- WhatsApp Button -->
+<button class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-green-200 dark:shadow-none flex items-center justify-center gap-3 transition-all transform active:scale-95 group">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+<span class="text-lg">Send Enquiry</span>
+</button>
+<button class="w-full bg-transparent border-2 border-gray-200 dark:border-gray-600 hover:border-primary hover:text-primary text-gray-700 dark:text-gray-300 font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined">call</span>
+<span>Call Now</span>
+</button>
+</div>
+<div class="text-center">
+<p class="text-xs text-gray-400">Usually replies within 1 hour</p>
+</div>
+</div>
+</div>
+<!-- Included/Excluded Mini Card -->
+<div class="bg-white dark:bg-[#2a201a] rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-800">
+<h4 class="font-bold text-gray-900 dark:text-white mb-3">Quick Inclusions</h4>
+<ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    Volvo Transfers
+                                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    3-Star Hotel Stay
+                                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    Breakfast &amp; Dinner
+                                </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    Local Sightseeing
+                                </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="bg-white dark:bg-[#1a120d] border-t border-gray-100 dark:border-gray-800 pt-12 pb-8">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+<div class="flex items-center gap-2 mb-6 text-gray-400">
+<span class="material-symbols-outlined text-3xl">hiking</span>
+<span class="font-bold text-lg">WanderWithFriends</span>
+</div>
+<p class="text-gray-500 text-sm text-center mb-6">Made for friends who travel together.</p>
+<div class="flex gap-6 text-sm font-medium text-gray-500">
+<a class="hover:text-primary" href="#">About Us</a>
+<a class="hover:text-primary" href="#">Contact</a>
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+</div>
+<div class="mt-8 text-xs text-gray-400">
+                © 2023 WanderWithFriends. All rights reserved.
+            </div>
+</div>
+</footer>
+
+<script src="./data/packages.js"></script>
+<script src="./js/Trip.js"></script>
+
+
+</body></html>

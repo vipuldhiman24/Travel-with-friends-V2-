@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WanderWithFriends - Visa Enquiry</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f47b25",
+                        "background-light": "#fcfaf8",
+                        "background-dark": "#221710",
+                        "text-main-light": "#1c130d",
+                        "text-main-dark": "#f4ece7",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2c241e",
+                        "border-light": "#e8d9ce",
+                        "border-dark": "#4a3b32",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e8d9ce;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d6c2b4;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4a3b32;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-border-light dark:border-border-dark px-4 lg:px-10 py-3 transition-colors duration-300">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-4 text-text-main-light dark:text-text-main-dark">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_330)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clipPath>
+</defs>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight">WanderWithFriends</h2>
+</div>
+<button class="lg:hidden p-2 text-text-main-light dark:text-text-main-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden lg:flex flex-1 justify-end items-center gap-8">
+<nav class="flex items-center gap-8">
+<a class="text-text-main-light dark:text-text-main-dark hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Flights</a>
+<a class="text-text-main-light dark:text-text-main-dark hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Hotels</a>
+<a class="text-text-main-light dark:text-text-main-dark hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Bus</a>
+<a class="text-text-main-light dark:text-text-main-dark hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Packages</a>
+<a class="text-primary font-bold text-sm leading-normal" href="#">Visa Services</a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="Toggle theme" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-symbols-outlined dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined hidden dark:block">light_mode</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary hover:bg-orange-600 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors shadow-lg shadow-orange-500/20">
+<span class="truncate">Log In</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow flex flex-col">
+<section class="relative w-full py-12 lg:py-20 px-4 overflow-hidden">
+<div class="absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-10 text-border-dark dark:text-border-light">
+<svg class="w-full h-full" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="20" id="dot-pattern" patternUnits="userSpaceOnUse" width="20">
+<circle cx="2" cy="2" fill="currentColor" r="1.5"></circle>
+</pattern>
+</defs>
+<rect fill="url(#dot-pattern)" height="100%" width="100%"></rect>
+</svg>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background-light/50 to-background-light dark:via-background-dark/50 dark:to-background-dark"></div>
+</div>
+<div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<div class="lg:col-span-5 flex flex-col gap-6 animate-fade-in-up">
+<div>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-primary text-xs font-bold uppercase tracking-wider mb-4 border border-orange-200 dark:border-orange-800/30">
+<span class="material-symbols-outlined text-sm">verified</span>
+                            Official Partner
+                        </span>
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-main-light dark:text-text-main-dark leading-[1.15]">
+                            Travel borders <br/>
+<span class="text-primary relative inline-block">
+                                without limits.
+                                <svg class="absolute -bottom-2 left-0 w-full h-3 text-primary opacity-30" fill="none" viewBox="0 0 200 9" xmlns="http://www.w3.org/2000/svg"><path d="M2.00025 6.99992C18.5002 2.49992 48.5002 0.99992 78.5002 2.49992C116.002 4.37492 168.001 7.49992 198.001 3.99992" stroke="currentColor" stroke-width="3"></path></svg>
+</span>
+</h1>
+</div>
+<p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-lg">
+                        Navigate global entry requirements with ease. Our visa experts handle the complex paperwork so you can focus on your journey.
+                    </p>
+<div class="relative w-full max-w-md hidden lg:block mt-6 group">
+<div class="absolute -top-4 -right-4 w-full h-full rounded-2xl border-2 border-dashed border-primary/30 z-0 transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 duration-500"></div>
+<div class="absolute -bottom-4 -left-4 w-24 h-24 bg-dots-pattern opacity-50 z-0"></div>
+<div class="relative rounded-2xl overflow-hidden shadow-2xl z-10 h-64 w-full">
+<img alt="Van driving through canyon" class="w-full h-full object-cover transform transition duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MO3HOFwSlHi-ugElVqqOoDm4JoveUV6qR4ZBe4Eg4Esfg7UXkzR9zZpG9mydjZHqtAEyTF8sJmcGWFt0hIFn1uhD9vp48EFFTaVWRLgkpZqKWn1GEsJ0QSNkKKeip6odAdvz7iOzk39N2keTkIBF3fQKmiVw7c160x72o059Xokkt3t4lYcDsKxNBF8c_HDg1rFatuOPj0BQbS8kYTdGStOrHzCw5HM0kROCAo_eiWkxjPp3_V-y_BzQIZXmdead_xIV8Ag1hen-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary">public</span>
+<span class="text-xs font-bold uppercase tracking-wide opacity-90">Global Access</span>
+</div>
+<p class="text-sm font-medium opacity-80">120+ Countries Supported</p>
+</div>
+</div>
+<div class="absolute -right-6 top-10 bg-surface-light dark:bg-surface-dark p-3 rounded-xl shadow-lg border border-border-light dark:border-border-dark flex items-center gap-3 z-20 animate-float">
+<div class="size-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined">check</span>
+</div>
+<div>
+<p class="text-xs text-gray-500 uppercase font-bold">Approval Rate</p>
+<p class="text-lg font-bold">99.2%</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 w-full">
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl p-6 md:p-8 shadow-2xl shadow-orange-500/10 border border-border-light dark:border-border-dark relative overflow-hidden backdrop-blur-sm">
+<div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary via-orange-400 to-primary"></div>
+<div class="mb-6">
+<h2 class="text-2xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">assignment</span>
+                                Start Your Application
+                            </h2>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Fill in the details below and we'll start processing instantly.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Nationality</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flag</span>
+<input class="w-full pl-10 pr-4 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm" placeholder="Your Passport Nationality" type="text"/>
+</div>
+</div>
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Destination Country</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flight_land</span>
+<input class="w-full pl-10 pr-4 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm" placeholder="Where do you want to go?" type="text"/>
+</div>
+</div>
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Purpose of Visit</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">work_outline</span>
+<select class="w-full pl-10 pr-10 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-medium text-sm appearance-none cursor-pointer">
+<option disabled="" selected="" value="">Select purpose</option>
+<option>Tourism / Holiday</option>
+<option>Business / Conference</option>
+<option>Study / Education</option>
+<option>Family Visit</option>
+<option>Transit</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+<div class="group">
+<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Travel Dates</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">calendar_month</span>
+<input class="w-full pl-10 pr-4 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm" placeholder="DD/MM/YYYY - DD/MM/YYYY" type="text"/>
+</div>
+</div>
+<div class="group md:col-span-2">
+<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Specific Questions or Notes</label>
+<div class="relative">
+<textarea class="w-full p-4 h-24 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm resize-none" placeholder="I have a previous rejection... / I need express service..."></textarea>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-border-light dark:border-border-dark">
+<a class="w-full h-14 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold rounded-xl shadow-lg shadow-green-500/20 transform transition hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 text-lg group" href="https://wa.me/15550123456" target="_blank">
+<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+<span>Enquire via WhatsApp</span>
+</a>
+<p class="text-center text-xs text-gray-400 mt-3 flex justify-center items-center gap-1">
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+                                Agents usually reply within 15 minutes
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-light dark:bg-surface-dark border-y border-border-light dark:border-border-dark py-12">
+<div class="max-w-7xl mx-auto px-4 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex items-start gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-colors group cursor-pointer">
+<div class="size-12 shrink-0 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Expert Consultation</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Guidance from visa specialists with over 10 years of experience in complex cases.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-colors group cursor-pointer">
+<div class="size-12 shrink-0 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Document Assistance</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">We help you organize, verify, and format every single paper required.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-colors group cursor-pointer">
+<div class="size-12 shrink-0 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Fast Processing</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Priority handling for urgent travel needs to save your valuable time.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 px-4 lg:px-10 max-w-7xl mx-auto w-full">
+<div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+<div>
+<h2 class="text-3xl font-bold mb-2">Popular Visa Destinations</h2>
+<p class="text-gray-500 dark:text-gray-400">We have high success rates for these countries.</p>
+</div>
+<a class="text-primary font-bold flex items-center hover:underline group" href="#">
+                    View all countries
+                    <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
+<img alt="Tokyo street view with neon signs at night" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Vibrant city street in Tokyo at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ejr0v-_viIQtl6Y4uVpVnLBU6w4i2W2YBgTOIQHR02dXUO4LYlxnraEq0PKRhdGSfqvTkxuxoRHyyPT6eT0oSeG9dkfKWWjqUuczUyyp4QzIbSqNZAXZx2Yb-AWdoHpNBQZmC7a5QLcVtaN9yKUkDbUHpuak-CAgBHVB1AGQhjp0HexZ1j1iGo1kivB3-B81vNGa8Bo9EbRUcH-I8XY7bIIeB5_dabpnTzJ9F43hOmAfYro19GIDF1doldYEmB3ZxP1pqX4lQZSG"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full text-white">
+<h3 class="text-2xl font-bold mb-1">Japan</h3>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Tourist &amp; Business</span>
+<span class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors">Consult now</span>
+</div>
+</div>
+</div>
+<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
+<img alt="Eiffel Tower in Paris with blue sky" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Eiffel tower view in Paris" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJkBNw7ed3erOj6xcsieReCgx_HLJ0vnoGSszTwRgMP-lMa0NdLuMR5wX9v3M0nQe3bc23zquwBdFAde7IZIxLOR4N6RJ8qqt71-izrxC0xQoouU7CiylYZvrOx9b0BXKXyKt-wHW1krgFWaro2awkBEV1rlDibHM3LbmFLvhDoPvAbNEMHfEhmymvVHUmb7Ygh0QcTAb2_jab68NhljCJQ_2iCjBMJFokZV_p9DPLY9lXijSnFFuupBz14p_GDN_Vp5SXMbhUSUns"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full text-white">
+<h3 class="text-2xl font-bold mb-1">Schengen Area</h3>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Europe Travel Visa</span>
+<span class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors">Consult now</span>
+</div>
+</div>
+</div>
+<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
+<img alt="Tropical temple in Bali surrounded by greenery" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Green lush temple landscape in Bali" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZBf_XhujDC8ALjP0DEriqAYqb19cZe5eYl0ffdLljvFfacV7AXnJcRRa_jdyIx7MDR8OUW0BaOt7cUTNR0W4OSnU9MS6CdrOZ90AZcZMcTJnq1tOu97sDxnGSDkYPJCUW4voDelSxrQtGyYIJkTzAgsE5ZTEk4PiWkUrEeUnSKGdTux4wmEBhR2UqSKpdFcqo-WKQ_XhsED63mLXlRvzTc7qOdmfYv5Exv3VnnWGOfAj3-bpBqGxZNirodxubmnLnqnIobHexCIU_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full text-white">
+<h3 class="text-2xl font-bold mb-1">Indonesia</h3>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Visa on Arrival</span>
+<span class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors">Consult now</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-surface-light dark:bg-[#18110c] border-t border-border-light dark:border-border-dark pt-12 pb-8 px-4 lg:px-10">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-4 text-text-main-light dark:text-text-main-dark">
+<div class="size-6 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_330_footer)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_330_footer"><rect fill="white" height="48" width="48"></rect></clipPath>
+</defs>
+</svg>
+</div>
+<h2 class="text-lg font-bold">WanderWithFriends</h2>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-4">
+                        Discover the world with the people who matter most. Premium experiences, unforgettable memories.
+                    </p>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-text-main-light dark:text-text-main-dark">Company</h4>
+<ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Press</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-text-main-light dark:text-text-main-dark">Support</h4>
+<ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Safety Information</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cancellation Options</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Report Issue</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-text-main-light dark:text-text-main-dark">Newsletter</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Subscribe for the latest travel deals and inspiration.</p>
+<div class="flex gap-2">
+<input class="flex-1 rounded-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark px-3 py-2 text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="Email address" type="email"/>
+<button class="bg-primary hover:bg-orange-600 text-white rounded-lg px-4 py-2 font-bold text-sm transition-colors">Join</button>
+</div>
+</div>
+</div>
+<div class="border-t border-border-light dark:border-border-dark pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-gray-400">© 2024 WanderWithFriends Inc. All rights reserved.</p>
+<div class="flex gap-6 text-xs text-gray-400">
+<a class="hover:text-primary" href="#">Privacy</a>
+<a class="hover:text-primary" href="#">Terms</a>
+<a class="hover:text-primary" href="#">Sitemap</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title> Travel-with-friends - Holiday Packages</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f47b25",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221710",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2d241e",
+                        "text-main": "#1c130d",
+                        "text-main-dark": "#f4ece7",
+                        "text-muted": "#9c6c49",
+                        "text-muted-dark": "#b08d74",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+
+
+    
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-text-main-dark font-display min-h-screen flex flex-col transition-colors duration-300">
+<!-- Top Navbar -->
+<header class="sticky top-0 z-50 w-full border-b border-[#f4ece7] dark:border-[#3a2d25] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 py-3 sm:px-10">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_330)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-text-main dark:text-text-main-dark">Travel-with-Friends</h2>
+</div>
+<div class="hidden lg:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="Bus.html">Bus</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="Flights.html">Flights</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="Trip_packages.html">Trip Packages</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="Hotels.html">Hotels</a>
+</nav>
+     <a
+      href="Contact.html"
+      class="flex items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+    >
+      Contact us
+    </a>
+</div>
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="lg:hidden p-2 text-text-main dark:text-text-main-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Mobile Menu -->
+<div
+  id="mobileMenu"
+  class="lg:hidden hidden border-t border-[#f4ece7] dark:border-[#3a2d25] bg-background-light dark:bg-background-dark px-6 py-6"
+>
+  <nav class="flex flex-col gap-4">
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Bus.html">
+      Bus
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Flights.html">
+      Flights
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Trip_packages.html">
+      Trip Packages
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Hotels.html">
+      Hotels
+    </a>
+
+        <a
+      href="Contact.html"
+      class="flex items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+    >
+      Contact us
+    </a>
+  </nav>
+</div>
+
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 flex flex-col gap-10">
+<!-- Header & Category Navigation -->
+<section class="flex flex-col gap-8">
+<div class="text-center space-y-3 pt-6">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-text-main dark:text-text-main-dark">
+                     Trips with Friends, Planned Without the Chaos
+                </h1>
+<p class="text-lg text-text-muted dark:text-text-muted-dark max-w-2xl mx-auto">
+                      Weekend scenes, college trips, birthday getaways, or just a long-overdue plan —
+      we handle the travel so your group can just show up and enjoy.
+                </p>
+</div>
+<!-- Aesthetic Navigation Buttons -->
+<div class="flex flex-wrap justify-center gap-4 py-2">
+<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Flights.html">
+<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">flight</span>
+<span class="font-bold text-text-main dark:text-text-main-dark">Flights</span>
+</a>
+<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Hotels.html">
+<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">hotel</span>
+<span class="font-bold text-text-main dark:text-text-main-dark">Hotels</span>
+</a>
+<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Bus.html">
+<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">directions_bus</span>
+<span class="font-bold text-text-main dark:text-text-main-dark">Bus</span>
+</a>
+<!-- Active State -->
+<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Bus.html">
+<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">luggage</span>
+<span class="font-bold text-text-main dark:text-text-main-dark">Packagaes</span>
+</a>
+<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Visa.html">
+<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">badge</span>
+<span class="font-bold text-text-main dark:text-text-main-dark">Visa</span>
+</a>
+</div>
+<!-- Trust Indicators -->
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-text-muted dark:text-text-muted-dark font-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+                    Best Price Guarantee
+                </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">support_agent</span>
+                    24/7 Support
+                </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">favorite</span>
+                    Curated Experiences
+                </div>
+</div>
+</section>
+<!-- Main Grid Area -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+  <!-- Left Column: Trending Packages -->
+  <div class="lg:col-span-8 space-y-6">
+
+    <div class="flex items-center justify-between">
+      <h3 class="text-2xl font-bold text-text-main dark:text-text-main-dark">
+        Trending Destinations
+      </h3>
+    </div>
+
+    <!-- Package cards (dynamic) -->
+    <div
+      id="packagesGrid"
+      class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    </div>
+
+    <div class="flex justify-center mt-8">
+      <a href="Trip_packages.html"
+        class="px-8 py-3 rounded-xl border-2 border-primary/20 hover:border-primary text-primary font-bold transition-all hover:bg-primary/5">
+        Load More Packages
+    </a>
+    </div>
+
+  </div>
+<!-- Right Column: Enquiry Form (4 cols) -->
+<div class="lg:col-span-4 relative">
+<div class="sticky top-24 bg-surface-light dark:bg-surface-dark p-6 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-black/20 border border-[#f4ece7] dark:border-[#3a2d25]">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-text-main dark:text-text-main-dark leading-tight">Concierge Service</h3>
+<p class="text-xs text-text-muted dark:text-text-muted-dark">We plan, you pack.</p>
+</div>
+</div>
+<form class="flex flex-col gap-5">
+
+  <!-- Destination -->
+  <div class="space-y-1">
+    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
+      Destination
+    </label>
+    <div class="relative">
+      <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">
+        search
+      </span>
+      <input
+        id="destination"
+        required
+        type="text"
+        placeholder="e.g. Manali, Kasol, Shimla"
+        class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 pl-12 pr-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary placeholder:text-text-muted/50 font-medium"
+      />
+    </div>
+  </div>
+
+  <!-- Travel Date -->
+  <div class="space-y-1">
+    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
+      Travel Dates
+    </label>
+    <input
+      id="travelDate"
+      required
+      type="date"
+      class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary font-medium"
+    />
+  </div>
+
+  <!-- Travelers + Duration -->
+  <div class="grid grid-cols-2 gap-4">
+
+    <div class="space-y-1">
+      <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
+        Travelers
+      </label>
+      <input
+        id="travelers"
+        required
+        type="number"
+        min="1"
+        value="2"
+        class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary font-medium"
+      />
+    </div>
+
+    <div class="space-y-1">
+      <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
+        Duration
+      </label>
+      <select
+        id="duration"
+        required
+        class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary font-medium appearance-none cursor-pointer">
+        <option value="">Select</option>
+        <option>1–2 Days</option>
+        <option>2–3 Days</option>
+        <option>3–5 Days</option>
+        <option>5–7 Days</option>
+        <option>7+ Days</option>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- Trip Style -->
+  <div class="space-y-1">
+    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
+      Trip Style
+    </label>
+
+    <div class="flex flex-wrap gap-2">
+      <label class="cursor-pointer">
+        <input class="peer sr-only" name="style" type="radio" value="Leisure" checked />
+        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
+          Leisure
+        </div>
+      </label>
+
+      <label class="cursor-pointer">
+        <input class="peer sr-only" name="style" type="radio" value="Adventure" />
+        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
+          Adventure
+        </div>
+      </label>
+
+      <label class="cursor-pointer">
+        <input class="peer sr-only" name="style" type="radio" value="Family" />
+        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
+          Family
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <!-- Additional Requests -->
+  <div class="space-y-1">
+    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
+      Additional Requests
+    </label>
+    <textarea
+      id="requests"
+      rows="3"
+      placeholder="Any specific requirements?"
+      class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary resize-none font-medium"></textarea>
+  </div>
+
+  <!-- Error Message -->
+  <p
+    id="formError"
+    class="hidden text-sm text-red-500 font-semibold text-center">
+    Please fill all required fields before continuing.
+  </p>
+
+  <!-- WhatsApp Button -->
+  <button
+    type="button"
+    onclick="validateAndSendWhatsApp()"
+    class="w-full py-4 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-lg shadow-lg">
+    Send via WhatsApp
+  </button>
+
+  <!-- Call Button -->
+  <button
+    type="button"
+    onclick="validateAndCall()"
+    class="w-full py-4 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-lg shadow-lg flex items-center justify-center gap-2">
+    <span class="material-symbols-outlined">call</span>
+    Call Us Now
+  </button>
+
+</form>
+
+
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 border-t border-[#f4ece7] dark:border-[#3a2d25] bg-background-light dark:bg-background-dark mt-auto">
+<div class="max-w-7xl mx-auto px-10 text-center">
+<p class="text-sm text-text-muted dark:text-text-muted-dark">© 2024 WanderWithFriends. All rights reserved.</p>
+</div>
+</footer>
+
+
+
+
+
+<script src="./js/main.js"></script>
+<script src="data/packages.js"></script> <script src="js/render-packages.js"></script> 
+</body>
+</html>

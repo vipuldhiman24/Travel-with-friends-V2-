@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WanderWithFriends - Bus Enquiry</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f47b25",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221710",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#1c130d] antialiased overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f4ece7] bg-background-light px-10 py-4 shadow-sm">
+<div class="flex items-center gap-4 text-[#1c130d]">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-[#1c130d] text-xl font-bold leading-tight tracking-[-0.015em]">WanderWithFriends</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-[#1c130d] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Flights</a>
+<a class="text-primary text-sm font-bold leading-normal" href="#">Bus</a>
+<a class="text-[#1c130d] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Hotels</a>
+<a class="text-[#1c130d] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Tours</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 hover:bg-[#e8d9ce] transition-colors text-[#1c130d] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Login</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-white hover:bg-primary/90 transition-colors text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Sign Up</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex flex-col items-center">
+<div class="w-full relative">
+<div class="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-8 pb-32" data-alt="Scenic highway winding through mountains during golden hour" style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAk44IXxicANysji8LQzFIgIoiPLSOepjJ1LnP-B58YscJfFGm7tPbfXXYO-HAhXj7QcTrzMAtaTDLo98Ix45W20UDgtkYC1YyMS_IU2wi22aiaFFSd6k-htQ9gEnObr1OtcmUEVbNAbz6sIAo2mM5LGXz6LnE2CXisPXlkXFD3apolKbfT_qbL-WVIJYEzL18HkDvZifIuARxYNyZSuOWh-_xQt5KORCSBsduVJ0L9coH-wYywjBbYoYuyQuitSQpeD0f6Z2szx3aW");'>
+<div class="flex flex-col gap-4 text-center max-w-3xl">
+<h1 class="text-white text-5xl font-black leading-tight tracking-[-0.033em] drop-shadow-md">
+                    Your Journey Begins Here
+                </h1>
+<h2 class="text-white/90 text-lg font-medium leading-normal drop-shadow-sm">
+                    Plan your next adventure with ease. Send us your travel details, and we'll arrange the perfect bus trip for you.
+                </h2>
+</div>
+</div>
+</div>
+<div class="w-full px-4 sm:px-10 flex justify-center -mt-24 z-20 mb-20">
+<div class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 w-full max-w-5xl border border-[#f4ece7]">
+<form class="flex flex-col gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">trip_origin</span>
+</div>
+<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Origin City or Station" type="text"/>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Destination City or Station" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Departure Date" type="text"/>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">event</span>
+</div>
+<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Return Date (Optional)" type="text"/>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">group</span>
+</div>
+<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" min="1" placeholder="No. of Passengers" type="number"/>
+</div>
+</div>
+<button class="w-full mt-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.99] flex items-center justify-center gap-3" type="submit">
+<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+                    Send Enquiry via WhatsApp
+                </button>
+</form>
+</div>
+</div>
+<div class="w-full max-w-7xl px-4 sm:px-10 mb-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+<div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white border border-[#f4ece7] hover:shadow-md transition-shadow">
+<div class="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-3xl">airline_seat_recline_extra</span>
+</div>
+<h3 class="text-lg font-bold text-[#1c130d]">Premium Comfort</h3>
+<p class="text-[#9c6c49]">Spacious seats, free Wi-Fi, and power outlets on every bus.</p>
+</div>
+<div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white border border-[#f4ece7] hover:shadow-md transition-shadow">
+<div class="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+<h3 class="text-lg font-bold text-[#1c130d]">Safety First</h3>
+<p class="text-[#9c6c49]">Verified operators with top-tier safety records and hygiene standards.</p>
+</div>
+<div class="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white border border-[#f4ece7] hover:shadow-md transition-shadow">
+<div class="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-3xl">price_check</span>
+</div>
+<h3 class="text-lg font-bold text-[#1c130d]">Transparent Pricing</h3>
+<p class="text-[#9c6c49]">No hidden fees. What you see is exactly what you pay.</p>
+</div>
+</div>
+</div>
+<section class="w-full max-w-7xl px-4 sm:px-10 mb-24">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-3xl font-bold text-[#1c130d] tracking-tight">Popular Bus Routes</h2>
+<a class="text-primary font-bold flex items-center gap-1 hover:gap-2 transition-all" href="#">
+                View all routes <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="The Eiffel Tower in Paris, France during daytime" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdLk36UeQU4DhAQn-bFcme1jjVB0SGRjdbUdPyb_LKIoYKPzKlHKMmio7Xx4GtPIkT8LSsBn6IbPFArVklOM1sak0xQDMSun6lpFWXZ7FIyaYeCS5OhG8LgmY1Jj01e01tJu6Yg1i8mevNfXzsXPFUNkpNw1Q5I7CKn4_MBFFuQtMLE4lPYGHbrXOZaiHbu0mLZ0qqZ6dmUk5GMMGSzkhdbL-AeJLu9HRpu5IxwPyD7kQWjrEZwYIV3sm0RWwje0lkzhIAAAukxP2F"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
+                        From $19
+                    </div>
+</div>
+<div class="p-4 pt-2">
+<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
+<span>4h 30m</span>
+<span class="size-1 rounded-full bg-[#9c6c49]"></span>
+<span>Direct</span>
+</div>
+<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">London to Paris</h3>
+<p class="text-sm text-gray-500 mt-1">Daily departures available</p>
+</div>
+</a>
+<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="The US Capitol building in Washington DC" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ1AhHetn37ITWHUZpDXy2iBrsGglCp_Eo47xAqlPWjUa5L68JDRbyZmCsRaXNqUb-ziEmdRVVeBfmjL7FNBgjaNrzs-yhFix4hQ3gofwYndidr52GJ4bqoSoN5TLWK3n6zZm_VsPrLtGBzu35zy7h1b4Zjp05yJzyKyoz-UMAxTxr0Uy8hdckSz5oWyFdlWJfupikyJfbJzw9VzA0r4Z0NBFl5EV12Wht4Iw8dvLlnzLXLSzyBtS--m392IFkF_uoWRoCOt6eWyu-"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
+                        From $25
+                    </div>
+</div>
+<div class="p-4 pt-2">
+<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
+<span>4h 15m</span>
+<span class="size-1 rounded-full bg-[#9c6c49]"></span>
+<span>Direct</span>
+</div>
+<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">New York to D.C.</h3>
+<p class="text-sm text-gray-500 mt-1">Free WiFi included</p>
+</div>
+</a>
+<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Scenic view of Goa palm trees and beach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxAKWmHLgzeclBYfjYyiZYpFy87P8FNWZ8T8VBCO-uN7ZQPMVXcC6iT0nZi9HDzcoS3zRAflrGsb0rP-IPlruaG3wQLhW0laS4G15UIHQ2eUSejYpQrE_Z5muY_wxtnw5i3Hqy2kraxagjWhj5zlS2Bh1v9GyGbKqZxD4cXFCkTU_hEAx3du1JD9i47Lz6G5V4i2ZTumsXgczXS7fsMvBs4Id0gzUDz93VCZzaEU2TnOzbq8myBpDpiw4cyH_c-aS2y0xrZHmY4daE"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
+                        From $12
+                    </div>
+</div>
+<div class="p-4 pt-2">
+<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
+<span>12h 00m</span>
+<span class="size-1 rounded-full bg-[#9c6c49]"></span>
+<span>Sleeper</span>
+</div>
+<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">Mumbai to Goa</h3>
+<p class="text-sm text-gray-500 mt-1">Overnight sleeper bus</p>
+</div>
+</a>
+<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="CN Tower and Toronto skyline at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn13npc7yXofj9BibhGUxxz_V_jkKbOeSa5X9W-25dXDypHT4bMrBXFRuHdNCLjTvtdA_R09bRje3m7rOfeUSI2sPRRQVjLvNjTGroZncYF6jibBHC9MyxH5Hs5C2-ziJF4wf_L013KCxr-lMl1IKBRkOLysYtwTet21WwTBYAS1aUVNLwzQlw_YIdmv1zZ4z-F0bQNPTU0aXtGrnvu-66sD7tZRHr6naZKu6MPGbLSlYf6Yic8nI87fwv2cIksUmUpj-bKGMv1P_8"/>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
+                        From $30
+                    </div>
+</div>
+<div class="p-4 pt-2">
+<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
+<span>5h 45m</span>
+<span class="size-1 rounded-full bg-[#9c6c49]"></span>
+<span>Direct</span>
+</div>
+<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">Montreal to Toronto</h3>
+<p class="text-sm text-gray-500 mt-1">Business class available</p>
+</div>
+</a>
+</div>
+</section>
+</main>
+<footer class="w-full bg-white border-t border-[#f4ece7] pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-10">
+<div class="flex flex-col md:flex-row justify-between gap-10 mb-16">
+<div class="max-w-sm">
+<div class="flex items-center gap-3 text-[#1c130d] mb-4">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-bold tracking-tight">WanderWithFriends</span>
+</div>
+<p class="text-[#9c6c49] leading-relaxed">
+                    Connecting you to the world's most beautiful destinations with comfort, safety, and friends along the way.
+                </p>
+</div>
+<div class="flex flex-wrap gap-12 sm:gap-20">
+<div class="flex flex-col gap-4">
+<h4 class="text-[#1c130d] font-bold">Company</h4>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">About Us</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Careers</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Blog</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Press</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[#1c130d] font-bold">Support</h4>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Help Center</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Safety</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Cancellation Options</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[#1c130d] font-bold">Legal</h4>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Terms</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Sitemap</a>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between border-t border-[#f4ece7] pt-8 gap-4">
+<p class="text-[#9c6c49] text-sm">© 2023 WanderWithFriends, Inc. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">
+<span class="sr-only">Facebook</span>
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">
+<span class="sr-only">Twitter</span>
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+</a>
+<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">
+<span class="sr-only">Instagram</span>
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>
