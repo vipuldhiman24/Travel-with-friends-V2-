@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   const params = new URLSearchParams(window.location.search);
-  const packageId = Number(params.get("id")) || 1;
+  const packageId = Number(params.get("pkg"));
 
-  const pkg = PACKAGES.find(p => p.id === packageId);
+  console.log("pkg from URL:", packageId);
+
+  const pkg = window.PACKAGES.find(p => p.id === packageId);
+
   if (!pkg) {
-    console.error("Package not found");
+    document.body.innerHTML = `
+      <div class="min-h-screen flex items-center justify-center text-xl font-bold">
+        Trip not found 💔
+      </div>
+    `;
     return;
   }
 
@@ -27,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   pkg.itinerary.forEach(item => {
     itineraryContainer.innerHTML += `
       <div class="relative pl-8 group">
-        <div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-white dark:bg-gray-800 group-hover:bg-primary transition-colors"></div>
+        <div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-white dark:bg-gray-800"></div>
         <div class="flex flex-col gap-2">
           <span class="text-sm font-bold text-primary uppercase tracking-wider">${item.day}</span>
           <h3 class="text-xl font-bold text-gray-900 dark:text-white">${item.heading}</h3>
@@ -36,5 +42,4 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
   });
-
 });

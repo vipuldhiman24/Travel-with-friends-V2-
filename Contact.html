@@ -43,38 +43,74 @@
 <body class="bg-background-light dark:bg-background-dark font-display text-text-main-light dark:text-text-main-dark transition-colors duration-200">
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
 <!-- Top Navigation -->
-<nav class="sticky top-0 z-50 w-full bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#f3ece7] dark:border-[#3d3028]">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex items-center justify-between h-20">
-<!-- Logo -->
+<!-- Top Navbar -->
+<header class="sticky top-0 z-50 w-full border-b border-[#f4ece7] dark:border-[#3a2d25] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 py-3 sm:px-10">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
 <div class="flex items-center gap-3">
-<div class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary">
-<span class="material-symbols-outlined filled">flight_takeoff</span>
+<div class="size-8 text-primary">
+<!-- <svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"> -->
+<g clip-path="url(#clip0_6_330)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
 </div>
-<h1 class="text-xl font-bold tracking-tight text-text-main-light dark:text-text-main-dark hidden sm:block">
-                            WanderWithFriends
-                        </h1>
+<h2 class="flex items-center gap-2 text-xl font-bold tracking-tight text-text-main dark:text-text-main-dark">
+  <span class="material-symbols-outlined text-primary">
+    flight_takeoff
+  </span>
+  Travel-with-Friends
+</h2>
+
 </div>
-<!-- Desktop Navigation Links -->
-<div class="hidden md:flex items-center gap-8">
-<a class="text-sm font-medium text-text-main-light dark:text-text-main-dark hover:text-primary transition-colors" href="#">Flights</a>
-<a class="text-sm font-medium text-text-main-light dark:text-text-main-dark hover:text-primary transition-colors" href="#">Hotels</a>
-<a class="text-sm font-medium text-text-main-light dark:text-text-main-dark hover:text-primary transition-colors" href="#">Bus</a>
-<a class="text-sm font-medium text-text-main-light dark:text-text-main-dark hover:text-primary transition-colors" href="#">Packages</a>
-<a class="text-sm font-medium text-text-main-light dark:text-text-main-dark hover:text-primary transition-colors" href="#">Visa</a>
+<div class="hidden lg:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="bus.html">Bus</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="flights.html">Flights</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="trip_packages.html">Trip Packages</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="hotels.html">Hotels</a>
+</nav>
+     <a
+      href="Contact.html"
+      class="flex items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+    >
+      Contact us
+    </a>
 </div>
-<!-- CTA & Mobile Menu -->
-<div class="flex items-center gap-4">
-<button class="hidden sm:flex items-center justify-center h-10 px-6 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                            Contact Us
-                        </button>
-<button class="md:hidden p-2 text-text-main-light dark:text-text-main-dark">
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="lg:hidden p-2 text-text-main dark:text-text-main-dark">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
+<!-- Mobile Menu -->
+<div
+  id="mobileMenu"
+  class="lg:hidden hidden border-t border-[#f4ece7] dark:border-[#3a2d25] bg-background-light dark:bg-background-dark px-6 py-6"
+>
+  <nav class="flex flex-col gap-4">
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="bus.html">
+      Bus
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Flights.html">
+      Flights
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Trip_packages.html">
+      Trip Packages
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Hotels.html">
+      Hotels
+    </a>
+
+        <a
+      href="Contact.html"
+      class="flex items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+    >
+      Contact us
+    </a>
+  </nav>
 </div>
-</div>
-</nav>
 <main class="flex-grow">
 <!-- Minimalist Hero Section -->
 <section class="relative pt-12 pb-20 lg:pt-24 lg:pb-32 px-4 overflow-hidden">

@@ -1,10 +1,405 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WanderWithFriends - Flight Enquiry</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f47b25",
+                        "background-light": "#fcfaf8",
+                        "background-dark": "#18110c",
+                        "text-main-light": "#1c130d",
+                        "text-main-dark": "#f4ece7",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2c241e",
+                        "border-light": "#e8d9ce",
+                        "border-dark": "#4a3b32",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    animation: {
+                        "fade-in-up": "fadeInUp 0.8s ease-out forwards",
+                        "background-pan": "backgroundPan 25s linear infinite",
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            "0%": { opacity: 0, transform: "translateY(20px)" },
+                            "100%": { opacity: 1, transform: "translateY(0)" },
+                        },
+                        backgroundPan: {
+                            "0%": { "background-position": "0% 50%" },
+                            "50%": { "background-position": "100% 50%" },
+                            "100%": { "background-position": "0% 50%" },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e8d9ce;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d6c2b4;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4a3b32;
+        }
+    </style>
 </head>
-<body>
-    
-</body>
-</html>
+<!-- Top Navbar -->
+<header class="sticky top-0 z-50 w-full border-b border-[#f4ece7] dark:border-[#3a2d25] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 py-3 sm:px-10">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<!-- <svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"> -->
+<g clip-path="url(#clip0_6_330)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="flex items-center gap-2 text-xl font-bold tracking-tight text-text-main dark:text-text-main-dark">
+  <span class="material-symbols-outlined text-primary">
+    flight_takeoff
+  </span>
+  Travel-with-Friends
+</h2>
+
+</div>
+<div class="hidden lg:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="bus.html">Bus</a>
+
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="trip_packages.html">Trip Packages</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="hotels.html">Hotels</a>
+</nav>
+     <a
+      href="Contact.html"
+      class="flex items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+    >
+      Contact us
+    </a>
+</div>
+<!-- Mobile Menu Button -->
+<button id="mobileMenuBtn" class="lg:hidden p-2 text-text-main dark:text-text-main-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Mobile Menu -->
+<div
+  id="mobileMenu"
+  class="lg:hidden hidden border-t border-[#f4ece7] dark:border-[#3a2d25] bg-background-light dark:bg-background-dark px-6 py-6"
+>
+  <nav class="flex flex-col gap-4">
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="bus.html">
+      Bus
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">
+      Home
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Trip_packages.html">
+      Trip Packages
+    </a>
+    <a class="text-sm font-semibold hover:text-primary transition-colors" href="Hotels.html">
+      Hotels
+    </a>
+
+        <a
+      href="Contact.html"
+      class="flex items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+    >
+      Contact us
+    </a>
+  </nav>
+</div>
+</header>
+<main class="flex-grow flex flex-col">
+<section class="relative w-full flex items-center min-h-[850px] lg:min-h-[750px] px-4 lg:px-10 py-12">
+<div class="absolute inset-0 w-full h-full overflow-hidden z-0">
+<div class="w-full h-full bg-cover bg-no-repeat animate-background-pan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ejr0v-_viIQtl6Y4uVpVnLBU6w4i2W2YBgTOIQHR02dXUO4LYlxnraEq0PKRhdGSfqvTkxuxoRHyyPT6eT0oSeG9dkfKWWjqUuczUyyp4QzIbSqNZAXZx2Yb-AWdoHpNBQZmC7a5QLcVtaN9yKUkDbUHpuak-CAgBHVB1AGQhjp0HexZ1j1iGo1kivB3-B81vNGa8Bo9EbRUcH-I8XY7bIIeB5_dabpnTzJ9F43hOmAfYro19GIDF1doldYEmB3ZxP1pqX4lQZSG'); background-size: 150% auto;"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30 dark:to-background-dark/80"></div>
+</div>
+<div class="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center animate-fade-in-up">
+<div class="text-white space-y-8 lg:pr-10">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-orange-200 text-sm font-semibold tracking-wide">
+<span class="material-symbols-outlined text-base">flight_takeoff</span>
+                Your Personal Flight Experts
+            </div>
+<h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
+                Find Your Perfect Flight, <br/>
+<span class="text-primary">Effortlessly.</span>
+</h1>
+<p class="text-lg lg:text-xl text-gray-200 opacity-90 leading-relaxed max-w-xl">
+                Tell us your travel plans and let our experts find the best deals for you. Skip the endless searching and get curated flight options via WhatsApp.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+<span class="material-symbols-outlined">savings</span>
+</div>
+<span class="font-medium">Best Price Guarantee</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<span class="font-medium">24/7 Expert Support</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
+<span class="material-symbols-outlined">custom_typography</span>
+</div>
+<span class="font-medium">Tailored Itineraries</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<span class="font-medium">Instant Quotes</span>
+</div>
+</div>
+</div>
+<div class="w-full">
+<div class="bg-surface-light dark:bg-surface-dark rounded-3xl shadow-2xl p-6 md:p-8 border border-white/20 dark:border-white/5 backdrop-blur-sm">
+<div class="mb-6 border-b border-border-light dark:border-border-dark pb-4">
+<h3 class="text-2xl font-bold text-text-main-light dark:text-text-main-dark">Request a Flight Quote</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Get personalized flight options via WhatsApp</p>
+</div>
+<form class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">From</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flight_takeoff</span>
+<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark" placeholder="e.g. New York" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">To</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flight_land</span>
+<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark" placeholder="e.g. London" type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Departure Date</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">calendar_today</span>
+<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark cursor-pointer" onblur="(this.type='text')" onfocus="(this.type='date')" placeholder="Select date" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Return Date</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">event_repeat</span>
+<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark cursor-pointer" onblur="(this.type='text')" onfocus="(this.type='date')" placeholder="(Optional)" type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Passengers</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">groups</span>
+<select class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-medium text-text-main-light dark:text-text-main-dark appearance-none cursor-pointer">
+<option>1 Adult</option>
+<option>2 Adults</option>
+<option>3 Adults</option>
+<option>4 Adults</option>
+<option>5+ Adults</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Class</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">chair</span>
+<select class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-medium text-text-main-light dark:text-text-main-dark appearance-none cursor-pointer">
+<option>Economy</option>
+<option>Premium Economy</option>
+<option>Business</option>
+<option>First</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<div class="pt-2">
+<a class="w-full h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-xl shadow-lg shadow-green-500/20 transform transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 flex items-center justify-center gap-3 text-lg group" href="https://wa.me/15550123456?text=I%20would%20like%20to%20enquire%20about%20flights" target="_blank">
+<svg class="w-6 h-6 fill-current transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
+<span>Get Flight Quotes</span>
+</a>
+<p class="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">Our experts typically reply within 5 minutes</p>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark py-10">
+<div class="max-w-7xl mx-auto px-4 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-all duration-300 hover:scale-105 cursor-pointer">
+<div class="size-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-2xl">verified</span>
+</div>
+<div>
+<h3 class="font-bold text-lg">Hassle-Free Booking</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">We handle everything from search to booking.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-all duration-300 hover:scale-105 cursor-pointer">
+<div class="size-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined text-2xl">airplane_ticket</span>
+</div>
+<div>
+<h3 class="font-bold text-lg">Exclusive Deals</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Access to unpublished fares and discounts.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-all duration-300 hover:scale-105 cursor-pointer">
+<div class="size-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-2xl">headset_mic</span>
+</div>
+<div>
+<h3 class="font-bold text-lg">Personalized Service</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Dedicated agent for your travel needs.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 px-4 lg:px-10 max-w-7xl mx-auto w-full">
+<div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+<div>
+<h2 class="text-3xl font-bold mb-2">Top Flight Destinations</h2>
+<p class="text-gray-500 dark:text-gray-400">Get the best fares for these popular routes.</p>
+</div>
+<a class="text-primary font-bold flex items-center group" href="#">
+<span class="group-hover:underline">Explore all destinations</span>
+<span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+<img alt="Eiffel Tower in Paris with blue sky" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJkBNw7ed3erOj6xcsieReCgx_HLJ0vnoGSszTwRgMP-lMa0NdLuMR5wX9v3M0nQe3bc23zquwBdFAde7IZIxLOR4N6RJ8qqt71-izrxC0xQoouU7CiylYZvrOx9b0BXKXyKt-wHW1krgFWaro2awkBEV1rlDibHM3LbmFLvhDoPvAbNEMHfEhmymvVHUmb7Ygh0QcTAb2_jab68NhljCJQ_2iCjBMJFokZV_p9DPLY9lXijSnFFuupBz14p_GDN_Vp5SXMbhUSUns"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full text-white">
+<h3 class="text-2xl font-bold mb-1">Paris</h3>
+<div class="flex items-center justify-between">
+<span class="text-sm opacity-90">Europe's Romantic Capital</span>
+<span class="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">Enquire Now</span>
+</div>
+</div>
+</div>
+<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+<img alt="Tropical temple in Bali surrounded by greenery" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZBf_XhujDC8ALjP0DEriqAYqb19cZe5eYl0ffdLljvFfacV7AXnJcRRa_jdyIx7MDR8OUW0BaOt7cUTNR0W4OSnU9MS6CdrOZ90AZcZMcTJnq1tOu97sDxnGSDkYPJCUW4voDelSxrQtGyYIJkTzAgsE5ZTEk4PiWkUrEeUnSKGdTux4wmEBhR2UqSKpdFcqo-WKQ_XhsED63mLXlRvzTc7qOdmfYv5Exv3VnnWGOfAj3-bpBqGxZNirodxubmnLnqnIobHexCIU_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full text-white">
+<h3 class="text-2xl font-bold mb-1">Bali</h3>
+<div class="flex items-center justify-between">
+<span class="text-sm opacity-90">Island of the Gods</span>
+<span class="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">Enquire Now</span>
+</div>
+</div>
+</div>
+<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+<img alt="Scenic landscape of a van driving through a canyon road during sunset" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MO3HOFwSlHi-ugElVqqOoDm4JoveUV6qR4ZBe4Eg4Esfg7UXkzR9zZpG9mydjZHqtAEyTF8sJmcGWFt0hIFn1uhD9vp48EFFTaVWRLgkpZqKWn1GEsJ0QSNkKKeip6odAdvz7iOzk39N2keTkIBF3fQKmiVw7c160x72o059Xokkt3t4lYcDsKxNBF8c_HDg1rFatuOPj0BQbS8kYTdGStOrHzCw5HM0kROCAo_eiWkxjPp3_V-y_BzQIZXmdead_xIV8Ag1hen-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full text-white">
+<h3 class="text-2xl font-bold mb-1">Dubai</h3>
+<div class="flex items-center justify-between">
+<span class="text-sm opacity-90">The Futuristic Oasis</span>
+<span class="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">Enquire Now</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-surface-light dark:bg-background-dark border-t border-border-light dark:border-border-dark pt-12 pb-8 px-4 lg:px-10">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-4 text-text-main-light dark:text-text-main-dark">
+<div class="size-6 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_330_footer)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_330_footer"><rect fill="white" height="48" width="48"></rect></clipPath>
+</defs>
+</svg>
+</div>
+<h2 class="text-lg font-bold">WanderWithFriends</h2>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-4">
+                        Discover the world with the people who matter most. Premium experiences, unforgettable memories.
+                    </p>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-text-main-light dark:text-text-main-dark">Company</h4>
+<ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Press</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-text-main-light dark:text-text-main-dark">Support</h4>
+<ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Safety Information</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cancellation Options</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Report Issue</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 text-text-main-light dark:text-text-main-dark">Newsletter</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Subscribe for the latest travel deals and inspiration.</p>
+<div class="flex gap-2">
+<input class="flex-1 rounded-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark px-3 py-2 text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="Email address" type="email"/>
+<button class="bg-primary hover:bg-orange-600 text-white rounded-lg px-4 py-2 font-bold text-sm transition-colors">Join</button>
+</div>
+</div>
+</div>
+<div class="border-t border-border-light dark:border-border-dark pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-gray-400">© 2024 WanderWithFriends Inc. All rights reserved.</p>
+<div class="flex gap-6 text-xs text-gray-400">
+<a class="hover:text-primary" href="#">Privacy</a>
+<a class="hover:text-primary" href="#">Terms</a>
+<a class="hover:text-primary" href="#">Sitemap</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
