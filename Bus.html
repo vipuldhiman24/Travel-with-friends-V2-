@@ -33,32 +33,9 @@
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-[#1c130d] antialiased overflow-x-hidden">
-<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f4ece7] bg-background-light px-10 py-4 shadow-sm">
-<div class="flex items-center gap-4 text-[#1c130d]">
-<div class="size-8 text-primary">
-<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill-rule="evenodd"></path>
-</svg>
-</div>
-<h2 class="text-[#1c130d] text-xl font-bold leading-tight tracking-[-0.015em]">WanderWithFriends</h2>
-</div>
-<div class="flex flex-1 justify-end gap-8">
-<div class="hidden md:flex items-center gap-9">
-<a class="text-[#1c130d] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Flights</a>
-<a class="text-primary text-sm font-bold leading-normal" href="#">Bus</a>
-<a class="text-[#1c130d] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Hotels</a>
-<a class="text-[#1c130d] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Tours</a>
-</div>
-<div class="flex gap-2">
-<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 hover:bg-[#e8d9ce] transition-colors text-[#1c130d] text-sm font-bold leading-normal tracking-[0.015em]">
-<span class="truncate">Login</span>
-</button>
-<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-white hover:bg-primary/90 transition-colors text-sm font-bold leading-normal tracking-[0.015em]">
-<span class="truncate">Sign Up</span>
-</button>
-</div>
-</div>
-</header>
+<!-- Top Navbar -->
+<div id="navbar"></div>
+
 <main class="flex flex-col items-center">
 <div class="w-full relative">
 <div class="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-8 pb-32" data-alt="Scenic highway winding through mountains during golden hour" style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAk44IXxicANysji8LQzFIgIoiPLSOepjJ1LnP-B58YscJfFGm7tPbfXXYO-HAhXj7QcTrzMAtaTDLo98Ix45W20UDgtkYC1YyMS_IU2wi22aiaFFSd6k-htQ9gEnObr1OtcmUEVbNAbz6sIAo2mM5LGXz6LnE2CXisPXlkXFD3apolKbfT_qbL-WVIJYEzL18HkDvZifIuARxYNyZSuOWh-_xQt5KORCSBsduVJ0L9coH-wYywjBbYoYuyQuitSQpeD0f6Z2szx3aW");'>
@@ -141,125 +118,21 @@
 </div>
 </div>
 </div>
-<section class="w-full max-w-7xl px-4 sm:px-10 mb-24">
-<div class="flex items-center justify-between mb-8">
-<h2 class="text-3xl font-bold text-[#1c130d] tracking-tight">Popular Bus Routes</h2>
-<a class="text-primary font-bold flex items-center gap-1 hover:gap-2 transition-all" href="#">
-                View all routes <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
-<div class="h-48 overflow-hidden relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="The Eiffel Tower in Paris, France during daytime" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdLk36UeQU4DhAQn-bFcme1jjVB0SGRjdbUdPyb_LKIoYKPzKlHKMmio7Xx4GtPIkT8LSsBn6IbPFArVklOM1sak0xQDMSun6lpFWXZ7FIyaYeCS5OhG8LgmY1Jj01e01tJu6Yg1i8mevNfXzsXPFUNkpNw1Q5I7CKn4_MBFFuQtMLE4lPYGHbrXOZaiHbu0mLZ0qqZ6dmUk5GMMGSzkhdbL-AeJLu9HRpu5IxwPyD7kQWjrEZwYIV3sm0RWwje0lkzhIAAAukxP2F"/>
-<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
-                        From $19
-                    </div>
-</div>
-<div class="p-4 pt-2">
-<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
-<span>4h 30m</span>
-<span class="size-1 rounded-full bg-[#9c6c49]"></span>
-<span>Direct</span>
-</div>
-<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">London to Paris</h3>
-<p class="text-sm text-gray-500 mt-1">Daily departures available</p>
-</div>
-</a>
-<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
-<div class="h-48 overflow-hidden relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="The US Capitol building in Washington DC" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ1AhHetn37ITWHUZpDXy2iBrsGglCp_Eo47xAqlPWjUa5L68JDRbyZmCsRaXNqUb-ziEmdRVVeBfmjL7FNBgjaNrzs-yhFix4hQ3gofwYndidr52GJ4bqoSoN5TLWK3n6zZm_VsPrLtGBzu35zy7h1b4Zjp05yJzyKyoz-UMAxTxr0Uy8hdckSz5oWyFdlWJfupikyJfbJzw9VzA0r4Z0NBFl5EV12Wht4Iw8dvLlnzLXLSzyBtS--m392IFkF_uoWRoCOt6eWyu-"/>
-<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
-                        From $25
-                    </div>
-</div>
-<div class="p-4 pt-2">
-<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
-<span>4h 15m</span>
-<span class="size-1 rounded-full bg-[#9c6c49]"></span>
-<span>Direct</span>
-</div>
-<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">New York to D.C.</h3>
-<p class="text-sm text-gray-500 mt-1">Free WiFi included</p>
-</div>
-</a>
-<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
-<div class="h-48 overflow-hidden relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Scenic view of Goa palm trees and beach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxAKWmHLgzeclBYfjYyiZYpFy87P8FNWZ8T8VBCO-uN7ZQPMVXcC6iT0nZi9HDzcoS3zRAflrGsb0rP-IPlruaG3wQLhW0laS4G15UIHQ2eUSejYpQrE_Z5muY_wxtnw5i3Hqy2kraxagjWhj5zlS2Bh1v9GyGbKqZxD4cXFCkTU_hEAx3du1JD9i47Lz6G5V4i2ZTumsXgczXS7fsMvBs4Id0gzUDz93VCZzaEU2TnOzbq8myBpDpiw4cyH_c-aS2y0xrZHmY4daE"/>
-<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
-                        From $12
-                    </div>
-</div>
-<div class="p-4 pt-2">
-<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
-<span>12h 00m</span>
-<span class="size-1 rounded-full bg-[#9c6c49]"></span>
-<span>Sleeper</span>
-</div>
-<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">Mumbai to Goa</h3>
-<p class="text-sm text-gray-500 mt-1">Overnight sleeper bus</p>
-</div>
-</a>
-<a class="group flex flex-col gap-3 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all border border-[#f4ece7]" href="#">
-<div class="h-48 overflow-hidden relative">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="CN Tower and Toronto skyline at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn13npc7yXofj9BibhGUxxz_V_jkKbOeSa5X9W-25dXDypHT4bMrBXFRuHdNCLjTvtdA_R09bRje3m7rOfeUSI2sPRRQVjLvNjTGroZncYF6jibBHC9MyxH5Hs5C2-ziJF4wf_L013KCxr-lMl1IKBRkOLysYtwTet21WwTBYAS1aUVNLwzQlw_YIdmv1zZ4z-F0bQNPTU0aXtGrnvu-66sD7tZRHr6naZKu6MPGbLSlYf6Yic8nI87fwv2cIksUmUpj-bKGMv1P_8"/>
-<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#1c130d] shadow-sm">
-                        From $30
-                    </div>
-</div>
-<div class="p-4 pt-2">
-<div class="flex items-center gap-2 text-[#9c6c49] text-xs font-medium uppercase tracking-wider mb-1">
-<span>5h 45m</span>
-<span class="size-1 rounded-full bg-[#9c6c49]"></span>
-<span>Direct</span>
-</div>
-<h3 class="text-lg font-bold text-[#1c130d] group-hover:text-primary transition-colors">Montreal to Toronto</h3>
-<p class="text-sm text-gray-500 mt-1">Business class available</p>
-</div>
-</a>
-</div>
-</section>
+ <div
+      id="packagesGrid"
+      class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    </div>
+
+    <div class="flex justify-center mt-8">
+      <a href="Trip_packages.html"
+        class="px-8 py-3 rounded-xl border-2 border-primary/20 hover:border-primary text-primary font-bold transition-all hover:bg-primary/5">
+        Load More Packages
+    </a>
+    </div>
 </main>
-<footer class="w-full bg-white border-t border-[#f4ece7] pt-16 pb-8">
-<div class="max-w-7xl mx-auto px-10">
-<div class="flex flex-col md:flex-row justify-between gap-10 mb-16">
-<div class="max-w-sm">
-<div class="flex items-center gap-3 text-[#1c130d] mb-4">
-<div class="size-6 text-primary">
-<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill-rule="evenodd"></path>
-</svg>
-</div>
-<span class="text-xl font-bold tracking-tight">WanderWithFriends</span>
-</div>
-<p class="text-[#9c6c49] leading-relaxed">
-                    Connecting you to the world's most beautiful destinations with comfort, safety, and friends along the way.
-                </p>
-</div>
-<div class="flex flex-wrap gap-12 sm:gap-20">
-<div class="flex flex-col gap-4">
-<h4 class="text-[#1c130d] font-bold">Company</h4>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">About Us</a>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Careers</a>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Blog</a>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Press</a>
-</div>
-<div class="flex flex-col gap-4">
-<h4 class="text-[#1c130d] font-bold">Support</h4>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Help Center</a>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Safety</a>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Cancellation Options</a>
-</div>
-<div class="flex flex-col gap-4">
-<h4 class="text-[#1c130d] font-bold">Legal</h4>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Terms</a>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Privacy</a>
-<a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">Sitemap</a>
-</div>
-</div>
-</div>
-<div class="flex flex-col sm:flex-row items-center justify-between border-t border-[#f4ece7] pt-8 gap-4">
-<p class="text-[#9c6c49] text-sm">© 2023 WanderWithFriends, Inc. All rights reserved.</p>
+<footer class=" pt-16 pb-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between border-t border-[#f4ece7] pt-8 gap-4 px-10">
+<p class="text-[#9c6c49] text-sm">© 2026 WanderWithFriends, Inc. All rights reserved.</p>
 <div class="flex gap-4">
 <a class="text-[#9c6c49] hover:text-primary transition-colors" href="#">
 <span class="sr-only">Facebook</span>
@@ -274,8 +147,8 @@
 <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
 </a>
 </div>
-</div>
-</div>
-</footer>
 
+</footer>
+<script src="/js/navbar.js"></script>
+<script src="data/packages.js"></script> <script src="js/render-packages.js"></script> 
 </body></html>
