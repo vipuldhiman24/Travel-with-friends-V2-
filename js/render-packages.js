@@ -38,7 +38,7 @@ PACKAGES.slice(0, 4).forEach(pkg => {
     <div class="pt-2 mt-auto border-t flex justify-between items-center">
       <div class="text-[10px] font-bold">${pkg.group}</div>
       <a
-            href="trips.html?pkg=${pkg.id}"
+            href="Trips.html?pkg=${pkg.id}"
             class="text-sm font-bold text-primary flex items-center gap-1 hover:gap-2 transition-all"
           >
             View Details
