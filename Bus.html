@@ -40,57 +40,153 @@
 <div class="w-full relative">
 <div class="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-8 pb-32" data-alt="Scenic highway winding through mountains during golden hour" style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAk44IXxicANysji8LQzFIgIoiPLSOepjJ1LnP-B58YscJfFGm7tPbfXXYO-HAhXj7QcTrzMAtaTDLo98Ix45W20UDgtkYC1YyMS_IU2wi22aiaFFSd6k-htQ9gEnObr1OtcmUEVbNAbz6sIAo2mM5LGXz6LnE2CXisPXlkXFD3apolKbfT_qbL-WVIJYEzL18HkDvZifIuARxYNyZSuOWh-_xQt5KORCSBsduVJ0L9coH-wYywjBbYoYuyQuitSQpeD0f6Z2szx3aW");'>
 <div class="flex flex-col gap-4 text-center max-w-3xl">
-<h1 class="text-white text-5xl font-black leading-tight tracking-[-0.033em] drop-shadow-md">
-                    Your Journey Begins Here
+<h1 id ="hero-text"class="text-white text-5xl font-black leading-tight tracking-[-0.033em] drop-shadow-md">
+                    Your  🚌Journey Begins Here
                 </h1>
 <h2 class="text-white/90 text-lg font-medium leading-normal drop-shadow-sm">
-                    Plan your next adventure with ease. Send us your travel details, and we'll arrange the perfect bus trip for you.
+                    Plan your next adventure with ease. Send us your travel details, and we'll arrange the perfect bus trip for you
                 </h2>
 </div>
 </div>
 </div>
 <div class="w-full px-4 sm:px-10 flex justify-center -mt-24 z-20 mb-20">
 <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-10 w-full max-w-5xl border border-[#f4ece7]">
-<form class="flex flex-col gap-6">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-<div class="relative group">
-<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
-<span class="material-symbols-outlined">trip_origin</span>
-</div>
-<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Origin City or Station" type="text"/>
-</div>
-<div class="relative group">
-<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
-<span class="material-symbols-outlined">location_on</span>
-</div>
-<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Destination City or Station" type="text"/>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-<div class="relative group">
-<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
-<span class="material-symbols-outlined">calendar_today</span>
-</div>
-<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Departure Date" type="text"/>
-</div>
-<div class="relative group">
-<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
-<span class="material-symbols-outlined">event</span>
-</div>
-<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" placeholder="Return Date (Optional)" type="text"/>
-</div>
-<div class="relative group">
-<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
-<span class="material-symbols-outlined">group</span>
-</div>
-<input class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm" min="1" placeholder="No. of Passengers" type="number"/>
-</div>
-</div>
-<button class="w-full mt-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.99] flex items-center justify-center gap-3" type="submit">
-<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-                    Send Enquiry via WhatsApp
-                </button>
+<!-- bus form  -->
+<form class="flex flex-col gap-6" id="whatsapp-form" data-form="bus">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+    <!-- FROM -->
+    <div class="flex flex-col gap-1">
+      <label for="bus_from" class="text-sm font-medium text-[#1c130d]">
+        From
+      </label>
+      <div class="relative group">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+          <span class="material-symbols-outlined">trip_origin</span>
+        </div>
+        <input
+          id="bus_from"
+          data-field="From"
+          required
+          list="indian-cities"
+          class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm"
+          placeholder="Origin City or Station"
+          type="text"
+        />
+      </div>
+    </div>
+
+    <!-- TO -->
+    <div class="flex flex-col gap-1">
+      <label for="bus_to" class="text-sm font-medium text-[#1c130d]">
+        To
+      </label>
+      <div class="relative group">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+          <span class="material-symbols-outlined">location_on</span>
+        </div>
+        <input
+          id="bus_to"
+          data-field="To"
+          required
+          list="indian-cities"
+          class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm"
+          placeholder="Destination City or Station"
+          type="text"
+        />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <!-- DEPARTURE -->
+    <div class="flex flex-col gap-1">
+      <label for="bus_departure" class="text-sm font-medium text-[#1c130d]">
+        Departure Date
+      </label>
+      <div class="relative group">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+          <span class="material-symbols-outlined">calendar_today</span>
+        </div>
+        <input
+          id="bus_departure"
+          data-field="Departure Date"
+          required
+          type="date"
+          class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 transition-all shadow-sm"
+        />
+      </div>
+    </div>
+
+    <!-- RETURN -->
+    <div class="flex flex-col gap-1">
+      <label for="bus_return" class="text-sm font-medium text-[#1c130d]">
+        Return Date
+      </label>
+      <div class="relative group">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+          <span class="material-symbols-outlined">event</span>
+        </div>
+        <input
+          id="bus_return"
+          data-field="Return Date"
+          required
+          type="date"
+          class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 transition-all shadow-sm"
+        />
+      </div>
+    </div>
+
+    <!-- PASSENGERS -->
+    <div class="flex flex-col gap-1">
+      <label for="bus_passengers" class="text-sm font-medium text-[#1c130d]">
+        Passengers
+      </label>
+      <div class="relative group">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#9c6c49] group-focus-within:text-primary transition-colors">
+          <span class="material-symbols-outlined">group</span>
+        </div>
+        <input
+          id="bus_passengers"
+          data-field="Passengers"
+          required
+          min="1"
+          class="w-full bg-[#fcfaf8] border border-[#e8d9ce] text-[#1c130d] text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm"
+          placeholder="No. of Passengers"
+          type="number"
+        />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-4 md:justify-start">
+    <button
+      type="button"
+      onclick="sendWhatsApp(this)"
+      class="md:w-auto w-full px-6 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-3"
+    >
+      <span class="material-symbols-outlined">chat</span>
+      <span>Send Enquiry via WhatsApp</span>
+    </button>
+
+    <a
+      href="tel:+917042857001"
+      class="md:w-auto w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-3 justify-center"
+    >
+      <span class="material-symbols-outlined">call</span>
+      <span>Call Now</span>
+    </a>
+  </div>
 </form>
+
+
+
+
+
+<!-- selling points  -->
 </div>
 </div>
 <div class="w-full max-w-7xl px-4 sm:px-10 mb-20">
@@ -118,7 +214,126 @@
 </div>
 </div>
 </div>
- <div
+
+
+
+<!-- Visual Visual Separator / Road Animation -->
+<div class="w-full bg-background-light py-8 overflow-hidden">
+<div class="max-w-[1200px] mx-auto px-6 relative h-16 flex items-center">
+<!-- Road Line -->
+<div class="absolute w-full h-1 top-1/2 -translate-y-1/2 left-0 road-line bg-repeat-x" style="background-image: linear-gradient(90deg, #e7d9d0 50%, transparent 50%); background-size: 40px 100%;"></div>
+<!-- Bus Icon positioned on the road -->
+<div class="relative z-10 bg-background-light px-4 ml-10 md:ml-40 flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-4xl">directions_bus</span>
+<span class="text-xs font-bold text-text-muted uppercase tracking-widest mt-1">On the way</span>
+</div>
+</div>
+</div>
+<!-- Popular Destinations Section -->
+<div class="w-full bg-background-light pb-24 px-6 lg:px-20">
+<div class="max-w-6xl mx-auto flex flex-col gap-10">
+<div class="flex flex-col md:flex-row items-end justify-between gap-4">
+<div>
+<h3 class="text-text-main text-3xl font-black tracking-tight mb-2">Trending Bus Routes</h3>
+<p class="text-text-muted text-lg">Explore our most loved destinations for road trips.</p>
+</div>
+
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white">
+  <div class="aspect-[4/3] w-full overflow-hidden">
+    <div
+      class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+      data-alt="Snow capped mountains in Manali"
+      data-location="Manali, India"
+      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuABpso6McIN3vQ4dBGct_TupsUj__2MparBFwh0HPgxmRYLNN9e2sCsOyG24uRinafVkuI3qYkZxxNbY-Yl0FpQxXL-cYS7ZdwQssFUIZErBMGVeOEtYaS5BEUBLDnKmBruQmB5UQfm8IzhZV0kMRnVeveG96CQa8QJGX-ClnQfWnS92zsQ_LmewJj62gxgwJpG198D7Te0povk5GiBOg3GGl9X6Nq0g4sHnC69RchieQXIUUSqPkgmve89efILQfu_kKSZdp1QcoSV');">
+    </div>
+  </div>
+
+  <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-text-main shadow-sm">
+    Best Seller
+  </div>
+
+  <div class="p-5 flex flex-col gap-2">
+    <div class="flex justify-between items-start">
+      <div>
+        <h4 class="text-lg font-bold text-text-main">Manali Highway</h4>
+        <p class="text-text-muted text-sm">Delhi to Manali</p>
+      </div>
+      <div class="text-right">
+        <!-- <p class="text-xs text-text-muted">Starting from</p>
+        <p class="text-primary font-black text-lg">$24</p> -->
+      </div>
+    </div>
+
+    <button
+      class="enquire-btn mt-3 w-full py-2.5 rounded-lg border border-surface-border
+             text-text-main font-bold text-sm transition-colors
+             hover:bg-primary hover:text-white hover:border-primary">
+      Enquire Now
+    </button>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white">
+  <div class="aspect-[4/3] w-full overflow-hidden">
+    <div
+      class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+      data-alt="Sunset on a beach in Goa with palm trees"
+      data-location="Goa, India"
+      style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBubW6Mu3ecpt7fD0WVsOeHZCTduoDk682cjaYs_dY_6SYEKeyOmEM9ILQCnRnchyq8oKgNBqquytNCqgeMQw-vg-swIXOD3mZUJ70ypIyxiv71GKWtCuAlV_lkGtC0lXby1hhtRCF5IFRVLtXQPK7h0lPKRKYb38KuNnNrTkzEJYFJMYGmjY6r23pPknSW5vUV_cGJQsQIS3E_DVBvgvgn5U1OW_GnfovDAGjQAjn0GHAySS2i3W4kcwAnJ0SQHrvo0nBBhA_MV5BT');">
+    </div>
+  </div>
+
+  <div class="p-5 flex flex-col gap-2">
+    <div class="flex justify-between items-start">
+      <div>
+        <h4 class="text-lg font-bold text-text-main">Coastal Cruiser</h4>
+        <p class="text-text-muted text-sm">Mumbai to Goa</p>
+      </div>
+     
+    </div>
+
+    <button
+      class="enquire-btn mt-3 w-full py-2.5 rounded-lg border border-surface-border
+             text-text-main font-bold text-sm transition-colors
+             hover:bg-primary hover:text-white hover:border-primary">
+      Enquire Now
+    </button>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white">
+  <div class="aspect-[4/3] w-full overflow-hidden">
+   <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Historic palace architecture in Udaipur" data-location="Udaipur, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvHctBj2JDlK40iSgqgxbgaYA0_TffCkvjmhIhsPKM6_ta7xfWQJkpg5j3ySFrI4o-xRYXWdLJsvIRnINi33-x6pVPB81WiqmBmUA0ezQZc4t0GOkQPUHCFDf-ryKJ2R_-zlVA-R0yuij83IchrMrlrjdJR5Ov_DuRaHcmHQrVH6ikj-l0YgOgyQOAHTy5c0ZnlIx395nxPaAklMhZU0_kFOYoVMGRZETkxwT8JBVkATzU3GcOEm9To5JlgzrNQwXw-n4WgCMMVMXp');">
+</div>
+  </div>
+
+  <div class="p-5 flex flex-col gap-2">
+    <div class="flex justify-between items-start">
+      <div>
+   <h4 class="text-lg font-bold text-text-main">Royal Rajasthan</h4>
+    <p class="text-text-muted text-sm">Jaipur to Udaipur</p>
+      </div>
+      <div class="text-right">
+        <!-- <p class="text-xs text-text-muted">Starting from</p>
+        <p class="text-primary font-black text-lg">$20</p> -->
+      </div>
+    </div>
+
+    <button
+      class="enquire-btn mt-3 w-full py-2.5 rounded-lg border border-surface-border
+             text-text-main font-bold text-sm transition-colors
+             hover:bg-primary hover:text-white hover:border-primary">
+      Enquire Now
+    </button>
+  </div>
+</div>
+
+ <!-- <div
       id="packagesGrid"
       class="grid grid-cols-1 md:grid-cols-2 gap-6">
     </div>
@@ -128,7 +343,7 @@
         class="px-8 py-3 rounded-xl border-2 border-primary/20 hover:border-primary text-primary font-bold transition-all hover:bg-primary/5">
         Load More Packages
     </a>
-    </div>
+    </div> -->
 </main>
 <footer class=" pt-16 pb-8">
     <div class="flex flex-col sm:flex-row items-center justify-between border-t border-[#f4ece7] pt-8 gap-4 px-10">
@@ -151,4 +366,17 @@
 </footer>
 <script src="/js/navbar.js"></script>
 <script src="data/packages.js"></script> <script src="js/render-packages.js"></script> 
+<script src="/js/forms.js"></script>
+<script src="components/city-component.js"></script>
+<script>
+  document.querySelectorAll(".enquire-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const form = document.getElementById("hero-text");
+      if (form) {
+        form.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+</script>
+
 </body></html>

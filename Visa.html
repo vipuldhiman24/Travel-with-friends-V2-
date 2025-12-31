@@ -97,10 +97,10 @@
 </span>
 </h1>
 </div>
-<p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-lg">
+<p id="application" class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed max-w-lg">
                         Navigate global entry requirements with ease. Our visa experts handle the complex paperwork so you can focus on your journey.
                     </p>
-<div class="relative w-full max-w-md hidden lg:block mt-6 group">
+<div  class="relative w-full max-w-md hidden lg:block mt-6 group">
 <div class="absolute -top-4 -right-4 w-full h-full rounded-2xl border-2 border-dashed border-primary/30 z-0 transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 duration-500"></div>
 <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-dots-pattern opacity-50 z-0"></div>
 <div class="relative rounded-2xl overflow-hidden shadow-2xl z-10 h-64 w-full">
@@ -108,7 +108,7 @@
 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
 <div class="absolute bottom-4 left-4 text-white">
 <div class="flex items-center gap-2 mb-1">
-<span class="material-symbols-outlined text-primary">public</span>
+<span class="material-symbols-outlined text-primary" >public</span>
 <span class="text-xs font-bold uppercase tracking-wide opacity-90">Global Access</span>
 </div>
 <p class="text-sm font-medium opacity-80">120+ Countries Supported</p>
@@ -130,65 +130,138 @@
 <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary via-orange-400 to-primary"></div>
 <div class="mb-6">
 <h2 class="text-2xl font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">assignment</span>
+<span class="material-symbols-outlined text-primary ">assignment</span>
                                 Start Your Application
                             </h2>
-<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Fill in the details below and we'll start processing instantly.</p>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1 " >Fill in the details below and we'll start processing instantly.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-<div class="group">
-<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Nationality</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flag</span>
-<input class="w-full pl-10 pr-4 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm" placeholder="Your Passport Nationality" type="text"/>
-</div>
-</div>
-<div class="group">
-<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Destination Country</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flight_land</span>
-<input class="w-full pl-10 pr-4 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm" placeholder="Where do you want to go?" type="text"/>
-</div>
-</div>
-<div class="group">
-<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Purpose of Visit</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">work_outline</span>
-<select class="w-full pl-10 pr-10 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-medium text-sm appearance-none cursor-pointer">
-<option disabled="" selected="" value="">Select purpose</option>
-<option>Tourism / Holiday</option>
-<option>Business / Conference</option>
-<option>Study / Education</option>
-<option>Family Visit</option>
-<option>Transit</option>
-</select>
-<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
-</div>
-</div>
-<div class="group">
-<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Travel Dates</label>
-<div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">calendar_month</span>
-<input class="w-full pl-10 pr-4 h-11 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm" placeholder="DD/MM/YYYY - DD/MM/YYYY" type="text"/>
-</div>
-</div>
-<div class="group md:col-span-2">
-<label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5 ml-1">Specific Questions or Notes</label>
-<div class="relative">
-<textarea class="w-full p-4 h-24 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl text-text-main-light dark:text-text-main-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-sm resize-none" placeholder="I have a previous rejection... / I need express service..."></textarea>
-</div>
-</div>
-</div>
-<div class="mt-8 pt-6 border-t border-border-light dark:border-border-dark">
-<a class="w-full h-14 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold rounded-xl shadow-lg shadow-green-500/20 transform transition hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 text-lg group" href="https://wa.me/15550123456" target="_blank">
-<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-<span>Enquire via WhatsApp</span>
-</a>
-<p class="text-center text-xs text-gray-400 mt-3 flex justify-center items-center gap-1">
-<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
-                                Agents usually reply within 15 minutes
-                            </p>
-</div>
+<!-- form kinda -->
+<form class="flex flex-col gap-4" data-form="package">
+
+  <!-- COUNTRY -->
+  <div>
+    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 ml-1">
+      Country
+    </label>
+    <div class="relative">
+      <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+        public
+      </span>
+      <input
+        type="text"
+        required
+        list="countries-list"
+        data-field="Country"
+        placeholder="E.g. Thailand, France..."
+        class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-white/5 text-text-main dark:text-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-gray-400 text-sm font-bold"
+      />
+    </div>
+  </div>
+
+  <!-- DESTINATION (COUNTRY AS WELL) -->
+  <div>
+    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 ml-1">
+      Destination
+    </label>
+    <div class="relative">
+      <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+        location_on
+      </span>
+      <input
+        type="text"
+        required
+        list="countries-list"
+        data-field="Destination"
+        placeholder="E.g. Maldives, Italy..."
+        class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-white/5 text-text-main dark:text-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-gray-400 text-sm font-bold"
+      />
+    </div>
+  </div>
+
+  <!-- DATES + TRAVELERS -->
+  <div class="grid grid-cols-2 gap-4">
+
+    <!-- DATES -->
+    <div>
+      <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 ml-1">
+        Dates
+      </label>
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+          calendar_today
+        </span>
+        <input
+          type="date"
+          required
+          data-field="Travel Dates"
+          class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-white/5 text-text-main dark:text-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-bold"
+        />
+      </div>
+    </div>
+
+    <!-- TRAVELERS -->
+    <div>
+      <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 ml-1">
+        Travelers
+      </label>
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+          group
+        </span>
+        <input
+          type="number"
+          min="1"
+          required
+          data-field="Travelers"
+          placeholder="No. of people"
+          class="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-white/5 text-text-main dark:text-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-gray-400 text-sm font-bold"
+        />
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PACKAGE TYPE -->
+  <div>
+    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 ml-1">
+      Package Type
+    </label>
+    <div class="relative">
+      <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10">
+        category
+      </span>
+      <select
+        required
+        data-field="Package Type"
+        class="w-full h-12 pl-12 pr-10 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-white/5 text-text-main dark:text-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all font-bold text-sm appearance-none cursor-pointer"
+      >
+        <option value="" disabled selected>Select package</option>
+        <option>Honeymoon Special</option>
+        <option>Family Vacation</option>
+        <option>Adventure Trip</option>
+        <option>Luxury Retreat</option>
+        <option>Group Tour</option>
+        <option>Solo Expedition</option>
+      </select>
+      <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+        expand_more
+      </span>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <button
+    type="button"
+    onclick="sendWhatsApp(this)"
+    class="w-full h-14 mt-2 bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-lg rounded-xl shadow-lg shadow-green-500/20 transition-all flex items-center justify-center gap-3 group"
+  >
+    Request Details
+  </button>
+
+</form>
+
+
+
 </div>
 </div>
 </div>
@@ -230,46 +303,69 @@
 <h2 class="text-3xl font-bold mb-2">Popular Visa Destinations</h2>
 <p class="text-gray-500 dark:text-gray-400">We have high success rates for these countries.</p>
 </div>
-<a class="text-primary font-bold flex items-center hover:underline group" href="#">
-                    View all countries
-                    <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
+
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
-<img alt="Tokyo street view with neon signs at night" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Vibrant city street in Tokyo at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ejr0v-_viIQtl6Y4uVpVnLBU6w4i2W2YBgTOIQHR02dXUO4LYlxnraEq0PKRhdGSfqvTkxuxoRHyyPT6eT0oSeG9dkfKWWjqUuczUyyp4QzIbSqNZAXZx2Yb-AWdoHpNBQZmC7a5QLcVtaN9yKUkDbUHpuak-CAgBHVB1AGQhjp0HexZ1j1iGo1kivB3-B81vNGa8Bo9EbRUcH-I8XY7bIIeB5_dabpnTzJ9F43hOmAfYro19GIDF1doldYEmB3ZxP1pqX4lQZSG"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full text-white">
-<h3 class="text-2xl font-bold mb-1">Japan</h3>
-<div class="flex items-center justify-between mt-3">
-<span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Tourist &amp; Business</span>
-<span class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors">Consult now</span>
+
+  <!-- JAPAN -->
+  <div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
+    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ejr0v-_viIQtl6Y4uVpVnLBU6w4i2W2YBgTOIQHR02dXUO4LYlxnraEq0PKRhdGSfqvTkxuxoRHyyPT6eT0oSeG9dkfKWWjqUuczUyyp4QzIbSqNZAXZx2Yb-AWdoHpNBQZmC7a5QLcVtaN9yKUkDbUHpuak-CAgBHVB1AGQhjp0HexZ1j1iGo1kivB3-B81vNGa8Bo9EbRUcH-I8XY7bIIeB5_dabpnTzJ9F43hOmAfYro19GIDF1doldYEmB3ZxP1pqX4lQZSG" />
+
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+    <div class="absolute bottom-0 left-0 p-6 w-full text-white">
+      <h3 class="text-2xl font-bold mb-1">Japan</h3>
+      <div class="flex items-center justify-between mt-3">
+        <span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Tourist & Business</span>
+        <span
+          class="consult-btn bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors cursor-pointer">
+          Enquire now?
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHENGEN -->
+  <div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
+    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJkBNw7ed3erOj6xcsieReCgx_HLJ0vnoGSszTwRgMP-lMa0NdLuMR5wX9v3M0nQe3bc23zquwBdFAde7IZIxLOR4N6RJ8qqt71-izrxC0xQoouU7CiylYZvrOx9b0BXKXyKt-wHW1krgFWaro2awkBEV1rlDibHM3LbmFLvhDoPvAbNEMHfEhmymvVHUmb7Ygh0QcTAb2_jab68NhljCJQ_2iCjBMJFokZV_p9DPLY9lXijSnFFuupBz14p_GDN_Vp5SXMbhUSUns" />
+
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+    <div class="absolute bottom-0 left-0 p-6 w-full text-white">
+      <h3 class="text-2xl font-bold mb-1">Schengen Area</h3>
+      <div class="flex items-center justify-between mt-3">
+        <span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Europe Travel Visa</span>
+        <span
+          class="consult-btn bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors cursor-pointer">
+          Enquire now?
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDONESIA -->
+  <div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
+    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZBf_XhujDC8ALjP0DEriqAYqb19cZe5eYl0ffdLljvFfacV7AXnJcRRa_jdyIx7MDR8OUW0BaOt7cUTNR0W4OSnU9MS6CdrOZ90AZcZMcTJnq1tOu97sDxnGSDkYPJCUW4voDelSxrQtGyYIJkTzAgsE5ZTEk4PiWkUrEeUnSKGdTux4wmEBhR2UqSKpdFcqo-WKQ_XhsED63mLXlRvzTc7qOdmfYv5Exv3VnnWGOfAj3-bpBqGxZNirodxubmnLnqnIobHexCIU_" />
+
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+    <div class="absolute bottom-0 left-0 p-6 w-full text-white">
+      <h3 class="text-2xl font-bold mb-1">Indonesia</h3>
+      <div class="flex items-center justify-between mt-3">
+        <span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Visa on Arrival</span>
+        <span
+          class="consult-btn bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors cursor-pointer">
+          Enquire now?
+        </span>
+      </div>
+    </div>
+  </div>
+
 </div>
-</div>
-</div>
-<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
-<img alt="Eiffel Tower in Paris with blue sky" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Eiffel tower view in Paris" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJkBNw7ed3erOj6xcsieReCgx_HLJ0vnoGSszTwRgMP-lMa0NdLuMR5wX9v3M0nQe3bc23zquwBdFAde7IZIxLOR4N6RJ8qqt71-izrxC0xQoouU7CiylYZvrOx9b0BXKXyKt-wHW1krgFWaro2awkBEV1rlDibHM3LbmFLvhDoPvAbNEMHfEhmymvVHUmb7Ygh0QcTAb2_jab68NhljCJQ_2iCjBMJFokZV_p9DPLY9lXijSnFFuupBz14p_GDN_Vp5SXMbhUSUns"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full text-white">
-<h3 class="text-2xl font-bold mb-1">Schengen Area</h3>
-<div class="flex items-center justify-between mt-3">
-<span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Europe Travel Visa</span>
-<span class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors">Consult now</span>
-</div>
-</div>
-</div>
-<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-xl transition-shadow">
-<img alt="Tropical temple in Bali surrounded by greenery" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Green lush temple landscape in Bali" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZBf_XhujDC8ALjP0DEriqAYqb19cZe5eYl0ffdLljvFfacV7AXnJcRRa_jdyIx7MDR8OUW0BaOt7cUTNR0W4OSnU9MS6CdrOZ90AZcZMcTJnq1tOu97sDxnGSDkYPJCUW4voDelSxrQtGyYIJkTzAgsE5ZTEk4PiWkUrEeUnSKGdTux4wmEBhR2UqSKpdFcqo-WKQ_XhsED63mLXlRvzTc7qOdmfYv5Exv3VnnWGOfAj3-bpBqGxZNirodxubmnLnqnIobHexCIU_"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full text-white">
-<h3 class="text-2xl font-bold mb-1">Indonesia</h3>
-<div class="flex items-center justify-between mt-3">
-<span class="text-xs font-medium opacity-90 border border-white/30 px-2 py-1 rounded">Visa on Arrival</span>
-<span class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-md hover:bg-orange-600 transition-colors">Consult now</span>
-</div>
-</div>
-</div>
-</div>
+
 </section>
 </main>
 <footer class=" pt-16 pb-8 px-10">
@@ -292,4 +388,28 @@
 
 </footer>
 <script src="/js/navbar.js"></script>
+<script src="/components/countries-component.js"></script>
+<script src="/js/forms.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".consult-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = document.getElementById("application");
+        if (!target) {
+          console.error("❌ #Application not found");
+          return;
+        }
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  });
+</script>
+
+
+
+
 </body></html>

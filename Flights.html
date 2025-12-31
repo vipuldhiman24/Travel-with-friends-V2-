@@ -69,9 +69,26 @@
 <main class="flex-grow flex flex-col">
 <section class="relative w-full flex items-center min-h-[850px] lg:min-h-[750px] px-4 lg:px-10 py-12">
 <div class="absolute inset-0 w-full h-full overflow-hidden z-0">
-<div class="w-full h-full bg-cover bg-no-repeat animate-background-pan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ejr0v-_viIQtl6Y4uVpVnLBU6w4i2W2YBgTOIQHR02dXUO4LYlxnraEq0PKRhdGSfqvTkxuxoRHyyPT6eT0oSeG9dkfKWWjqUuczUyyp4QzIbSqNZAXZx2Yb-AWdoHpNBQZmC7a5QLcVtaN9yKUkDbUHpuak-CAgBHVB1AGQhjp0HexZ1j1iGo1kivB3-B81vNGa8Bo9EbRUcH-I8XY7bIIeB5_dabpnTzJ9F43hOmAfYro19GIDF1doldYEmB3ZxP1pqX4lQZSG'); background-size: 150% auto;"></div>
-<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30 dark:to-background-dark/80"></div>
+
+  <!-- GRADIENT BACKGROUND (ALWAYS VISIBLE) -->
+<div class="absolute inset-0 bg-gray-500/70"></div>
+
+  <!-- IMAGE + ANIMATION (DESKTOP ONLY) -->
+  <div
+    class="absolute inset-0 hidden md:block
+           bg-cover bg-no-repeat
+           animate-background-pan"
+    style="
+      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ejr0v-_viIQtl6Y4uVpVnLBU6w4i2W2YBgTOIQHR02dXUO4LYlxnraEq0PKRhdGSfqvTkxuxoRHyyPT6eT0oSeG9dkfKWWjqUuczUyyp4QzIbSqNZAXZx2Yb-AWdoHpNBQZmC7a5QLcVtaN9yKUkDbUHpuak-CAgBHVB1AGQhjp0HexZ1j1iGo1kivB3-B81vNGa8Bo9EbRUcH-I8XY7bIIeB5_dabpnTzJ9F43hOmAfYro19GIDF1doldYEmB3ZxP1pqX4lQZSG');
+      background-size: 150% auto;
+    ">
+  </div>
+
+  <!-- EXTRA OVERLAY FOR DESKTOP READABILITY -->
+  <div class="absolute inset-0 hidden md:block bg-black/40"></div>
+
 </div>
+
 <div class="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center animate-fade-in-up">
 <div class="text-white space-y-8 lg:pr-10">
 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-orange-200 text-sm font-semibold tracking-wide">
@@ -83,7 +100,7 @@
 <span class="text-primary">Effortlessly.</span>
 </h1>
 <p class="text-lg lg:text-xl text-gray-200 opacity-90 leading-relaxed max-w-xl">
-                Tell us your travel plans and let our experts find the best deals for you. Skip the endless searching and get curated flight options via WhatsApp.
+                Tell us your travel plans and let our experts find the best deals for you. Skip the endless searching and get curated flight options at the best Prices !!.
             </p>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
 <div class="flex items-center gap-3">
@@ -108,7 +125,7 @@
 <div class="size-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
 <span class="material-symbols-outlined">bolt</span>
 </div>
-<span class="font-medium">Instant Quotes</span>
+<span class="font-medium "id="quote">Instant Quotes</span>
 </div>
 </div>
 </div>
@@ -118,76 +135,105 @@
 <h3 class="text-2xl font-bold text-text-main-light dark:text-text-main-dark">Request a Flight Quote</h3>
 <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Get personalized flight options via WhatsApp</p>
 </div>
-<form class="space-y-4">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="space-y-1">
-<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">From</label>
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flight_takeoff</span>
-<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark" placeholder="e.g. New York" type="text"/>
-</div>
-</div>
-<div class="space-y-1">
-<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">To</label>
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">flight_land</span>
-<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark" placeholder="e.g. London" type="text"/>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="space-y-1">
-<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Departure Date</label>
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">calendar_today</span>
-<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark cursor-pointer" onblur="(this.type='text')" onfocus="(this.type='date')" placeholder="Select date" type="text"/>
-</div>
-</div>
-<div class="space-y-1">
-<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Return Date</label>
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">event_repeat</span>
-<input class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-gray-400 font-medium text-text-main-light dark:text-text-main-dark cursor-pointer" onblur="(this.type='text')" onfocus="(this.type='date')" placeholder="(Optional)" type="text"/>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="space-y-1">
-<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Passengers</label>
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">groups</span>
-<select class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-medium text-text-main-light dark:text-text-main-dark appearance-none cursor-pointer">
-<option>1 Adult</option>
-<option>2 Adults</option>
-<option>3 Adults</option>
-<option>4 Adults</option>
-<option>5+ Adults</option>
-</select>
-<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
-</div>
-</div>
-<div class="space-y-1">
-<label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider ml-1">Class</label>
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">chair</span>
-<select class="w-full pl-10 pr-4 h-12 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-medium text-text-main-light dark:text-text-main-dark appearance-none cursor-pointer">
-<option>Economy</option>
-<option>Premium Economy</option>
-<option>Business</option>
-<option>First</option>
-</select>
-<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-sm">expand_more</span>
-</div>
-</div>
-</div>
-<div class="pt-2">
-<a class="w-full h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-xl shadow-lg shadow-green-500/20 transform transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 flex items-center justify-center gap-3 text-lg group" href="https://wa.me/15550123456?text=I%20would%20like%20to%20enquire%20about%20flights" target="_blank">
-<svg class="w-6 h-6 fill-current transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path></svg>
-<span>Get Flight Quotes</span>
-</a>
-<p class="text-center text-xs text-gray-500 mt-3 dark:text-gray-400">Our experts typically reply within 5 minutes</p>
-</div>
+<!-- form -->
+<form class="flex flex-col gap-6" data-form="flight">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+    <!-- FROM -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-medium text-[#1c130d]">From</label>
+      <div class="relative group">
+        <span class="material-symbols-outlined absolute inset-y-0 left-4 flex items-center text-[#9c6c49]">flight_takeoff</span>
+        <input
+          required
+          list="flight-airports"
+          data-field="From"
+          placeholder="Departure Airport"
+          class="w-full bg-[#fcfaf8] border border-[#e8d9ce] rounded-xl p-4 pl-12"
+          type="text"
+        />
+      </div>
+    </div>
+
+    <!-- TO -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-medium text-[#1c130d]">To</label>
+      <div class="relative group">
+        <span class="material-symbols-outlined absolute inset-y-0 left-4 flex items-center text-[#9c6c49]">flight_land</span>
+        <input
+          required
+          list="flight-airports"
+          data-field="To"
+          placeholder="Arrival Airport"
+          class="w-full bg-[#fcfaf8] border border-[#e8d9ce] rounded-xl p-4 pl-12"
+          type="text"
+        />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <!-- DEPART -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-medium text-[#1c130d]">Departure Date</label>
+      <input
+        required
+        type="date"
+        data-field="Departure Date"
+        class="w-full bg-[#fcfaf8] border border-[#e8d9ce] rounded-xl p-4"
+      />
+    </div>
+
+    <!-- RETURN -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-medium text-[#1c130d]">Return Date</label>
+      <input
+        required
+        type="date"
+        data-field="Return Date"
+        class="w-full bg-[#fcfaf8] border border-[#e8d9ce] rounded-xl p-4"
+      />
+    </div>
+
+    <!-- TRAVELERS -->
+    <div class="flex flex-col gap-1">
+      <label class="text-sm font-medium text-[#1c130d]">Travelers</label>
+      <input
+        required
+        min="1"
+        type="number"
+        data-field="Travelers"
+        placeholder="No. of Travelers"
+        class="w-full bg-[#fcfaf8] border border-[#e8d9ce] rounded-xl p-4"
+      />
+    </div>
+
+  </div>
+
+  <div class="flex gap-4">
+    <button
+      type="button"
+      onclick="sendWhatsApp(this)"
+      class="px-6 py-3 bg-[#25D366] text-white rounded-xl flex items-center gap-2"
+    >
+      <span class="material-symbols-outlined">chat</span>
+      WhatsApp Enquiry
+    </button>
+      <a
+      href="tel:+917042857001"
+      class="md:w-auto w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-3 justify-center"
+    >
+      <span class="material-symbols-outlined">call</span>
+      <span>Call Now</span>
+    </a>
+  </div>
+
 </form>
+
+
 </div>
 </div>
 </div>
@@ -224,52 +270,89 @@
 </div>
 </section>
 <section class="py-16 px-4 lg:px-10 max-w-7xl mx-auto w-full">
-<div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
-<div>
-<h2 class="text-3xl font-bold mb-2">Top Flight Destinations</h2>
-<p class="text-gray-500 dark:text-gray-400">Get the best fares for these popular routes.</p>
-</div>
-<a class="text-primary font-bold flex items-center group" href="#">
-<span class="group-hover:underline">Explore all destinations</span>
-<span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-<img alt="Eiffel Tower in Paris with blue sky" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJkBNw7ed3erOj6xcsieReCgx_HLJ0vnoGSszTwRgMP-lMa0NdLuMR5wX9v3M0nQe3bc23zquwBdFAde7IZIxLOR4N6RJ8qqt71-izrxC0xQoouU7CiylYZvrOx9b0BXKXyKt-wHW1krgFWaro2awkBEV1rlDibHM3LbmFLvhDoPvAbNEMHfEhmymvVHUmb7Ygh0QcTAb2_jab68NhljCJQ_2iCjBMJFokZV_p9DPLY9lXijSnFFuupBz14p_GDN_Vp5SXMbhUSUns"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full text-white">
-<h3 class="text-2xl font-bold mb-1">Paris</h3>
-<div class="flex items-center justify-between">
-<span class="text-sm opacity-90">Europe's Romantic Capital</span>
-<span class="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">Enquire Now</span>
-</div>
-</div>
-</div>
-<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-<img alt="Tropical temple in Bali surrounded by greenery" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZBf_XhujDC8ALjP0DEriqAYqb19cZe5eYl0ffdLljvFfacV7AXnJcRRa_jdyIx7MDR8OUW0BaOt7cUTNR0W4OSnU9MS6CdrOZ90AZcZMcTJnq1tOu97sDxnGSDkYPJCUW4voDelSxrQtGyYIJkTzAgsE5ZTEk4PiWkUrEeUnSKGdTux4wmEBhR2UqSKpdFcqo-WKQ_XhsED63mLXlRvzTc7qOdmfYv5Exv3VnnWGOfAj3-bpBqGxZNirodxubmnLnqnIobHexCIU_"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full text-white">
-<h3 class="text-2xl font-bold mb-1">Bali</h3>
-<div class="flex items-center justify-between">
-<span class="text-sm opacity-90">Island of the Gods</span>
-<span class="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">Enquire Now</span>
-</div>
-</div>
-</div>
-<div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-<img alt="Scenic landscape of a van driving through a canyon road during sunset" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MO3HOFwSlHi-ugElVqqOoDm4JoveUV6qR4ZBe4Eg4Esfg7UXkzR9zZpG9mydjZHqtAEyTF8sJmcGWFt0hIFn1uhD9vp48EFFTaVWRLgkpZqKWn1GEsJ0QSNkKKeip6odAdvz7iOzk39N2keTkIBF3fQKmiVw7c160x72o059Xokkt3t4lYcDsKxNBF8c_HDg1rFatuOPj0BQbS8kYTdGStOrHzCw5HM0kROCAo_eiWkxjPp3_V-y_BzQIZXmdead_xIV8Ag1hen-"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full text-white">
-<h3 class="text-2xl font-bold mb-1">Dubai</h3>
-<div class="flex items-center justify-between">
-<span class="text-sm opacity-90">The Futuristic Oasis</span>
-<span class="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">Enquire Now</span>
-</div>
-</div>
-</div>
-</div>
+
+  <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+    <div>
+      <h2 class="text-3xl font-bold mb-2">Top Flight Destinations</h2>
+      <p class="text-gray-500 dark:text-gray-400">
+        Get the best fares for these popular routes.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- CARD 1 -->
+    <div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+      <img
+        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        src="https://th.bing.com/th/id/OIP.h6F6n_5TDtaOtYAcWEPqJQHaE8?w=213&h=150&c=6&o=7&dpr=1.4&pid=1.7&rm=3"alt="thailand"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+      <div class="absolute bottom-0 left-0 p-6 w-full text-white">
+        <h3 class="text-2xl font-bold mb-1">Thailand</h3>
+        <div class="flex items-center justify-between">
+          <span class="text-sm opacity-90">bustling Bangkok to serene beaches</span>
+          <span
+            class="enquire-scroll bg-primary px-3 py-1 rounded-full
+                   text-sm font-bold shadow-md cursor-pointer
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Enquire Now
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+      <img
+        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZBf_XhujDC8ALjP0DEriqAYqb19cZe5eYl0ffdLljvFfacV7AXnJcRRa_jdyIx7MDR8OUW0BaOt7cUTNR0W4OSnU9MS6CdrOZ90AZcZMcTJnq1tOu97sDxnGSDkYPJCUW4voDelSxrQtGyYIJkTzAgsE5ZTEk4PiWkUrEeUnSKGdTux4wmEBhR2UqSKpdFcqo-WKQ_XhsED63mLXlRvzTc7qOdmfYv5Exv3VnnWGOfAj3-bpBqGxZNirodxubmnLnqnIobHexCIU_"
+        alt="Bali"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+      <div class="absolute bottom-0 left-0 p-6 w-full text-white">
+        <h3 class="text-2xl font-bold mb-1">Bali</h3>
+        <div class="flex items-center justify-between">
+          <span class="text-sm opacity-90">Island of the Gods</span>
+          <span
+            class="enquire-scroll bg-primary px-3 py-1 rounded-full
+                   text-sm font-bold shadow-md cursor-pointer
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Enquire Now
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+      <img
+        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MO3HOFwSlHi-ugElVqqOoDm4JoveUV6qR4ZBe4Eg4Esfg7UXkzR9zZpG9mydjZHqtAEyTF8sJmcGWFt0hIFn1uhD9vp48EFFTaVWRLgkpZqKWn1GEsJ0QSNkKKeip6odAdvz7iOzk39N2keTkIBF3fQKmiVw7c160x72o059Xokkt3t4lYcDsKxNBF8c_HDg1rFatuOPj0BQbS8kYTdGStOrHzCw5HM0kROCAo_eiWkxjPp3_V-y_BzQIZXmdead_xIV8Ag1hen-"
+        alt="Dubai"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+      <div class="absolute bottom-0 left-0 p-6 w-full text-white">
+        <h3 class="text-2xl font-bold mb-1">Dubai</h3>
+        <div class="flex items-center justify-between">
+          <span class="text-sm opacity-90">The Futuristic Oasis</span>
+          <span
+            class="enquire-scroll bg-primary px-3 py-1 rounded-full
+                   text-sm font-bold shadow-md cursor-pointer
+                   opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Enquire Now
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
+
 </main>
 <footer class=" pt-16 pb-8">
     <div class="flex flex-col sm:flex-row items-center justify-between border-t border-[#f4ece7] pt-8 gap-4 px-10">
@@ -291,4 +374,17 @@
 
 </footer>
 <script src="/js/navbar.js"></script>
+<script src="/js/forms.js"></script>
+<script src="/components/flight-airports-component.js"></script>
+<script>
+  document.querySelectorAll(".enquire-scroll").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const hero = document.getElementById("quote");
+      if (hero) {
+        hero.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+</script>
+
 </body></html>
