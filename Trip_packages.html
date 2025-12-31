@@ -90,42 +90,94 @@
 </div>
 <!-- Inquiry Form Card -->
 <div class="w-full max-w-md lg:w-[420px] bg-white dark:bg-[#2a201a] rounded-2xl shadow-2xl p-6 md:p-8 backdrop-blur-xl border border-white/20 dark:border-white/10">
-<h3 class="text-xl font-bold text-[#1b130e] dark:text-white mb-1">Begin Your Story</h3>
-<p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Tell us where you want your next chapter to be.</p>
-<form class="flex flex-col gap-4">
-<div class="space-y-1">
-<label class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Full Name</label>
-<div class="relative">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">person</span>
-<input class="w-full pl-10 pr-4 py-3 bg-background-light dark:bg-background-dark border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 text-[#1b130e] dark:text-white" placeholder="Jane Doe" type="text"/>
-</div>
-</div>
-<div class="space-y-1">
-<label class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Dream Destination</label>
-<div class="relative">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">map</span>
-<input class="w-full pl-10 pr-4 py-3 bg-background-light dark:bg-background-dark border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 text-[#1b130e] dark:text-white" placeholder="Bali, Paris, Tokyo..." type="text"/>
-</div>
-</div>
-<div class="space-y-1">
-<label class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Travel Date</label>
-<div class="relative">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">calendar_month</span>
-<input class="w-full pl-10 pr-4 py-3 bg-background-light dark:bg-background-dark border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 text-[#1b130e] dark:text-white text-gray-400" type="date"/>
-</div>
-</div>
-<button class="mt-2 w-full bg-primary hover:bg-primary/90 text-white dark:text-[#1b130e] font-bold py-3.5 rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]" type="button">
-<span class="material-symbols-outlined text-[20px]">chat</span>
-                        Start Chat on WhatsApp
-                    </button>
-<p class="text-[10px] text-center text-gray-400 mt-2">
-                        By clicking, you agree to receive messages via WhatsApp regarding your inquiry.
-                    </p>
+<h3 class="text-xl font-bold text-[#1b130e] dark:text-white mb-1">Custom Trip ? We will help 🐨</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Tell us where and what you need</p>
+<form class="flex flex-col gap-4" data-form="quick-chat">
+
+  <!-- FULL NAME -->
+  <div class="space-y-1">
+    <label class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+      Full Name
+    </label>
+    <div class="relative">
+      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">
+        person
+      </span>
+      <input
+        type="text"
+        required
+        data-field="Full Name"
+        placeholder="Jane Doe"
+        class="w-full pl-10 pr-4 py-3 bg-background-light dark:bg-background-dark border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 text-[#1b130e] dark:text-white"
+      />
+    </div>
+  </div>
+
+  <!-- DREAM DESTINATION -->
+  <div class="space-y-1">
+    <label class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+       Destination
+    </label>
+    <div class="relative">
+      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">
+        map
+      </span>
+      <input
+        type="text"
+        required
+        data-field="Destination"
+        placeholder="Manali, Bangkok, Thailand..."
+        class="w-full pl-10 pr-4 py-3 bg-background-light dark:bg-background-dark border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 text-[#1b130e] dark:text-white"
+      />
+    </div>
+  </div>
+
+  <!-- TRAVEL DATE -->
+  <div class="space-y-1">
+    <label class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+      Travel Date
+    </label>
+    <div class="relative">
+      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 material-symbols-outlined text-[20px]">
+        calendar_month
+      </span>
+      <input
+        type="date"
+        required
+        data-field="Travel Date"
+        class="w-full pl-10 pr-4 py-3 bg-background-light dark:bg-background-dark border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/50 text-[#1b130e] dark:text-white"
+      />
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <button
+    type="button"
+    onclick="sendWhatsApp(this)"
+    class="mt-2 w-full bg-primary hover:bg-primary/90 text-white dark:text-[#1b130e] font-bold py-3.5 rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]"
+  >
+    <span class="material-symbols-outlined text-[20px]">chat</span>
+    Start Chat on WhatsApp
+  </button>
+
+  <p class="text-[10px] text-center text-gray-400 mt-2">
+    By clicking, you agree to receive messages via WhatsApp regarding your inquiry.
+  </p>
+
 </form>
+
 </div>
 </div>
 </header>
 <!-- Packages Section -->
+  <div class="flex flex-col items-center text-center gap-4 mb-10">
+  <h3 class="text-3xl font-extrabold bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 bg-clip-text text-transparent drop-shadow-sm">
+    Trending Destinations
+  </h3>
+  <p class="text-base md:text-lg text-text-main dark:text-text-main-dark max-w-2xl leading-relaxed">
+    Discover the most sought-after travel experiences handpicked by our experts. These trending packages blend luxury, adventure, and unforgettable memories — perfect for your next escape.
+  </p>
+</div>
 <div class="flex flex-col gap-2 text-center mb-10">
   <div
     id="packagesGrid"
@@ -133,86 +185,17 @@
     <!-- Your 4 package cards go here -->
   </div>
 
-  <div class="flex justify-center mt-8">
-    <a href="Trip_packages.html"
-      class="px-6 py-2 rounded-lg border-2 border-primary/20 hover:border-primary text-primary font-bold transition-all hover:bg-primary/5">
-      Load More Packages
-    </a>
-  </div>
+ 
 </div>
 
 <!-- Inquiry Form Section -->
 <section class="w-full bg-orange-50 px-4 py-16">
 <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
 <!-- Left Content -->
-<div class="flex-1 flex flex-col gap-6">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-primary text-sm font-bold w-fit">
-<span class="material-symbols-outlined text-sm">flight</span> Custom Trips
-                    </div>
-<h2 class="text-4xl lg:text-5xl font-black text-[#1b130e] leading-tight">
-                        Can't find the <span class="text-primary">perfect</span> package?
-                    </h2>
-<p class="text-lg text-gray-600 leading-relaxed">
-                        Let us design a custom itinerary just for you and your friends. Tell us where you want to go, and we'll handle the logistics via WhatsApp.
-                    </p>
-<div class="flex flex-col gap-4 mt-4">
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-white flex items-center justify-center text-primary shadow-sm">
-<span class="material-symbols-outlined">support_agent</span>
-</div>
-<div>
-<h4 class="font-bold text-[#1b130e]">24/7 Support</h4>
-<p class="text-sm text-gray-500">Always here to help during your trip</p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-white flex items-center justify-center text-secondary shadow-sm">
-<span class="material-symbols-outlined">group</span>
-</div>
-<div>
-<h4 class="font-bold text-[#1b130e]">Group Discounts</h4>
-<p class="text-sm text-gray-500">Special rates for 5+ travelers</p>
-</div>
-</div>
-</div>
-</div>
+
 <!-- Right Form -->
-<div class="flex-1 w-full max-w-md bg-white p-8 rounded-3xl shadow-xl shadow-orange-100/50 border border-orange-100">
-<h3 class="text-xl font-bold text-[#1b130e] mb-6">Plan Your Custom Trip</h3>
-<form class="flex flex-col gap-4">
-<div>
-<label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
-<input class="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:ring-primary" placeholder="Jane Doe" type="text"/>
-</div>
-<div>
-<label class="block text-sm font-semibold text-gray-700 mb-1">WhatsApp Number</label>
-<input class="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:ring-primary" placeholder="+1 234 567 890" type="tel"/>
-</div>
-<div class="grid grid-cols-2 gap-4">
-<div>
-<label class="block text-sm font-semibold text-gray-700 mb-1">Destination</label>
-<select class="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:ring-primary">
-<option>Select...</option>
-<option>Europe</option>
-<option>Asia</option>
-<option>Africa</option>
-<option>Americas</option>
-</select>
-</div>
-<div>
-<label class="block text-sm font-semibold text-gray-700 mb-1">Date</label>
-<input class="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:ring-primary" type="date"/>
-</div>
-</div>
-<div>
-<label class="block text-sm font-semibold text-gray-700 mb-1">Special Requests</label>
-<textarea class="w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-sm focus:border-primary focus:ring-primary resize-none" placeholder="Any specific activities or dietary needs?" rows="3"></textarea>
-</div>
-<button class="mt-2 flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-sm font-bold text-white hover:bg-orange-600 shadow-lg shadow-orange-200 transition-all" type="button">
-                            Start Planning
-                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
-</button>
-</form>
+
+
 </div>
 </div>
 </section>
@@ -231,47 +214,53 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <!-- Review 1 -->
+<!-- Review 1 -->
 <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col gap-4">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-gray-300 overflow-hidden">
-<img alt="Portrait of Sarah" class="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZsyclNFEiPoslg-u2IMy0kG9X9gdFBwO82ZWrvQ28duWZn26_XlER_V7ozY42ndUa0OBd_DANL1witIXaH8Pqcj1god4bvXt-3wxdL8d3ZBqzqX60EhsyjqXi3ZQ9gz0Zyzgn40bUUDZw6vAGvPFtZpkBTeF6m9PaM5g84KfAf3M88sC1Hqg5PQyc0guDsF6-pVLwEcEv6hOyPZxJaCgIwF0pZ5TxTzh1Mifx62-Vw-EYjn5wWH-OzLtqq8ElHkepXQCZxN4s3Z7P"/>
+  <div class="flex items-center gap-3">
+    <div class="size-10 rounded-full bg-gray-300 overflow-hidden">
+      <img alt="Portrait of Riya" class="w-full h-full object-cover" data-alt="User avatar" src="https://via.placeholder.com/40" />
+    </div>
+    <div>
+      <h5 class="font-bold text-sm text-[#1b130e]">Riya Sharma</h5>
+      <p class="text-xs text-gray-500">Manali Mountain Escape</p>
+    </div>
+  </div>
+  <p class="text-gray-600 text-sm italic">
+    "At first I was unsure about booking with a smaller company, but everything was so well managed. The trip was smooth, fun, and surprisingly affordable compared to bigger operators."
+  </p>
 </div>
-<div>
-<h5 class="font-bold text-sm text-[#1b130e]">Sarah Jenkins</h5>
-<p class="text-xs text-gray-500">Bali Retreat</p>
-</div>
-</div>
-<p class="text-gray-600 text-sm italic">"The most organized trip I've ever been on. The Flywithfriends team handled everything, and the WhatsApp updates were super convenient."</p>
-</div>
+
 <!-- Review 2 -->
 <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col gap-4">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-gray-300 overflow-hidden">
-<img alt="Portrait of Mike" class="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1fARYDlIOGbfNAcknr8bASRLR-XUcGrkmqn1o5r7miueSNqux7K1nSIMZAXxAII69HPEHhc2P-PvxL-rry42GqoSozJ2wGfgFFx2h7790OKZ2ptNT8MKDP09antQZJci8s7wiWKI8uV7OHh1zqQshqS4ZtSmskMgClamMMdW76uPIQ_vFTw6VJV-LMk9nloLGghtCr9_KAw0zenl-7m6lZx_29PNxXqwzSqkL0eIE4qcqGrv4UpEUF39WRkN_lQC_3OYBTuE9BBAB"/>
+  <div class="flex items-center gap-3">
+    <div class="size-10 rounded-full bg-gray-300 overflow-hidden">
+      <img alt="Portrait of Arjun" class="w-full h-full object-cover" data-alt="User avatar" src="https://via.placeholder.com/40" />
+    </div>
+    <div>
+      <h5 class="font-bold text-sm text-[#1b130e]">Arjun Verma</h5>
+      <p class="text-xs text-gray-500">Kasol & Tosh Chill Trip</p>
+    </div>
+  </div>
+  <p class="text-gray-600 text-sm italic">
+    "We thought a smaller operator might cut corners, but the team was super helpful and kept everything within budget. It felt personal and gave us great value for money."
+  </p>
 </div>
-<div>
-<h5 class="font-bold text-sm text-[#1b130e]">Mike Chen</h5>
-<p class="text-xs text-gray-500">Tokyo Explorer</p>
-</div>
-</div>
-<p class="text-gray-600 text-sm italic">"Incredible value for money. We saw so much of Japan in 10 days. Highly recommend for group travel!"</p>
-</div>
+
 <!-- Review 3 -->
 <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col gap-4">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-gray-300 overflow-hidden">
-<img alt="Portrait of Alex" class="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_kbccogag5BLRivbilP7ihO780E82CiSgTYxInpvLg1SI-84IzZNnA8bAkfGcMUi-xeE0iKf7jITG7YdCkNKMjzhvqD-ZOpSEW83e6ZcozfFMornejnF0zRQc-Xl7dAemcdcoNmJRvSMiYhVOlDSN8FsFUOeKW1qpAZRJcWE-KrEkcPoTFtHAijYN9uJSfE2At8r-MPo5VfV9CAuPhzv8DwgcOXabwGLYHuHeW-yUeX_Q70mJzIc1MeJaRUHwi4ROffxdxYr0uqkU"/>
+  <div class="flex items-center gap-3">
+    <div class="size-10 rounded-full bg-gray-300 overflow-hidden">
+      <img alt="Portrait of Neha" class="w-full h-full object-cover" data-alt="User avatar" src="https://via.placeholder.com/40" />
+    </div>
+    <div>
+      <h5 class="font-bold text-sm text-[#1b130e]">Neha Singh</h5>
+      <p class="text-xs text-gray-500">Jim Corbett Jungle Safari</p>
+    </div>
+  </div>
+  <p class="text-gray-600 text-sm italic">
+    "We were skeptical at first, but the service was excellent. The guides were friendly, the itinerary well‑planned, and it all fit perfectly into our budget."
+  </p>
 </div>
-<div>
-<h5 class="font-bold text-sm text-[#1b130e]">Alex Rivera</h5>
-<p class="text-xs text-gray-500">Cape Town Adventure</p>
-</div>
-</div>
-<p class="text-gray-600 text-sm italic">"A truly unforgettable experience. The guides were friendly, and the itinerary was perfect mix of fun and relaxation."</p>
-</div>
-</div>
-</div>
-</section>
 <!-- "Animation" Graphic Footer Section -->
 <!-- Visualizing movement and energy to conclude the page -->
 <section class="relative w-full h-64 overflow-hidden bg-gradient-to-b from-white to-blue-50 mt-auto">
@@ -319,4 +308,7 @@
 
 <script src="/js/navbar.js"></script>
 <script src="data/packages.js"></script> <script src="js/render-packages.js"></script> 
+<script src="js/main.js"></script> 
+<script src="js/forms.js"></script> 
+
 </body></html>
