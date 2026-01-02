@@ -3,7 +3,7 @@ console.log("✅ main.js loaded");
 // =============================
 // Global Config
 // =============================
-const WHATSAPP_NUMBER = "917042857001";
+const WHATSAPP_NUMBER = "918851722264";
 
 // =============================
 // Mobile Menu Toggle (SAFE)
@@ -93,7 +93,6 @@ function validateAndSendWhatsApp() {
 }
 
 function validateAndCall() {
-  if (!isFormValid()) return;
   window.location.href = `tel:+${WHATSAPP_NUMBER}`;
 }
 
