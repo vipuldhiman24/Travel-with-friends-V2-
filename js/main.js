@@ -1,6 +1,11 @@
 console.log("✅ main.js loaded");
 
 // =============================
+// Global Config
+// =============================
+const WHATSAPP_NUMBER = "917042857001";
+
+// =============================
 // Mobile Menu Toggle (SAFE)
 // =============================
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
@@ -13,14 +18,14 @@ if (mobileMenuBtn && mobileMenu) {
 }
 
 // =============================
-// WhatsApp Message Sender
+// WhatsApp Message Sender (WITH DATA)
 // =============================
 function sendToWhatsApp() {
-  const destination = document.getElementById("destination").value;
-  const travelDate = document.getElementById("travelDate").value;
-  const travelers = document.getElementById("travelers").value;
-  const duration = document.getElementById("duration").value;
-  const requests = document.getElementById("requests").value;
+  const destination = document.getElementById("destination")?.value || "";
+  const travelDate = document.getElementById("travelDate")?.value || "";
+  const travelers = document.getElementById("travelers")?.value || "";
+  const duration = document.getElementById("duration")?.value || "";
+  const requests = document.getElementById("requests")?.value || "";
 
   const styleInput = document.querySelector('input[name="style"]:checked');
   const style = styleInput ? styleInput.value : "Not specified";
@@ -36,15 +41,27 @@ Trip Style: ${style}
 Additional Requests:
 ${requests}`;
 
-  const phoneNumber = "917042857001";
   window.open(
-    `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
     "_blank"
   );
 }
 
 // =============================
-// Form Validation
+// WhatsApp Quick CTA (NO VALIDATION)
+// =============================
+function sendWhatsAppQuick() {
+  const message = `Hello 👋
+I would like to enquire about your travel services.`;
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+}
+
+// =============================
+// Form Validation (INDEX FORM)
 // =============================
 function isFormValid() {
   const destination = document.getElementById("destination");
@@ -67,6 +84,9 @@ function isFormValid() {
   return true;
 }
 
+// =============================
+// Validated Actions
+// =============================
 function validateAndSendWhatsApp() {
   if (!isFormValid()) return;
   sendToWhatsApp();
@@ -74,7 +94,7 @@ function validateAndSendWhatsApp() {
 
 function validateAndCall() {
   if (!isFormValid()) return;
-  window.location.href = "tel:+917042857001";
+  window.location.href = `tel:+${WHATSAPP_NUMBER}`;
 }
 
 // =============================
@@ -82,3 +102,4 @@ function validateAndCall() {
 // =============================
 window.validateAndSendWhatsApp = validateAndSendWhatsApp;
 window.validateAndCall = validateAndCall;
+window.sendWhatsAppQuick = sendWhatsAppQuick;
