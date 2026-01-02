@@ -1,80 +1,169 @@
 window.PACKAGES = [
   {
     id: 1,
-    title: "Manali Mountain Escape",
-    location: "Himachal Pradesh, India",
-    image: "https://th.bing.com/th/id/OIP.MfIQdj_n9ShKGbmLcV5roAHaEK?w=322&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3",
-    price: "From ₹9,999",
-    duration: "5D / 4N",
-    badge: "Popular",
-    group: "4+",
+    title: "Divine Vaishno Devi Yatra – 3 Nights / 4 Days",
+    location: "Katra – Vaishno Devi, Jammu & Kashmir, India",
+    image: "/assets/Vishnodevi.jpg",
+    price: "Starting from ₹7,499 per person",
+    duration: "3 Nights / 4 Days",
+    badge: "🙏 Spiritual Journey | Best Seller",
+    group: "2 – 12 People",
     shortDesc:
-      "Snowy views, café hopping, and adventure activities — perfect for a friends’ mountain getaway.",
+      "A spiritually enriching journey to Shri Mata Vaishno Devi covering Katra, Bhawan darshan, and nearby sacred attractions — peaceful, comfortable, and well-planned.",
     itinerary: [
-      { day: "Day 1", heading: "Delhi → Manali Overnight Travel", description: "Start your journey from Delhi with an overnight bus or car ride to Manali. Enjoy the scenic drive through the Himalayas." },
-      { day: "Day 2", heading: "Local Sightseeing & Cafés", description: "Explore Manali’s charming cafés, visit Hadimba Temple, and stroll through Old Manali’s rustic lanes." },
-      { day: "Day 3", heading: "Solang Valley Adventure", description: "Spend the day at Solang Valley with paragliding, skiing, or ATV rides amidst snowy peaks." },
-      { day: "Day 4", heading: "Rohtang Pass Excursion", description: "Take a trip to Rohtang Pass for breathtaking views and snow activities. Perfect for group fun." },
-      { day: "Day 5", heading: "Mall Road Shopping & Return", description: "Wrap up your trip with shopping on Mall Road, then head back to Delhi with unforgettable memories." }
+      {
+        day: "Day 1",
+        heading: "Arrival in Katra & Leisure",
+        description:
+          "Arrive in Katra, check into hotel, relax, explore local markets, and attend evening Aarti if time permits."
+      },
+      {
+        day: "Day 2",
+        heading: "Vaishno Devi Yatra (Darshan)",
+        description:
+          "Early morning proceed for Vaishno Devi Yatra (13 km trek). Optional pony, palki, or helicopter. Visit Ardhkuwari, Bhairon Temple, and Mata Bhawan."
+      },
+      {
+        day: "Day 3",
+        heading: "Katra Local Sightseeing",
+        description:
+          "After breakfast, enjoy local sightseeing including Charan Paduka, Bhairon Ghati, and nearby temples."
+      },
+      {
+        day: "Day 4",
+        heading: "Departure from Katra",
+        description:
+          "After breakfast, check out and proceed to Jammu Railway Station / Airport with divine blessings."
+      }
     ]
   },
 
   {
     id: 2,
-    title: "Kasol & Tosh Chill Trip",
-    location: "Himachal Pradesh, India",
-    image: "https://th.bing.com/th/id/OIP.dIPUZgEezVd72dbDiIEuCQHaEK?w=286&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3",
-    price: "From ₹7,499",
-    duration: "5D / 4N",
-    group: "3+",
+    title: "Scenic Manali Escape – 3 Nights / 4 Days",
+    location: "Manali, Himachal Pradesh, India",
+    image: "/assets/Manali.jpg",
+    price: "Starting from ₹4,999 per person",
+    duration: "3 Nights / 4 Days",
+    badge: "⭐ Most Popular",
+    group: "2 – 10 People",
     shortDesc:
-      "Riverside cafés, backpacker vibes, and scenic hikes — slow travel with your gang.",
+      "Snow-capped mountains, scenic valleys, famous sightseeing spots, and peaceful river moments — perfect for couples, friends, and small groups.",
     itinerary: [
-      { day: "Day 1", heading: "Delhi → Kasol", description: "Travel overnight from Delhi to Kasol, a backpacker’s paradise in the Parvati Valley." },
-      { day: "Day 2", heading: "Kasol Cafés & Chalal Walk", description: "Relax in riverside cafés and take a scenic walk to Chalal village." },
-      { day: "Day 3", heading: "Tosh Hike & Bonfire Night", description: "Hike to Tosh village, enjoy mountain views, and spend the evening around a bonfire." },
-      { day: "Day 4", heading: "Manikaran Hot Springs", description: "Visit the famous hot springs and Gurudwara at Manikaran for a cultural experience." },
-      { day: "Day 5", heading: "Parvati River Chill & Return", description: "Spend a relaxed morning by the Parvati River before heading back to Delhi." }
+      {
+        day: "Day 1",
+        heading: "Arrival in Manali & Local Sightseeing",
+        description:
+          "Visit Hadimba Devi Temple, Vashisht hot water springs, and Mall Road. Dinner and overnight stay."
+      },
+      {
+        day: "Day 2",
+        heading: "Solang Valley & Adventure",
+        description:
+          "Enjoy paragliding, zorbing, ropeway ride, skiing (seasonal), and snow activities at Solang Valley."
+      },
+      {
+        day: "Day 3",
+        heading: "Kullu – Manikaran Excursion",
+        description:
+          "Visit Kullu Valley, shawl factories, and Manikaran Sahib hot springs."
+      },
+      {
+        day: "Day 4",
+        heading: "Departure",
+        description:
+          "Check out after breakfast with unforgettable Himalayan memories."
+      }
     ]
   },
 
   {
     id: 3,
-    title: "Jim Corbett Jungle Safari",
-    location: "Uttarakhand, India",
-    image: "https://th.bing.com/th/id/OIP.yE7p-uHfLFwVkcNDBD2cngHaFj?w=191&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3",
-    price: "From ₹8,999",
-    duration: "5D / 4N",
-    badge: "Wildlife",
-    group: "4+",
+    title: "Dubai Dream Holiday with FlyWithFriends",
+    location: "Dubai, United Arab Emirates",
+    image: "/assets/Burj Khalifa.jfif",
+    price: "₹59,999 per person",
+    duration: "5 Days / 4 Nights",
+    badge: "🔥 Premium International Trip",
+    group: "4 – 15 People",
     shortDesc:
-      "Stay near the jungle, early morning safaris, and a digital detox with friends.",
+      "Luxury skyscrapers, desert safari, dhow cruise, shopping, and iconic attractions — Dubai done right.",
     itinerary: [
-      { day: "Day 1", heading: "Delhi → Corbett", description: "Depart from Delhi and arrive at Jim Corbett National Park. Check into your resort." },
-      { day: "Day 2", heading: "Jeep Safari & Resort Stay", description: "Embark on a thrilling jeep safari to spot wildlife, then relax at the resort." },
-      { day: "Day 3", heading: "Birdwatching & Riverside Picnic", description: "Spend the day birdwatching and enjoy a picnic by the Kosi River." },
-      { day: "Day 4", heading: "Nature Walk & Village Visit", description: "Take a guided nature walk and visit a nearby tribal village for cultural insights." },
-      { day: "Day 5", heading: "Morning Safari & Return", description: "Go for one last safari before returning to Delhi." }
+      {
+        day: "Day 1",
+        heading: "Arrival & Dhow Cruise",
+        description:
+          "Evening Dhow Cruise Dinner at Dubai Marina with live music and buffet."
+      },
+      {
+        day: "Day 2",
+        heading: "City Tour & Burj Khalifa",
+        description:
+          "Dubai city tour and Burj Khalifa 124th floor visit."
+      },
+      {
+        day: "Day 3",
+        heading: "Desert Safari",
+        description:
+          "Dune bashing, camel ride, BBQ dinner, and cultural shows."
+      },
+      {
+        day: "Day 4",
+        heading: "Abu Dhabi (Optional)",
+        description:
+          "Optional Abu Dhabi tour including Sheikh Zayed Grand Mosque."
+      },
+      {
+        day: "Day 5",
+        heading: "Departure",
+        description:
+          "Check out and transfer to airport."
+      }
     ]
   },
 
   {
     id: 4,
-    title: "Shimla Weekend Getaway",
-    location: "Himachal Pradesh, India",
-    image: "https://th.bing.com/th/id/OIP.YwPyOs5I5toR2GXhJa16jgHaE5?w=256&h=180&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3",
-    price: "From ₹6,999",
-    duration: "5D / 4N",
-    badge: "Easy Trip",
-    group: "2+",
+    title: "Magical Bali Getaway",
+    location: "Bali, Indonesia",
+    image: "/assets/Bali.jfif",
+    price: "₹69,999 per person (Excluding Flights)",
+    duration: "5 Days / 4 Nights",
+    badge: "🔥 Best Seller | International Trip",
+    group: "2 – 15 Travelers",
     shortDesc:
-      "Colonial charm, scenic walks, and relaxed sightseeing — easy, fun, and close to Delhi.",
+      "Beaches, temples, waterfalls, rice terraces, and water sports — Bali at its best.",
     itinerary: [
-      { day: "Day 1", heading: "Delhi → Shimla", description: "Travel from Delhi to Shimla and settle into your hotel." },
-      { day: "Day 2", heading: "Mall Road & Ridge Walk", description: "Explore Mall Road, The Ridge, and enjoy colonial architecture." },
-      { day: "Day 3", heading: "Kufri Visit & Adventure Park", description: "Head to Kufri for horse rides, adventure activities, and panoramic views." },
-      { day: "Day 4", heading: "Jakhoo Temple & Heritage Tour", description: "Visit Jakhoo Temple and take a heritage walk through Shimla’s landmarks." },
-      { day: "Day 5", heading: "Local Markets & Return", description: "Shop for souvenirs in local markets before returning to Delhi." }
+      {
+        day: "Day 1",
+        heading: "Arrival in Bali",
+        description:
+          "Airport pickup and hotel transfer. Evening free."
+      },
+      {
+        day: "Day 2",
+        heading: "Water Sports & Uluwatu",
+        description:
+          "Tanjung Benoa water sports and Uluwatu Temple sunset."
+      },
+      {
+        day: "Day 3",
+        heading: "Ubud & Waterfalls",
+        description:
+          "Tegenungan Waterfall, Monkey Forest, rice terraces."
+      },
+      {
+        day: "Day 4",
+        heading: "Tanah Lot & Leisure",
+        description:
+          "Tanah Lot Temple visit and leisure time."
+      },
+      {
+        day: "Day 5",
+        heading: "Departure",
+        description:
+          "Checkout and airport transfer."
+      }
     ]
   }
 ];

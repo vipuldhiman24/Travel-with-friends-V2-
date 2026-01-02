@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("pkg-desc").textContent = pkg.shortDesc;
   document.getElementById("pkg-price").textContent = pkg.price;
   document.getElementById("pkg-duration").textContent = pkg.duration;
+  document.getElementById("pkg-sidebar-price").textContent =
+  pkg.price.replace("Starting from ", "").replace(" per person", "");
+
 
   // HERO IMAGE
   document.getElementById("pkg-image").style.backgroundImage =
