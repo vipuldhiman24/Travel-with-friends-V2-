@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   fetch("/components/navbar.html")
     .then(res => {
-      if (!res.ok) throw new Error("Navbar fetch failed");
+      if (!res.ok) return fetch("components/navbar.html").then(r => r.text());
       return res.text();
     })
     .then(html => {
