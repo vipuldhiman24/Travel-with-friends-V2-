@@ -110,6 +110,208 @@
         .dark ::-webkit-scrollbar-thumb {
             background: #4a3b32;
         }
+
+    /* Responsive refinements for the flight landing page */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    @media (max-width: 767px) {
+      main {
+        width: 100%;
+        overflow-x: clip;
+      }
+
+      /* Keep the animated travel image visible on phones. */
+      section.relative.w-full.flex.items-center {
+        min-height: 0 !important;
+        padding: 3.5rem 1rem 2.5rem !important;
+        align-items: flex-start;
+      }
+
+      section.relative.w-full.flex.items-center > .absolute:first-child {
+        background: #39312d;
+      }
+
+      section.relative.w-full.flex.items-center
+      > .absolute:first-child > div:nth-child(2) {
+        display: block !important;
+        background-size: auto 115% !important;
+        background-position: center center;
+        animation: mobileBackgroundPan 32s ease-in-out infinite alternate;
+      }
+
+      section.relative.w-full.flex.items-center
+      > .absolute:first-child > div:nth-child(3) {
+        display: block !important;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, .58) 0%,
+          rgba(0, 0, 0, .48) 48%,
+          rgba(0, 0, 0, .66) 100%
+        );
+      }
+
+      section.relative.w-full.flex.items-center > div.relative {
+        gap: 2rem !important;
+      }
+
+      section.relative.w-full.flex.items-center h1 {
+        font-size: clamp(2.15rem, 9vw, 3.15rem) !important;
+        line-height: 1.12 !important;
+        letter-spacing: -0.04em;
+      }
+
+      section.relative.w-full.flex.items-center p {
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
+      }
+
+      section.relative.w-full.flex.items-center .space-y-8 {
+        gap: 1.35rem !important;
+      }
+
+      /* Compact quote card without squeezing the inputs. */
+      section.relative.w-full.flex.items-center .rounded-3xl {
+        padding: 1.2rem !important;
+        border-radius: 1.35rem !important;
+      }
+
+      section.relative.w-full.flex.items-center form {
+        gap: 1rem !important;
+      }
+
+      section.relative.w-full.flex.items-center form > div {
+        gap: .9rem !important;
+      }
+
+      section.relative.w-full.flex.items-center input {
+        min-width: 0;
+        width: 100%;
+        min-height: 3.15rem;
+        font-size: 16px; /* Prevents iOS Safari input zoom. */
+      }
+
+      section.relative.w-full.flex.items-center form button,
+      section.relative.w-full.flex.items-center form a {
+        min-height: 3.15rem;
+        width: 100%;
+      }
+
+      /* Feature rows stay readable and use the available width. */
+      section.relative.w-full.flex.items-center .grid.grid-cols-1.sm\:grid-cols-2 {
+        grid-template-columns: 1fr 1fr;
+        column-gap: .8rem;
+        row-gap: 1rem;
+      }
+
+      section.relative.w-full.flex.items-center .grid.grid-cols-1.sm\:grid-cols-2 > div {
+        align-items: center;
+        min-width: 0;
+      }
+
+      section.relative.w-full.flex.items-center .grid.grid-cols-1.sm\:grid-cols-2 > div span:last-child {
+        font-size: .82rem;
+        line-height: 1.35;
+      }
+
+      /* Destination cards: keep the enquiry affordance visible without hover. */
+      section.py-16 .group .enquire-scroll {
+        opacity: 1 !important;
+      }
+
+      section.py-16 .group {
+        height: 17rem;
+      }
+
+      section.py-16 .group > div.absolute.bottom-0 {
+        padding: 1.1rem;
+      }
+
+      section.py-16 .group h3 {
+        font-size: 1.45rem;
+      }
+
+      section.py-16 .group > div.absolute.bottom-0 > div {
+        align-items: flex-end;
+        gap: .6rem;
+      }
+
+      section.py-16 .group > div.absolute.bottom-0 > div > span:first-child {
+        max-width: 65%;
+        line-height: 1.4;
+      }
+
+      section.py-16 .group .enquire-scroll {
+        flex-shrink: 0;
+        font-size: .75rem;
+      }
+
+      /* Avoid hover transforms sticking on touch devices. */
+      .hover\:scale-105:hover,
+      .hover\:-translate-y-2:hover {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 380px) {
+      section.relative.w-full.flex.items-center {
+        padding-left: .8rem !important;
+        padding-right: .8rem !important;
+      }
+
+      section.relative.w-full.flex.items-center .grid.grid-cols-1.sm\:grid-cols-2 {
+        grid-template-columns: 1fr;
+      }
+
+      section.relative.w-full.flex.items-center .rounded-3xl {
+        padding: 1rem !important;
+      }
+
+      section.py-16 .group > div.absolute.bottom-0 > div {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      section.py-16 .group > div.absolute.bottom-0 > div > span:first-child {
+        max-width: 100%;
+      }
+    }
+
+    @keyframes mobileBackgroundPan {
+      0% {
+        background-position: 42% 50%;
+        transform: scale(1);
+      }
+      100% {
+        background-position: 58% 50%;
+        transform: scale(1.06);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .animate-background-pan,
+      section.relative.w-full.flex.items-center
+      > .absolute:first-child > div:nth-child(2) {
+        animation: none !important;
+      }
+
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+      }
+    }
     </style>
 </head>
 <!-- Top Navbar -->
@@ -133,7 +335,7 @@
   </div>
 
   <!-- EXTRA OVERLAY FOR DESKTOP READABILITY -->
-  <div class="absolute inset-0 hidden md:block bg-black/40"></div>
+  <div class="absolute inset-0 bg-black/45 md:bg-black/40"></div>
 
 </div>
 
@@ -260,7 +462,7 @@
 
   </div>
 
-  <div class="flex gap-4">
+  <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
     <button
       type="button"
       onclick="sendWhatsApp(this)"
