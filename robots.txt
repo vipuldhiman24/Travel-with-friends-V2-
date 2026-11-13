@@ -1,0 +1,9 @@
+# Robots.txt for Fly With Friends
+User-agent: *
+Allow: /
+
+# Disallow administrative or internal assets if any
+Disallow: /data/
+
+# Sitemap location
+Sitemap: https://flywithfriends.com/sitemap.xml
