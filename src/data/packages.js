@@ -1,4 +1,4 @@
-window.PACKAGES = [
+export const PACKAGES = [
   {
     id: 1,
     title: "Divine Vaishno Devi Yatra – 3 Nights / 4 Days",
@@ -167,3 +167,7 @@ window.PACKAGES = [
     ]
   }
 ];
+
+if (typeof window !== "undefined") {
+  window.PACKAGES = PACKAGES;
+}

@@ -1,573 +1,83 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Fly With Friends | Group Travel Packages, Flights, Hotels &amp; Bus Bookings</title>
-<meta name="description" content="Plan unforgettable group trips without chaos. Fly With Friends offers curated group flight deals, hotel accommodations, bus rentals, custom holiday tour packages, and visa assistance."/>
-<meta name="keywords" content="group travel, holiday packages, group flights booking, budget hotels for groups, bus rentals, tour packages for friends, fly with friends, weekend getaways, visa assistance"/>
-<meta name="author" content="Fly With Friends"/>
-<meta name="robots" content="index, follow"/>
-<link rel="canonical" href="https://flywithfriends.com/"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://flywithfriends.com/"/>
-<meta property="og:title" content="Fly With Friends | Group Travel Packages, Flights, Hotels &amp; Bus Bookings"/>
-<meta property="og:description" content="Plan unforgettable group trips without chaos. Fly With Friends offers curated group flight deals, hotel accommodations, bus rentals, custom holiday tour packages, and visa assistance."/>
-<meta property="og:image" content="/assets/logo.png"/>
-<meta property="og:site_name" content="Fly With Friends"/>
-<meta property="og:locale" content="en_US"/>
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:url" content="https://flywithfriends.com/"/>
-<meta name="twitter:title" content="Fly With Friends | Group Travel Packages, Flights, Hotels &amp; Bus Bookings"/>
-<meta name="twitter:description" content="Plan unforgettable group trips without chaos. Fly With Friends offers curated group flight deals, hotel accommodations, bus rentals, custom holiday tour packages, and visa assistance."/>
-<meta name="twitter:image" content="/assets/logo.png"/>
-
-<link rel="icon" href="/assets/favicon.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/assets/favicon.png" sizes="48x48" type="image/png">
-<link rel="apple-touch-icon" href="/assets/favicon.png">
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-
-<!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TravelAgency",
-  "name": "Fly With Friends",
-  "alternateName": "Travel With Friends",
-  "description": "Curated group travel experiences, holiday tour packages, flights, hotels, and bus booking services for friends and families.",
-  "url": "https://flywithfriends.com",
-  "logo": "https://flywithfriends.com/assets/logo.png",
-  "image": "https://flywithfriends.com/assets/logo.png",
-  "telephone": "+918851722264",
-  "email": "flywithfriends06@gmail.com",
-  "priceRange": "$$",
-  "sameAs": [
-    "https://www.facebook.com/share/1C7HStw4XV/",
-    "https://www.instagram.com/flywithfriends06?igsh=bXY2ZTYwMGhyZHBu"
-  ]
-}
-</script>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Theme Config -->
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#f47b25",
-                        "background-light": "#f8f7f5",
-                        "background-dark": "#221710",
-                        "surface-light": "#ffffff",
-                        "surface-dark": "#2d241e",
-                        "text-main": "#1c130d",
-                        "text-main-dark": "#f4ece7",
-                        "text-muted": "#9c6c49",
-                        "text-muted-dark": "#b08d74",
-                    },
-                    fontFamily: {
-                        "display": ["Plus Jakarta Sans", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
-                },
-            },
-        }
-    </script>
-
-<style>
-/* =========================================================
-   FLY WITH FRIENDS — SCALED & MOVING TRAVEL HERO BACKGROUND
-   Works on Mobile & Desktop without breaking sticky position
-   ========================================================= */
-
-html, body {
-    overflow-x: clip;
-}
-
-.travel-atmosphere {
-    position: relative;
-    isolation: isolate;
-    background: transparent !important;
-}
-
-/* Wrapper in the first section that holds the full-bleed moving image */
-.travel-atmosphere > section:first-of-type {
-    position: relative;
-}
-
-/* 1. SCALED & MOVING TRAVEL IMAGE LAYER (Mobile + Desktop) */
-.travel-atmosphere > section:first-of-type::before {
-    content: "";
-    position: absolute;
-    z-index: -2;
-    pointer-events: none;
-
-    /* Bleed across the entire screen width and down behind Trending Destinations */
-    top: -3rem;
-    left: 50%;
-    width: 108vw;
-    height: 760px;
-
-    background-image:
-        linear-gradient(
-            180deg,
-            rgba(248, 247, 245, 0.20) 0%,
-            rgba(255, 249, 244, 0.52) 55%,
-            rgba(248, 247, 245, 0.94) 88%,
-            #f8f7f5 100%
-        ),
-        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=85");
-
-    background-size: cover;
-    background-position: center 38%;
-    background-repeat: no-repeat;
-    will-change: transform;
-
-    /* GPU-accelerated scale & pan so it glides smoothly on mobile and desktop */
-    animation: heroZoomPan 26s ease-in-out infinite alternate;
-}
-
-/* 2. SOFT MOVING SUNLIGHT & SKY GLOW OVERLAY */
-.travel-atmosphere > section:first-of-type::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    pointer-events: none;
-
-    top: -3rem;
-    left: 50%;
-    width: 100vw;
-    height: 760px;
-    transform: translateX(-50%);
-
-    background:
-        radial-gradient(
-            circle at 18% 22%,
-            rgba(244, 123, 37, 0.22),
-            transparent 45%
-        ),
-        radial-gradient(
-            circle at 82% 28%,
-            rgba(125, 211, 252, 0.28),
-            transparent 48%
-        ),
-        radial-gradient(
-            circle at 50% 65%,
-            rgba(254, 215, 170, 0.25),
-            transparent 55%
-        );
-
-    background-size: 150% 150%;
-    animation: auroraFlow 18s ease-in-out infinite alternate;
-}
-
-/* Keep all content cleanly above the animated layers */
-.travel-atmosphere > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* Smooth Ken Burns Zoom + Pan Animation (Works reliably on iOS/Android/Desktop) */
-@keyframes heroZoomPan {
-    0% {
-        transform: translate3d(-50%, 0, 0) scale(1);
-    }
-    50% {
-        transform: translate3d(-48.5%, -12px, 0) scale(1.09);
-    }
-    100% {
-        transform: translate3d(-51.5%, 6px, 0) scale(1.04);
-    }
-}
-
-/* Soft moving light */
-@keyframes auroraFlow {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 20% 100%;
-    }
-}
-
-/* Mobile-specific tuning so the mountain/lake horizon sits right behind the hero text */
-@media (max-width: 768px) {
-    .travel-atmosphere > section:first-of-type::before,
-    .travel-atmosphere > section:first-of-type::after {
-        height: 680px;
-        background-position: 52% 30%;
-    }
-}
-
-/* Dark mode support */
-.dark .travel-atmosphere > section:first-of-type::before {
-    background-image:
-        linear-gradient(
-            180deg,
-            rgba(34, 23, 16, 0.42) 0%,
-            rgba(34, 23, 16, 0.76) 60%,
-            rgba(34, 23, 16, 0.96) 90%,
-            #221710 100%
-        ),
-        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=85");
-}
-
-.dark .travel-atmosphere > section:first-of-type::after {
-    background:
-        radial-gradient(
-            circle at 18% 22%,
-            rgba(244, 123, 37, 0.16),
-            transparent 45%
-        ),
-        radial-gradient(
-            circle at 82% 28%,
-            rgba(56, 189, 248, 0.16),
-            transparent 48%
-        );
-}
-</style>
-
-</head>
-
-<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-text-main-dark font-display min-h-screen flex flex-col transition-colors duration-300">
-<!-- Top Navbar -->
-<div id="navbar"></div>
-
-<!-- Main Content -->
-<main class="travel-atmosphere flex-grow w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 flex flex-col gap-10">
-  
-<!-- Header & Category Navigation -->
-<section class="flex flex-col gap-8">
-<div class="text-center space-y-3 pt-6">
-<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-text-main dark:text-text-main-dark">
-                     Trips with Friends, Planned Without the Chaos
-                </h1>
-<p class="text-lg text-text-muted dark:text-text-muted-dark max-w-2xl mx-auto">
-                      Weekend scenes, college trips, birthday getaways, or just a long-overdue plan —
-      we handle the travel so your group can just show up and enjoy.
-                </p>
-</div>
-<!-- Aesthetic Navigation Buttons -->
-<div class="flex flex-wrap justify-center gap-4 py-2">
-<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Flights.html">
-<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">flight</span>
-<span class="font-bold text-text-main dark:text-text-main-dark">Flights</span>
-</a>
-<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Hotels.html">
-<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">hotel</span>
-<span class="font-bold text-text-main dark:text-text-main-dark">Hotels</span>
-</a>
-<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Bus.html">
-<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">directions_bus</span>
-<span class="font-bold text-text-main dark:text-text-main-dark">Bus</span>
-</a>
-<!-- Active State -->
-<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Trip_packages.html">
-<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">luggage</span>
-<span class="font-bold text-text-main dark:text-text-main-dark">Packages</span>
-</a>
-<a class="group flex items-center gap-3 px-6 py-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-transparent hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300" href="Visa.html">
-<span class="material-symbols-outlined text-text-muted dark:text-text-muted-dark group-hover:text-primary">badge</span>
-<span class="font-bold text-text-main dark:text-text-main-dark">Visa</span>
-</a>
-</div>
-<!-- Trust Indicators -->
-<div class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-text-muted dark:text-text-muted-dark font-medium">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
-                    Best Price Guarantee
-                </div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[18px]">support_agent</span>
-                    24/7 Support
-                </div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[18px]">favorite</span>
-                    Curated Experiences
-                </div>
-</div>
-</section>
-<!-- Main Grid Area -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-  <!-- Left Column: Trending Packages -->
-  <div class="lg:col-span-8 space-y-6">
-
-    <div class="flex items-center justify-between">
-      <h3 class="text-2xl font-bold text-text-main dark:text-text-main-dark">
-        Trending Destinations
-      </h3>
-    </div>
-
-    <!-- Package cards (dynamic) -->
-    <div
-      id="packagesGrid"
-      class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    </div>
-
-    <div class="flex justify-center mt-8">
-      <a href="Trip_packages.html"
-        class="px-8 py-3 rounded-xl border-2 border-primary/20 hover:border-primary text-primary font-bold transition-all hover:bg-primary/5">
-        Load More Packages
-    </a>
-    </div>
-
-  </div>
-<!-- Right Column: Enquiry Form (4 cols) -->
-<div class="lg:col-span-4 relative">
-<div class="sticky top-24 bg-surface-light dark:bg-surface-dark p-6 rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-black/20 border border-[#f4ece7] dark:border-[#3a2d25]">
-<div class="flex items-center gap-3 mb-6">
-<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined">support_agent</span>
-</div>
-<div>
-<h3 class="text-xl font-bold text-text-main dark:text-text-main-dark leading-tight">Trips , Flights , Busses ?</h3>
-<p class="text-xm text-text-muted dark:text-text-muted-dark">We plan, you pack.</p>
-</div>
-</div>
-<form class="flex flex-col gap-5">
-
-  <!-- Destination -->
-  <div class="space-y-1">
-    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-      Destination
-    </label>
-    <div class="relative">
-      <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">
-        search
-      </span>
-      <input
-        id="destination"
-        required
-        type="text"
-        placeholder="e.g. Manali, Kasol, Shimla"
-        class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 pl-12 pr-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary placeholder:text-text-muted/50 font-medium"
-      />
-    </div>
-  </div>
-
-  <!-- Travel Date -->
-  <div class="space-y-1">
-    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-      Travel Dates
-    </label>
-    <input
-      id="travelDate"
-      required
-      type="date"
-      class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary font-medium"
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Fly With Friends | Group Travel Packages, Flights, Hotels &amp; Bus Bookings</title>
+    <meta
+      name="description"
+      content="Plan unforgettable group trips without chaos. Fly With Friends offers curated group flight deals, hotel accommodations, bus rentals, custom holiday tour packages, and visa assistance."
     />
-  </div>
+    <meta
+      name="keywords"
+      content="group travel, holiday packages, group flights booking, budget hotels for groups, bus rentals, tour packages for friends, fly with friends, weekend getaways, visa assistance"
+    />
+    <meta name="author" content="Fly With Friends" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://flywithfriends.com/" />
 
-  <!-- Travelers + Duration -->
-  <div class="grid grid-cols-2 gap-4">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://flywithfriends.com/" />
+    <meta property="og:title" content="Fly With Friends | Group Travel Packages, Flights, Hotels &amp; Bus Bookings" />
+    <meta
+      property="og:description"
+      content="Plan unforgettable group trips without chaos. Fly With Friends offers curated group flight deals, hotel accommodations, bus rentals, custom holiday tour packages, and visa assistance."
+    />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta property="og:site_name" content="Fly With Friends" />
+    <meta property="og:locale" content="en_US" />
 
-    <div class="space-y-1">
-      <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-        Travelers
-      </label>
-      <input
-        id="travelers"
-        required
-        type="number"
-        min="1"
-        value="2"
-        class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary font-medium"
-      />
-    </div>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://flywithfriends.com/" />
+    <meta name="twitter:title" content="Fly With Friends | Group Travel Packages, Flights, Hotels &amp; Bus Bookings" />
+    <meta
+      name="twitter:description"
+      content="Plan unforgettable group trips without chaos. Fly With Friends offers curated group flight deals, hotel accommodations, bus rentals, custom holiday tour packages, and visa assistance."
+    />
+    <meta name="twitter:image" content="/assets/logo.png" />
 
-    <div class="space-y-1">
-      <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-        Duration
-      </label>
-      <select
-        id="duration"
-        required
-        class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary font-medium appearance-none cursor-pointer">
-        <option value="">Select</option>
-        <option>1–2 Days</option>
-        <option>2–3 Days</option>
-        <option>3–5 Days</option>
-        <option>5–7 Days</option>
-        <option>7+ Days</option>
-      </select>
-    </div>
+    <link rel="icon" href="/assets/favicon.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/assets/favicon.png" sizes="48x48" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/favicon.png" />
 
-  </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Trip Style -->
-  <div class="space-y-1">
-    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-      Trip Style
-    </label>
-
-    <div class="flex flex-wrap gap-2">
-      <label class="cursor-pointer">
-        <input class="peer sr-only" name="style" type="radio" value="Leisure" checked />
-        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
-          Leisure🐨
-        </div>
-      </label>
-
-      <label class="cursor-pointer">
-        <input class="peer sr-only" name="style" type="radio" value="Adventure" />
-        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
-          Adventure👟
-        </div>
-      </label>
-
-      <label class="cursor-pointer">
-        <input class="peer sr-only" name="style" type="radio" value="Family" />
-        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
-          Family👨‍👩‍👧‍👦
-        </div>
-        
-      </label>
-      <label class="cursor-pointer">
-        <input class="peer sr-only" name="style" type="radio" value="Honeymoon" />
-        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
-          Honeymoon🧑‍🤝‍🧑
-        </div>
-      </label>
-      <label class="cursor-pointer">
-        <input class="peer sr-only" name="style" type="radio" value="Mountains" />
-        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
-          Mountains 🗻
-        </div>
-      </label>
-      <label class="cursor-pointer">
-        <input class="peer sr-only" name="style" type="radio" value="Trekking" />
-        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
-          Trekking⛰️
-        </div>
-      </label>
-      <label class="cursor-pointer">
-        <input class="peer sr-only" name="style" type="radio" value="Weekend Getaway" />
-        <div class="px-3 py-2 rounded-lg bg-background-light dark:bg-background-dark peer-checked:bg-primary/10 peer-checked:border-primary peer-checked:text-primary text-xs font-bold">
-          Weekend Getaway!🎈
-        </div>
-      </label>
-    </div>
-  </div>
-
-  <!-- Additional Requests -->
-  <div class="space-y-1">
-    <label class="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-      Additional Requests
-    </label>
-    <textarea
-      id="requests"
-      rows="3"
-      placeholder="Any specific requirements?"
-      class="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary resize-none font-medium"></textarea>
-  </div>
-
-  <!-- Error Message -->
-  <p
-    id="formError"
-    class="hidden text-sm text-red-500 font-semibold text-center">
-    Please fill all required fields before continuing.
-  </p>
-
-  <!-- WhatsApp Button -->
-  <button
-    type="button"
-    onclick="validateAndSendWhatsApp()"
-    class="w-full py-4 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-lg shadow-lg">
-    Send via WhatsApp
-  </button>
-
-  <!-- Call Button -->
-  <button
-    type="button"
-    onclick="validateAndCall()"
-    class="w-full py-4 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-lg shadow-lg flex items-center justify-center gap-2">
-    <span class="material-symbols-outlined">call</span>
-    Call Us Now
-  </button>
-
-</form>
-
-
-</div>
-</div>
-</div>
-
-<!-- Why Book With Us Section -->
-<section class="mt-4 py-12 px-6 sm:px-10 rounded-3xl bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm">
-  <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-      <span class="material-symbols-outlined text-sm">stars</span>
-      The Fly With Friends Advantage
-    </div>
-    <h2 class="text-2xl sm:text-3xl font-extrabold text-text-main dark:text-text-main-dark">
-      Why Book With Us?
-    </h2>
-    <p class="text-sm sm:text-base text-text-muted dark:text-text-muted-dark">
-      We make group travel effortless, affordable, and completely hassle-free from start to finish.
-    </p>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <!-- Feature 1 -->
-    <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-      <div class="size-14 rounded-2xl bg-orange-100 dark:bg-orange-950/40 text-primary flex items-center justify-center mb-4">
-        <span class="material-symbols-outlined text-3xl">groups</span>
-      </div>
-      <h3 class="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Group-Centric Planning</h3>
-      <p class="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">Tailored flight seats, synchronized buses, and multi-room stays so your entire group travels together seamlessly.</p>
-    </div>
-
-    <!-- Feature 2 -->
-    <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-      <div class="size-14 rounded-2xl bg-blue-100 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center mb-4">
-        <span class="material-symbols-outlined text-3xl">payments</span>
-      </div>
-      <h3 class="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Transparent Best Pricing</h3>
-      <p class="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">No hidden fees or unexpected charges. Honest rates with negotiated group discounts directly from trusted suppliers.</p>
-    </div>
-
-    <!-- Feature 3 -->
-    <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-      <div class="size-14 rounded-2xl bg-green-100 dark:bg-green-950/40 text-[#25D366] flex items-center justify-center mb-4">
-        <span class="material-symbols-outlined text-3xl">support_agent</span>
-      </div>
-      <h3 class="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">24/7 Dedicated Support</h3>
-      <p class="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">Direct WhatsApp and call support with real travel experts who stay with your group before, during, and after the trip.</p>
-    </div>
-
-    <!-- Feature 4 -->
-    <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-      <div class="size-14 rounded-2xl bg-purple-100 dark:bg-purple-950/40 text-purple-600 flex items-center justify-center mb-4">
-        <span class="material-symbols-outlined text-3xl">verified</span>
-      </div>
-      <h3 class="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">End-to-End Service</h3>
-      <p class="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">From flight bookings, bus transfers, and luxury hotels to visa assistance, all your travel requirements in one place.</p>
-    </div>
-  </div>
-</section>
-
-</main>
-<!-- Footer -->
-<div id="footer"></div>
-
-<script src="./js/main.js"></script>
-<script src="data/packages.js"></script> 
-<script src="js/render-packages.js"></script> 
-<script src="/js/navbar.js"></script>
-<script src="/js/footer.js"></script>
-<script src="/js/loader.js"></script>
-</body>
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "Fly With Friends",
+        "alternateName": "Travel With Friends",
+        "description": "Curated group travel experiences, holiday tour packages, flights, hotels, and bus booking services for friends and families.",
+        "url": "https://flywithfriends.com",
+        "logo": "https://flywithfriends.com/assets/logo.png",
+        "image": "https://flywithfriends.com/assets/logo.png",
+        "telephone": "+918851722264",
+        "email": "flywithfriends06@gmail.com",
+        "priceRange": "$$",
+        "sameAs": [
+          "https://www.facebook.com/share/1C7HStw4XV/",
+          "https://www.instagram.com/flywithfriends06?igsh=bXY2ZTYwMGhyZHBu"
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
