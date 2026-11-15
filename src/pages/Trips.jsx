@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PromoBanner from '../components/PromoBanner';
 import { PACKAGES } from '../data/packages';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
 
@@ -215,6 +217,12 @@ export default function Trips() {
             </div>
           </div>
         </div>
+
+        {/* Promo Banner */}
+        <PromoBanner title="Special Group Discount" className="mt-12" />
+
+        {/* Why Choose Us */}
+        <WhyChooseUs />
       </main>
     </>
   );

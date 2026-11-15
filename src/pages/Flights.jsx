@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PromoBanner from '../components/PromoBanner';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
 
 export default function Flights() {
+  const [tripType, setTripType] = useState('one-way'); // 'one-way' | 'round-trip' | 'multi-city'
+  const [fareType, setFareType] = useState('regular'); // 'regular' | 'student' | 'senior' | 'group'
+  const [travelClass, setTravelClass] = useState('Economy');
   const [formData, setFormData] = useState({
     from: '',
     to: '',
@@ -16,6 +21,19 @@ export default function Flights() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSwapAirports = () => {
+    setFormData((prev) => ({
+      ...prev,
+      from: prev.to,
+      to: prev.from,
+    }));
+  };
+
+  const handleGroupInquiry = () => {
+    const message = `Hello Fly With Friends 👋\nI am looking for *Exclusive Group Flight Fares* for more than 9 travelers. Please connect me with a group flight specialist.`;
+    openWhatsApp(message);
+  };
+
   const handleWhatsApp = (e) => {
     e.preventDefault();
     if (!formData.from.trim() || !formData.to.trim() || !formData.departureDate) {
@@ -23,7 +41,20 @@ export default function Flights() {
       return;
     }
 
-    const message = `New FLIGHT Enquiry 🚀\n\nFrom: ${formData.from}\nTo: ${formData.to}\nDeparture Date: ${formData.departureDate}\nReturn Date: ${formData.returnDate || 'One Way'}\nTravelers: ${formData.travelers}\n`;
+    const isRound = tripType === 'round-trip' && formData.returnDate;
+    const message = `New FLIGHT Enquiry 🚀
+
+Trip Type: ${tripType === 'round-trip' ? 'Round Trip' : tripType === 'multi-city' ? 'Multi City' : 'One Way'}
+From: ${formData.from}
+To: ${formData.to}
+Departure Date: ${formData.departureDate}
+Return Date: ${isRound ? formData.returnDate : 'None (One Way)'}
+Travelers: ${formData.travelers} Pax
+Class: ${travelClass}
+Fare Category: ${fareType.toUpperCase()}
+
+Please share the best flight options and quotes.`;
+
     openWhatsApp(message);
   };
 
@@ -31,24 +62,25 @@ export default function Flights() {
     if (destination) {
       setFormData((prev) => ({ ...prev, to: destination }));
     }
-    const hero = document.getElementById('quote-form');
+    const hero = document.getElementById('flight-search-bar');
     if (hero) {
       hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Group Flight Booking Service",
-    "provider": {
-      "@type": "TravelAgency",
-      "name": "Fly With Friends",
-      "telephone": "+918851722264",
-      "url": "https://flywithfriends.com"
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Group Flight Booking Service',
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Fly With Friends',
+      telephone: PHONE_NUMBER,
+      url: 'https://flywithfriends.com',
     },
-    "serviceType": "Flight Reservation",
-    "description": "Domestic and international group flight reservations with special group discounts, seat blocks, and dedicated support."
+    serviceType: 'Flight Reservation',
+    description:
+      'Domestic and international group flight reservations with special group discounts, seat blocks, and dedicated support.',
   };
 
   return (
@@ -57,289 +89,439 @@ export default function Flights() {
         title="Group Flight Bookings & Discount Airline Fares | Fly With Friends"
         description="Book domestic and international group flights at discounted rates. Get dedicated travel support, seat synchronization, and instant WhatsApp booking quotes."
         keywords="group flight booking, cheap airline tickets, group flights discount, domestic flights, international flights, fly with friends"
-        canonical="/Flights.html"
+        canonical="/flights"
         schema={schema}
       />
 
       <main className="flex-grow flex flex-col">
-        {/* Hero Section */}
-        <section className="relative w-full flex items-center min-h-[850px] lg:min-h-[750px] px-4 lg:px-10 py-12">
-          <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-            <div className="absolute inset-0 bg-gray-500/70" />
+        {/* Hero Section with Moving Background (Works on both Mobile & Desktop) */}
+        <section className="relative w-full overflow-hidden pt-8 pb-14 md:pt-12 md:pb-20 px-4 sm:px-6 lg:px-8 bg-[#1f1610]">
+          {/* Moving background image layer - active on both mobile & desktop */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
             <div
-              className="absolute inset-0 hidden md:block bg-cover bg-no-repeat animate-background-pan"
+              className="absolute -inset-[8%] w-[116%] h-[116%] bg-cover bg-center bg-no-repeat animate-flight-pan"
               style={{
                 backgroundImage:
                   "url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ejr0v-_viIQtl6Y4uVpVnLBU6w4i2W2YBgTOIQHR02dXUO4LYlxnraEq0PKRhdGSfqvTkxuxoRHyyPT6eT0oSeG9dkfKWWjqUuczUyyp4QzIbSqNZAXZx2Yb-AWdoHpNBQZmC7a5QLcVtaN9yKUkDbUHpuak-CAgBHVB1AGQhjp0HexZ1j1iGo1kivB3-B81vNGa8Bo9EbRUcH-I8XY7bIIeB5_dabpnTzJ9F43hOmAfYro19GIDF1doldYEmB3ZxP1pqX4lQZSG')",
-                backgroundSize: '150% auto',
               }}
             />
+            {/* Dark overlays for high contrast and readability on all devices */}
             <div className="absolute inset-0 bg-black/45 md:bg-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-[#1f1610]" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center animate-fade-in-up">
-            <div className="text-white space-y-8 lg:pr-10">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-orange-200 text-sm font-semibold tracking-wide">
-                <span className="material-symbols-outlined text-base">flight_takeoff</span>
-                Your Personal Flight Experts
-              </div>
-              <h1 className="text-4xl lg:text-6xl font-extrabold leading-tight">
-                Find Your Perfect Flight, <br />
-                <span className="text-primary">Effortlessly.</span>
+          <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
+            {/* Header copy */}
+            <div className="text-center text-white max-w-3xl mx-auto mb-6 md:mb-8 animate-fade-in-up">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/20 border border-primary/40 text-orange-200 text-xs font-bold uppercase tracking-wider mb-3">
+                <span className="material-symbols-outlined text-sm">flight</span>
+                Personal &amp; Group Flight Experts
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                Find Your Perfect Flight, <span className="text-primary">Effortlessly.</span>
               </h1>
-              <p className="text-lg lg:text-xl text-gray-200 opacity-90 leading-relaxed max-w-xl">
-                Tell us your travel plans and let our experts find the best deals for you. Skip the endless searching and get curated flight options at the best prices!
+              <p className="text-sm sm:text-base text-gray-200 mt-2 max-w-xl mx-auto">
+                Skip endless search portals. Get curated flight itineraries and negotiated group fares directly on WhatsApp.
               </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
-                    <span className="material-symbols-outlined">savings</span>
-                  </div>
-                  <span className="font-medium">Best Price Guarantee</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
-                    <span className="material-symbols-outlined">support_agent</span>
-                  </div>
-                  <span className="font-medium">24/7 Expert Support</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400">
-                    <span className="material-symbols-outlined">custom_typography</span>
-                  </div>
-                  <span className="font-medium">Tailored Itineraries</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400">
-                    <span className="material-symbols-outlined">bolt</span>
-                  </div>
-                  <span className="font-medium" id="quote">Instant Quotes</span>
-                </div>
-              </div>
             </div>
 
-            {/* Flight Quote Card */}
-            <div className="w-full" id="quote-form">
-              <div className="bg-surface-light dark:bg-surface-dark rounded-3xl shadow-2xl p-6 md:p-8 border border-white/20 dark:border-white/5 backdrop-blur-sm">
-                <div className="mb-6 border-b border-border-light dark:border-border-dark pb-4">
-                  <h3 className="text-2xl font-bold text-text-main dark:text-text-main-dark">Request a Flight Quote</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Get personalized flight options via WhatsApp</p>
+            {/* Modern Horizontal Search Form Widget (Matches Reference Screenshot 5) */}
+            <div
+              id="flight-search-bar"
+              className="w-full bg-surface-light dark:bg-surface-dark rounded-2xl md:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-white/20 dark:border-white/10 backdrop-blur-md"
+            >
+              <form onSubmit={handleWhatsApp} className="flex flex-col gap-4">
+                {/* Top Row: Trip Type Radio Buttons & Group Fares Pill */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-gray-100 dark:border-gray-800">
+                  <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="tripType"
+                        value="one-way"
+                        checked={tripType === 'one-way'}
+                        onChange={() => setTripType('one-way')}
+                        className="text-primary focus:ring-primary h-4 w-4"
+                      />
+                      <span>One Way</span>
+                    </label>
+
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="tripType"
+                        value="round-trip"
+                        checked={tripType === 'round-trip'}
+                        onChange={() => setTripType('round-trip')}
+                        className="text-primary focus:ring-primary h-4 w-4"
+                      />
+                      <span>Round Trip</span>
+                    </label>
+
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="tripType"
+                        value="multi-city"
+                        checked={tripType === 'multi-city'}
+                        onChange={() => setTripType('multi-city')}
+                        className="text-primary focus:ring-primary h-4 w-4"
+                      />
+                      <span>Multi City</span>
+                    </label>
+                  </div>
+
+                  {/* Group Fares Banner Pill */}
+                  <button
+                    type="button"
+                    onClick={handleGroupInquiry}
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-950/40 text-primary border border-orange-200 dark:border-orange-800/40 text-xs font-bold hover:bg-primary hover:text-white transition-all cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-sm">groups</span>
+                    <span>More than 9 Pax? <strong>Get Exclusive Group Fares</strong></span>
+                  </button>
                 </div>
 
-                <form onSubmit={handleWhatsApp} className="flex flex-col gap-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {/* FROM */}
-                    <div className="flex flex-col gap-1">
-                      <label className="text-sm font-medium text-text-main dark:text-text-main-dark">From</label>
-                      <div className="relative group">
-                        <span className="material-symbols-outlined absolute inset-y-0 left-4 flex items-center text-text-muted">
-                          flight_takeoff
-                        </span>
-                        <input
-                          required
-                          name="from"
-                          list="flight-airports"
-                          value={formData.from}
-                          onChange={handleChange}
-                          placeholder="Departure Airport"
-                          className="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl p-4 pl-12 text-sm text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-
-                    {/* TO */}
-                    <div className="flex flex-col gap-1">
-                      <label className="text-sm font-medium text-text-main dark:text-text-main-dark">To</label>
-                      <div className="relative group">
-                        <span className="material-symbols-outlined absolute inset-y-0 left-4 flex items-center text-text-muted">
-                          flight_land
-                        </span>
-                        <input
-                          required
-                          name="to"
-                          list="flight-airports"
-                          value={formData.to}
-                          onChange={handleChange}
-                          placeholder="Arrival Airport"
-                          className="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl p-4 pl-12 text-sm text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary"
-                          type="text"
-                        />
-                      </div>
+                {/* Main Horizontal Inputs Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+                  {/* FROM Input (lg:col-span-3) */}
+                  <div className="lg:col-span-3 relative bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      From
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">flight_takeoff</span>
+                      <input
+                        type="text"
+                        required
+                        name="from"
+                        list="flight-airports"
+                        value={formData.from}
+                        onChange={handleChange}
+                        placeholder="Departure City / Airport"
+                        className="w-full bg-transparent border-none p-0 text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 placeholder:text-gray-400 placeholder:font-normal"
+                      />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    {/* DEPART */}
-                    <div className="flex flex-col gap-1">
-                      <label className="text-sm font-medium text-text-main dark:text-text-main-dark">Departure Date</label>
+                  {/* Swap Button (Hidden on small, absolute/inline on desktop) */}
+                  <div className="hidden lg:flex lg:col-span-1 justify-center -mx-3 z-10">
+                    <button
+                      type="button"
+                      onClick={handleSwapAirports}
+                      aria-label="Swap departure and arrival"
+                      className="size-9 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-primary shadow-sm hover:rotate-180 hover:bg-primary hover:text-white transition-all flex items-center justify-center cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-lg">sync_alt</span>
+                    </button>
+                  </div>
+
+                  {/* TO Input (lg:col-span-3) */}
+                  <div className="lg:col-span-3 relative bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      To
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">flight_land</span>
                       <input
+                        type="text"
                         required
+                        name="to"
+                        list="flight-airports"
+                        value={formData.to}
+                        onChange={handleChange}
+                        placeholder="Arrival City / Airport"
+                        className="w-full bg-transparent border-none p-0 text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 placeholder:text-gray-400 placeholder:font-normal"
+                      />
+                    </div>
+                  </div>
+
+                  {/* DEPARTURE DATE (lg:col-span-2) */}
+                  <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      Departure
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">calendar_today</span>
+                      <input
                         type="date"
+                        required
                         name="departureDate"
                         value={formData.departureDate}
                         onChange={handleChange}
-                        className="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl p-4 text-sm text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-
-                    {/* RETURN */}
-                    <div className="flex flex-col gap-1">
-                      <label className="text-sm font-medium text-text-main dark:text-text-main-dark">Return Date</label>
-                      <input
-                        type="date"
-                        name="returnDate"
-                        value={formData.returnDate}
-                        onChange={handleChange}
-                        className="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl p-4 text-sm text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-
-                    {/* TRAVELERS */}
-                    <div className="flex flex-col gap-1">
-                      <label className="text-sm font-medium text-text-main dark:text-text-main-dark">Travelers</label>
-                      <input
-                        required
-                        min="1"
-                        type="number"
-                        name="travelers"
-                        value={formData.travelers}
-                        onChange={handleChange}
-                        placeholder="No. of Travelers"
-                        className="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl p-4 text-sm text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary"
+                        className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
                       />
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    <button
-                      type="submit"
-                      className="px-6 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-md transition-all"
-                    >
-                      <span className="material-symbols-outlined">chat</span>
-                      <span>WhatsApp Enquiry</span>
-                    </button>
-                    <a
-                      href={`tel:${PHONE_NUMBER}`}
-                      className="md:w-auto w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-3 justify-center"
-                    >
-                      <span className="material-symbols-outlined">call</span>
-                      <span>Call Now</span>
-                    </a>
+                  {/* RETURN DATE (OPTIONAL! lg:col-span-2) */}
+                  <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                        Return <span className="text-[10px] lowercase text-gray-400">(optional)</span>
+                      </label>
+                      {tripType !== 'round-trip' && (
+                        <button
+                          type="button"
+                          onClick={() => setTripType('round-trip')}
+                          className="text-[10px] text-primary font-bold hover:underline"
+                        >
+                          + Round Trip
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">event_repeat</span>
+                      {tripType === 'round-trip' ? (
+                        <input
+                          type="date"
+                          name="returnDate"
+                          value={formData.returnDate}
+                          onChange={handleChange}
+                          className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
+                        />
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setTripType('round-trip')}
+                          className="w-full text-left text-xs font-semibold text-gray-400 hover:text-primary transition-colors py-0.5 truncate"
+                        >
+                          Tap to add return date
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </form>
-              </div>
+
+                  {/* TRAVELERS & CLASS + CTA (lg:col-span-12 or subgrid) */}
+                  <div className="sm:col-span-2 lg:col-span-12 flex flex-col md:flex-row items-center justify-between gap-3 pt-2">
+                    {/* Travelers Count & Class */}
+                    <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                      <div className="flex items-center gap-2 bg-background-light dark:bg-background-dark/70 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700/80">
+                        <span className="material-symbols-outlined text-primary text-lg">group</span>
+                        <span className="text-xs font-bold text-text-muted dark:text-text-muted-dark">Pax:</span>
+                        <select
+                          name="travelers"
+                          value={formData.travelers}
+                          onChange={handleChange}
+                          className="bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
+                        >
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, '10+ Group'].map((n) => (
+                            <option key={n} value={n}>
+                              {n} {n === 1 ? 'Traveler' : 'Travelers'}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="flex items-center gap-2 bg-background-light dark:bg-background-dark/70 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700/80">
+                        <span className="material-symbols-outlined text-primary text-lg">airline_seat_recline_extra</span>
+                        <select
+                          value={travelClass}
+                          onChange={(e) => setTravelClass(e.target.value)}
+                          className="bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
+                        >
+                          <option value="Economy">Economy</option>
+                          <option value="Premium Economy">Premium Economy</option>
+                          <option value="Business">Business</option>
+                          <option value="First Class">First Class</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Submit CTA Buttons */}
+                    <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+                      <a
+                        href={`tel:${PHONE_NUMBER}`}
+                        className="px-4 py-3 rounded-xl border border-primary text-primary font-bold text-xs sm:text-sm hover:bg-primary/10 transition-colors flex items-center justify-center gap-1.5"
+                      >
+                        <span className="material-symbols-outlined text-base">call</span>
+                        <span className="hidden sm:inline">Call Us</span>
+                      </a>
+                      <button
+                        type="submit"
+                        className="flex-1 md:flex-initial h-12 px-8 rounded-xl bg-primary hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02]"
+                      >
+                        <span className="material-symbols-outlined text-xl">search</span>
+                        <span>Search Flights</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Row: Special Fares Badges (Matches Reference Screenshot 5) */}
+                <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-800">
+                  <div className="flex items-center gap-1 mr-2">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-pink-100 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400">
+                      More Benefits
+                    </span>
+                    <span className="text-xs font-bold text-text-main dark:text-text-main-dark">
+                      Special Fares:
+                    </span>
+                  </div>
+
+                  <label className={`cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                    fareType === 'regular'
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-gray-200 dark:border-gray-700 text-text-muted hover:border-gray-300'
+                  }`}>
+                    <input
+                      type="radio"
+                      name="fareType"
+                      value="regular"
+                      checked={fareType === 'regular'}
+                      onChange={() => setFareType('regular')}
+                      className="sr-only"
+                    />
+                    <span>👤 Regular</span>
+                    <span className="text-[10px] font-normal text-text-muted">(Lowest Fares)</span>
+                  </label>
+
+                  <label className={`cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                    fareType === 'student'
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-gray-200 dark:border-gray-700 text-text-muted hover:border-gray-300'
+                  }`}>
+                    <input
+                      type="radio"
+                      name="fareType"
+                      value="student"
+                      checked={fareType === 'student'}
+                      onChange={() => setFareType('student')}
+                      className="sr-only"
+                    />
+                    <span>🎓 Student</span>
+                    <span className="text-[10px] font-normal text-text-muted">(Extra Baggage)</span>
+                  </label>
+
+                  <label className={`cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                    fareType === 'senior'
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-gray-200 dark:border-gray-700 text-text-muted hover:border-gray-300'
+                  }`}>
+                    <input
+                      type="radio"
+                      name="fareType"
+                      value="senior"
+                      checked={fareType === 'senior'}
+                      onChange={() => setFareType('senior')}
+                      className="sr-only"
+                    />
+                    <span>👴 Senior Citizen</span>
+                    <span className="text-[10px] font-normal text-text-muted">(Exclusive Discount)</span>
+                  </label>
+
+                  <label className={`cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+                    fareType === 'group'
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-gray-200 dark:border-gray-700 text-text-muted hover:border-gray-300'
+                  }`}>
+                    <input
+                      type="radio"
+                      name="fareType"
+                      value="group"
+                      checked={fareType === 'group'}
+                      onChange={() => setFareType('group')}
+                      className="sr-only"
+                    />
+                    <span>👥 Group Deal</span>
+                    <span className="text-[10px] font-normal text-text-muted">(Special Rates)</span>
+                  </label>
+                </div>
+              </form>
             </div>
           </div>
         </section>
 
-        {/* Feature Icons Section */}
-        <section className="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark py-10">
-          <div className="max-w-7xl mx-auto px-4 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-all duration-300 hover:scale-105 cursor-pointer">
-              <div className="size-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
-                <span className="material-symbols-outlined text-2xl">verified</span>
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-text-main dark:text-text-main-dark">Hassle-Free Booking</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">We handle everything from search to booking.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-all duration-300 hover:scale-105 cursor-pointer">
-              <div className="size-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                <span className="material-symbols-outlined text-2xl">airplane_ticket</span>
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-text-main dark:text-text-main-dark">Exclusive Deals</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Access to unpublished fares and group discounts.</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-background-light dark:hover:bg-background-dark transition-all duration-300 hover:scale-105 cursor-pointer">
-              <div className="size-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
-                <span className="material-symbols-outlined text-2xl">headset_mic</span>
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-text-main dark:text-text-main-dark">Personalized Service</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Dedicated agent for your travel needs.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Promotional Offers Banner (Matches Reference Screenshot 2) */}
+        <PromoBanner title="Airline Offers &amp; Group Discounts" />
+
+        {/* Why Choose Us USP Section (Matches Reference Screenshots 1 & 4 in our theme colors) */}
+        <WhyChooseUs />
 
         {/* Top Flight Destinations */}
         <section className="py-16 px-4 lg:px-10 max-w-7xl mx-auto w-full">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
             <div>
-              <h2 className="text-3xl font-bold mb-2 text-text-main dark:text-text-main-dark">Top Flight Destinations</h2>
-              <p className="text-gray-500 dark:text-gray-400">Get the best fares for these popular routes.</p>
+              <span className="text-primary text-xs font-bold uppercase tracking-wider">Top Routes</span>
+              <h2 className="text-3xl font-bold text-text-main dark:text-text-main-dark mt-1">
+                Popular Flight Destinations
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 mt-1">
+                Direct and connecting flights with negotiated group discounts.
+              </p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* CARD 1 */}
-            <div
-              onClick={() => scrollToQuote('Thailand')}
-              className="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-            >
+            {/* Route 1 */}
+            <div className="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-md hover:shadow-xl transition-all">
               <img
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                src="https://th.bing.com/th/id/OIP.h6F6n_5TDtaOtYAcWEPqJQHaE8?w=213&h=150&c=6&o=7&dpr=1.4&pid=1.7&rm=3"
-                alt="Thailand flights"
+                src="/assets/Manali.jpg"
+                alt="Delhi to Kullu Manali Flights"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 w-full text-white">
-                <h3 className="text-2xl font-bold mb-1">Thailand</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm opacity-90">Bustling Bangkok to serene beaches</span>
-                  <span className="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Enquire Now
-                  </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 text-white flex justify-between items-end">
+                <div>
+                  <span className="text-xs font-bold text-orange-300 uppercase">Mountain Getaway</span>
+                  <h3 className="text-xl font-bold">Delhi ⇄ Kullu / Manali</h3>
+                  <p className="text-xs text-gray-200 mt-0.5">Starting from ₹3,499</p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => scrollToQuote('Kullu (KUU)')}
+                  className="px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
+                >
+                  Enquire
+                </button>
               </div>
             </div>
 
-            {/* CARD 2 */}
-            <div
-              onClick={() => scrollToQuote('Bali')}
-              className="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-            >
+            {/* Route 2 */}
+            <div className="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-md hover:shadow-xl transition-all">
               <img
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZBf_XhujDC8ALjP0DEriqAYqb19cZe5eYl0ffdLljvFfacV7AXnJcRRa_jdyIx7MDR8OUW0BaOt7cUTNR0W4OSnU9MS6CdrOZ90AZcZMcTJnq1tOu97sDxnGSDkYPJCUW4voDelSxrQtGyYIJkTzAgsE5ZTEk4PiWkUrEeUnSKGdTux4wmEBhR2UqSKpdFcqo-WKQ_XhsED63mLXlRvzTc7qOdmfYv5Exv3VnnWGOfAj3-bpBqGxZNirodxubmnLnqnIobHexCIU_"
-                alt="Bali flights"
+                src="/assets/Burj Khalifa.jfif"
+                alt="Mumbai to Dubai Flights"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 w-full text-white">
-                <h3 className="text-2xl font-bold mb-1">Bali</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm opacity-90">Island of the Gods</span>
-                  <span className="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Enquire Now
-                  </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 text-white flex justify-between items-end">
+                <div>
+                  <span className="text-xs font-bold text-orange-300 uppercase">International</span>
+                  <h3 className="text-xl font-bold">Mumbai ⇄ Dubai (DXB)</h3>
+                  <p className="text-xs text-gray-200 mt-0.5">Starting from ₹12,999</p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => scrollToQuote('Dubai (DXB)')}
+                  className="px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
+                >
+                  Enquire
+                </button>
               </div>
             </div>
 
-            {/* CARD 3 */}
-            <div
-              onClick={() => scrollToQuote('Dubai')}
-              className="group relative rounded-2xl overflow-hidden h-80 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-            >
+            {/* Route 3 */}
+            <div className="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-md hover:shadow-xl transition-all">
               <img
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MO3HOFwSlHi-ugElVqqOoDm4JoveUV6qR4ZBe4Eg4Esfg7UXkzR9zZpG9mydjZHqtAEyTF8sJmcGWFt0hIFn1uhD9vp48EFFTaVWRLgkpZqKWn1GEsJ0QSNkKKeip6odAdvz7iOzk39N2keTkIBF3fQKmiVw7c160x72o059Xokkt3t4lYcDsKxNBF8c_HDg1rFatuOPj0BQbS8kYTdGStOrHzCw5HM0kROCAo_eiWkxjPp3_V-y_BzQIZXmdead_xIV8Ag1hen-"
-                alt="Dubai flights"
+                src="/assets/Bali.jfif"
+                alt="Delhi to Bali Flights"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-6 w-full text-white">
-                <h3 className="text-2xl font-bold mb-1">Dubai</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm opacity-90">The Futuristic Oasis</span>
-                  <span className="bg-primary px-3 py-1 rounded-full text-sm font-bold shadow-md cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Enquire Now
-                  </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 text-white flex justify-between items-end">
+                <div>
+                  <span className="text-xs font-bold text-orange-300 uppercase">Tropical Vacation</span>
+                  <h3 className="text-xl font-bold">Delhi ⇄ Bali (DPS)</h3>
+                  <p className="text-xs text-gray-200 mt-0.5">Starting from ₹18,499</p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => scrollToQuote('Bali (DPS)')}
+                  className="px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
+                >
+                  Enquire
+                </button>
               </div>
             </div>
           </div>

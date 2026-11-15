@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import PackageCard from '../components/PackageCard';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PromoBanner from '../components/PromoBanner';
 import { PACKAGES } from '../data/packages';
 import { sendTripEnquiry, PHONE_NUMBER } from '../utils/whatsapp';
 
@@ -314,63 +316,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Why Book With Us Section */}
-        <section className="mt-4 py-12 px-6 sm:px-10 rounded-3xl bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-              <span className="material-symbols-outlined text-sm">stars</span>
-              The Fly With Friends Advantage
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-text-main dark:text-text-main-dark">
-              Why Book With Us?
-            </h2>
-            <p className="text-sm sm:text-base text-text-muted dark:text-text-muted-dark">
-              We make group travel effortless, enjoyable, and completely stress-free from start to finish.
-            </p>
-          </div>
+        {/* Promo Offer Banner */}
+        <PromoBanner title="Special Holiday Offers &amp; Group Discounts" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-orange-100 dark:bg-orange-950/40 text-primary flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">groups</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Group-Centric Planning</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                Tailored flight seats, synchronized buses, and multi-room stays so your entire group travels together seamlessly.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-blue-100 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">payments</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Transparent Pricing</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                No hidden fees or unexpected charges. Honest rates with negotiated group discounts directly from trusted suppliers.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-green-100 dark:bg-green-950/40 text-[#25D366] flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">support_agent</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Dedicated Trip Support</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                Direct WhatsApp and call support with travel coordinators who assist your group before and during your journey.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-purple-100 dark:bg-purple-950/40 text-purple-600 flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">verified</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">End-to-End Service</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                From flight bookings, bus transfers, and hotels to visa assistance, all your travel requirements in one place.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Why Choose Us USP Section */}
+        <WhyChooseUs />
 
       </main>
     </>

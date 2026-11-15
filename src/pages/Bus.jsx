@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PromoBanner from '../components/PromoBanner';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
 
 export default function Bus() {
+  const [busType, setBusType] = useState('Volvo AC Sleeper');
   const [formData, setFormData] = useState({
     from: '',
     to: '',
@@ -16,14 +19,32 @@ export default function Bus() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSwap = () => {
+    setFormData((prev) => ({
+      ...prev,
+      from: prev.to,
+      to: prev.from,
+    }));
+  };
+
   const handleWhatsApp = (e) => {
     e.preventDefault();
     if (!formData.from.trim() || !formData.to.trim() || !formData.departureDate) {
-      alert('Please fill departure city, arrival city, and date.');
+      alert('Please fill in departure city, arrival city, and date.');
       return;
     }
 
-    const message = `New BUS Enquiry 🚀\n\nFrom: ${formData.from}\nTo: ${formData.to}\nDeparture Date: ${formData.departureDate}\nReturn Date: ${formData.returnDate || 'One Way'}\nPassengers: ${formData.passengers}\n`;
+    const message = `New BUS Enquiry 🚀
+
+From: ${formData.from}
+To: ${formData.to}
+Departure Date: ${formData.departureDate}
+Return Date: ${formData.returnDate || 'None (One Way)'}
+Passengers: ${formData.passengers}
+Bus Category: ${busType}
+
+Please share bus availability, timings, and ticket/charter rates.`;
+
     openWhatsApp(message);
   };
 
@@ -31,24 +52,25 @@ export default function Bus() {
     if (from && to) {
       setFormData((prev) => ({ ...prev, from, to }));
     }
-    const formElement = document.getElementById('hero-text');
+    const formElement = document.getElementById('bus-search-bar');
     if (formElement) {
       formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Group Bus & Coach Rental Service",
-    "provider": {
-      "@type": "TravelAgency",
-      "name": "Fly With Friends",
-      "telephone": "+918851722264",
-      "url": "https://flywithfriends.com"
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Group Bus & Coach Rental Service',
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Fly With Friends',
+      telephone: PHONE_NUMBER,
+      url: 'https://flywithfriends.com',
     },
-    "serviceType": "Bus Reservation",
-    "description": "Safe, punctual luxury bus charter and group transport for weekend getaways, college tours, and family holidays."
+    serviceType: 'Bus Reservation',
+    description:
+      'Safe, punctual luxury bus charter and group transport for weekend getaways, college tours, and family holidays.',
   };
 
   return (
@@ -57,282 +79,279 @@ export default function Bus() {
         title="Group Bus Bookings & Luxury Coach Rentals | Fly With Friends"
         description="Reliable bus rentals and group coach booking services across top holiday destinations. Comfortable travel, verified operators, and instant quotes on WhatsApp."
         keywords="group bus booking, luxury bus rental, tour coach hire, outstation bus booking, bus travel for groups, fly with friends"
-        canonical="/Bus.html"
+        canonical="/bus"
         schema={schema}
       />
 
-      <main className="flex flex-col items-center">
-        {/* Banner Section */}
-        <div className="w-full relative">
-          <div
-            className="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-8 pb-32"
-            style={{
-              backgroundImage:
-                'linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAk44IXxicANysji8LQzFIgIoiPLSOepjJ1LnP-B58YscJfFGm7tPbfXXYO-HAhXj7QcTrzMAtaTDLo98Ix45W20UDgtkYC1YyMS_IU2wi22aiaFFSd6k-htQ9gEnObr1OtcmUEVbNAbz6sIAo2mM5LGXz6LnE2CXisPXlkXFD3apolKbfT_qbL-WVIJYEzL18HkDvZifIuARxYNyZSuOWh-_xQt5KORCSBsduVJ0L9coH-wYywjBbYoYuyQuitSQpeD0f6Z2szx3aW")',
-            }}
-          >
-            <div className="flex flex-col gap-4 text-center max-w-3xl">
-              <h1 id="hero-text" className="text-white text-5xl font-black leading-tight tracking-[-0.033em] drop-shadow-md">
-                Your 🚌 Journey Begins Here
-              </h1>
-              <h2 className="text-white/90 text-lg font-medium leading-normal drop-shadow-sm">
-                Plan your next adventure with ease. Send us your travel details, and we'll arrange the perfect bus trip for you.
-              </h2>
-            </div>
-          </div>
-        </div>
-
-        {/* Bus Form Card */}
-        <div className="w-full px-4 sm:px-10 flex justify-center -mt-24 z-20 mb-20">
-          <div className="bg-white dark:bg-surface-dark rounded-2xl shadow-xl p-6 sm:p-10 w-full max-w-5xl border border-[#f4ece7] dark:border-[#3a2d25]">
-            <form onSubmit={handleWhatsApp} className="flex flex-col gap-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {/* FROM */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-sm font-medium text-text-main dark:text-text-main-dark">From</label>
-                  <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-text-muted">
-                      <span className="material-symbols-outlined">trip_origin</span>
-                    </div>
-                    <input
-                      required
-                      type="text"
-                      name="from"
-                      list="indian-cities"
-                      value={formData.from}
-                      onChange={handleChange}
-                      placeholder="Origin City or Station"
-                      className="w-full bg-[#fcfaf8] dark:bg-background-dark border border-[#e8d9ce] dark:border-border-dark text-text-main dark:text-text-main-dark text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm"
-                    />
-                  </div>
-                </div>
-
-                {/* TO */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-sm font-medium text-text-main dark:text-text-main-dark">To</label>
-                  <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-text-muted">
-                      <span className="material-symbols-outlined">location_on</span>
-                    </div>
-                    <input
-                      required
-                      type="text"
-                      name="to"
-                      list="indian-cities"
-                      value={formData.to}
-                      onChange={handleChange}
-                      placeholder="Destination City or Station"
-                      className="w-full bg-[#fcfaf8] dark:bg-background-dark border border-[#e8d9ce] dark:border-border-dark text-text-main dark:text-text-main-dark text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {/* DEPARTURE */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-sm font-medium text-text-main dark:text-text-main-dark">Departure Date</label>
-                  <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-text-muted">
-                      <span className="material-symbols-outlined">calendar_today</span>
-                    </div>
-                    <input
-                      required
-                      type="date"
-                      name="departureDate"
-                      value={formData.departureDate}
-                      onChange={handleChange}
-                      className="w-full bg-[#fcfaf8] dark:bg-background-dark border border-[#e8d9ce] dark:border-border-dark text-text-main dark:text-text-main-dark text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 transition-all shadow-sm"
-                    />
-                  </div>
-                </div>
-
-                {/* RETURN */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-sm font-medium text-text-main dark:text-text-main-dark">Return Date</label>
-                  <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-text-muted">
-                      <span className="material-symbols-outlined">event</span>
-                    </div>
-                    <input
-                      type="date"
-                      name="returnDate"
-                      value={formData.returnDate}
-                      onChange={handleChange}
-                      className="w-full bg-[#fcfaf8] dark:bg-background-dark border border-[#e8d9ce] dark:border-border-dark text-text-main dark:text-text-main-dark text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 transition-all shadow-sm"
-                    />
-                  </div>
-                </div>
-
-                {/* PASSENGERS */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-sm font-medium text-text-main dark:text-text-main-dark">Passengers</label>
-                  <div className="relative group">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-text-muted">
-                      <span className="material-symbols-outlined">group</span>
-                    </div>
-                    <input
-                      required
-                      min="1"
-                      type="number"
-                      name="passengers"
-                      value={formData.passengers}
-                      onChange={handleChange}
-                      placeholder="No. of Passengers"
-                      className="w-full bg-[#fcfaf8] dark:bg-background-dark border border-[#e8d9ce] dark:border-border-dark text-text-main dark:text-text-main-dark text-base rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary block p-4 pl-12 placeholder:text-[#9c6c49]/60 transition-all shadow-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row gap-4 md:justify-start">
-                <button
-                  type="submit"
-                  className="md:w-auto w-full px-6 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-3 justify-center"
-                >
-                  <span className="material-symbols-outlined">chat</span>
-                  <span>Send Enquiry via WhatsApp</span>
-                </button>
-
-                <a
-                  href={`tel:${PHONE_NUMBER}`}
-                  className="md:w-auto w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-3 justify-center"
-                >
-                  <span className="material-symbols-outlined">call</span>
-                  <span>Call Now</span>
-                </a>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        {/* Selling Points */}
-        <div className="w-full max-w-7xl px-4 sm:px-10 mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] hover:shadow-md transition-shadow">
-              <div className="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                <span className="material-symbols-outlined text-3xl">airline_seat_recline_extra</span>
-              </div>
-              <h3 className="text-lg font-bold text-text-main dark:text-text-main-dark">Premium Comfort</h3>
-              <p className="text-text-muted dark:text-text-muted-dark">Spacious seats, air conditioning, and power outlets on verified buses.</p>
-            </div>
-            <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] hover:shadow-md transition-shadow">
-              <div className="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                <span className="material-symbols-outlined text-3xl">verified_user</span>
-              </div>
-              <h3 className="text-lg font-bold text-text-main dark:text-text-main-dark">Safety First</h3>
-              <p className="text-text-muted dark:text-text-muted-dark">Verified operators with experienced drivers and strict hygiene standards.</p>
-            </div>
-            <div className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-white dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] hover:shadow-md transition-shadow">
-              <div className="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                <span className="material-symbols-outlined text-3xl">price_check</span>
-              </div>
-              <h3 className="text-lg font-bold text-text-main dark:text-text-main-dark">Transparent Pricing</h3>
-              <p className="text-text-muted dark:text-text-muted-dark">No hidden charges or toll surprises. Clear upfront quotes for your group.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Visual Road Separator */}
-        <div className="w-full bg-background-light dark:bg-background-dark py-8 overflow-hidden">
-          <div className="max-w-[1200px] mx-auto px-6 relative h-16 flex items-center">
-            <div
-              className="absolute w-full h-1 top-1/2 -translate-y-1/2 left-0 road-line bg-repeat-x"
-              style={{
-                backgroundImage: 'linear-gradient(90deg, #e7d9d0 50%, transparent 50%)',
-                backgroundSize: '40px 100%',
-              }}
+      <main className="flex flex-col items-center w-full">
+        {/* Banner Section with Compact Height */}
+        <section className="w-full relative px-4 sm:px-6 lg:px-8 pt-8 pb-14 md:pt-12 md:pb-20 bg-[#1f1610] overflow-hidden">
+          <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+            <img
+              src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=2000&q=80"
+              alt="Highway bus travel"
+              className="w-full h-full object-cover opacity-35 filter brightness-75 scale-105"
             />
-            <div className="relative z-10 bg-background-light dark:bg-background-dark px-4 ml-10 md:ml-40 flex flex-col items-center">
-              <span className="material-symbols-outlined text-primary text-4xl">directions_bus</span>
-              <span className="text-xs font-bold text-text-muted dark:text-text-muted-dark uppercase tracking-widest mt-1">On the way</span>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#1f1610]" />
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center">
+            {/* Header */}
+            <div className="text-center text-white max-w-3xl mx-auto mb-8 animate-fade-in-up">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/20 border border-primary/40 text-orange-200 text-xs font-bold uppercase tracking-wider mb-3">
+                <span className="material-symbols-outlined text-sm">directions_bus</span>
+                Safe &amp; Punctual Bus Services
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                Your Road Trip <span className="text-primary">Begins Here.</span>
+              </h1>
+              <p className="text-sm sm:text-base text-gray-200 mt-2 max-w-xl mx-auto">
+                Volvo multi-axle buses, luxury sleepers, and group coaches. Book tickets or charter full buses with instant quotes.
+              </p>
+            </div>
+
+            {/* Modern Horizontal Bus Search Widget */}
+            <div
+              id="bus-search-bar"
+              className="w-full bg-surface-light dark:bg-surface-dark rounded-2xl md:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-white/20 dark:border-white/10 backdrop-blur-md"
+            >
+              <form onSubmit={handleWhatsApp} className="flex flex-col gap-4">
+                {/* Top Row: Bus Category Badges */}
+                <div className="flex flex-wrap items-center gap-2 pb-3 border-b border-gray-100 dark:border-gray-800">
+                  <span className="text-xs font-bold text-text-muted dark:text-text-muted-dark mr-2">
+                    Bus Category:
+                  </span>
+                  {[
+                    'Volvo AC Sleeper',
+                    'AC Bharat Benz',
+                    'Tempo Traveller (12-26)',
+                    'Charter Coach (45+)',
+                  ].map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setBusType(cat)}
+                      className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                        busType === cat
+                          ? 'bg-primary text-white shadow-sm'
+                          : 'bg-background-light dark:bg-background-dark text-text-muted hover:text-text-main'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Main Horizontal Inputs Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+                  {/* FROM Input (lg:col-span-3) */}
+                  <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      From
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">trip_origin</span>
+                      <input
+                        type="text"
+                        required
+                        name="from"
+                        list="indian-cities"
+                        value={formData.from}
+                        onChange={handleChange}
+                        placeholder="Origin City / Stand"
+                        className="w-full bg-transparent border-none p-0 text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 placeholder:text-gray-400 placeholder:font-normal"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Swap Button (lg:col-span-1) */}
+                  <div className="hidden lg:flex lg:col-span-1 justify-center -mx-3 z-10">
+                    <button
+                      type="button"
+                      onClick={handleSwap}
+                      aria-label="Swap origin and destination"
+                      className="size-9 rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-primary shadow-sm hover:rotate-180 hover:bg-primary hover:text-white transition-all flex items-center justify-center cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-lg">sync_alt</span>
+                    </button>
+                  </div>
+
+                  {/* TO Input (lg:col-span-3) */}
+                  <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      To
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">location_on</span>
+                      <input
+                        type="text"
+                        required
+                        name="to"
+                        list="indian-cities"
+                        value={formData.to}
+                        onChange={handleChange}
+                        placeholder="Destination City / Stand"
+                        className="w-full bg-transparent border-none p-0 text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 placeholder:text-gray-400 placeholder:font-normal"
+                      />
+                    </div>
+                  </div>
+
+                  {/* DEPARTURE DATE (lg:col-span-2) */}
+                  <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      Departure Date
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">calendar_today</span>
+                      <input
+                        type="date"
+                        required
+                        name="departureDate"
+                        value={formData.departureDate}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
+                      />
+                    </div>
+                  </div>
+
+                  {/* RETURN DATE (OPTIONAL! lg:col-span-3) */}
+                  <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      Return Date <span className="text-[10px] lowercase text-gray-400">(optional)</span>
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">event_repeat</span>
+                      <input
+                        type="date"
+                        name="returnDate"
+                        value={formData.returnDate}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
+                      />
+                    </div>
+                  </div>
+
+                  {/* PASSENGERS & ACTION BUTTONS (lg:col-span-12) */}
+                  <div className="sm:col-span-2 lg:col-span-12 flex flex-col md:flex-row items-center justify-between gap-3 pt-2">
+                    {/* Passengers Counter */}
+                    <div className="flex items-center gap-2 bg-background-light dark:bg-background-dark/70 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700/80 w-full md:w-auto">
+                      <span className="material-symbols-outlined text-primary text-lg">group</span>
+                      <span className="text-xs font-bold text-text-muted dark:text-text-muted-dark">Passengers:</span>
+                      <select
+                        name="passengers"
+                        value={formData.passengers}
+                        onChange={handleChange}
+                        className="bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
+                      >
+                        {[1, 2, 4, 6, 8, 12, 16, 20, 30, 'Full Bus Charter (45+)'].map((p) => (
+                          <option key={p} value={p}>
+                            {p} {typeof p === 'number' && p === 1 ? 'Passenger' : typeof p === 'number' ? 'Passengers' : ''}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex items-center gap-3 w-full md:w-auto justify-end">
+                      <a
+                        href={`tel:${PHONE_NUMBER}`}
+                        className="px-4 py-3 rounded-xl border border-primary text-primary font-bold text-xs sm:text-sm hover:bg-primary/10 transition-colors flex items-center justify-center gap-1.5"
+                      >
+                        <span className="material-symbols-outlined text-base">call</span>
+                        <span className="hidden sm:inline">Call Coordinator</span>
+                      </a>
+                      <button
+                        type="submit"
+                        className="flex-1 md:flex-initial h-12 px-8 rounded-xl bg-primary hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02]"
+                      >
+                        <span className="material-symbols-outlined text-xl">search</span>
+                        <span>Search Buses</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Trending Bus Routes */}
-        <div className="w-full bg-background-light dark:bg-background-dark pb-24 px-6 lg:px-20">
-          <div className="max-w-6xl mx-auto flex flex-col gap-10">
-            <div>
-              <h3 className="text-text-main dark:text-text-main-dark text-3xl font-black tracking-tight mb-2">Trending Bus Routes</h3>
-              <p className="text-text-muted dark:text-text-muted-dark text-lg">Explore our most popular group road trip routes.</p>
+        {/* Promo Offer Banner */}
+        <PromoBanner title="Bus &amp; Group Travel Discounts" />
+
+        {/* Why Choose Us USP Section */}
+        <WhyChooseUs />
+
+        {/* Trending Bus Routes Section */}
+        <section className="py-16 px-4 lg:px-10 max-w-7xl mx-auto w-full">
+          <div className="mb-8">
+            <span className="text-primary text-xs font-bold uppercase tracking-wider">Popular Highway Routes</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-text-main dark:text-text-main-dark mt-1">
+              Top Trending Bus Routes
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-bold text-primary uppercase">Overnight Volvo</span>
+                <h3 className="text-xl font-bold text-text-main dark:text-text-main-dark mt-1">Delhi ⇄ Manali</h3>
+                <p className="text-xs text-text-muted dark:text-text-muted-dark mt-1">
+                  Semi-sleeper &amp; sleeper luxury buses with live tracking and charging ports.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between">
+                <span className="text-sm font-bold text-primary">From ₹899</span>
+                <button
+                  type="button"
+                  onClick={() => scrollToHero('Delhi', 'Manali')}
+                  className="text-xs font-bold text-primary hover:underline"
+                >
+                  Book Seat →
+                </button>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Route 1 */}
-              <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-surface-dark">
-                <div className="aspect-[4/3] w-full overflow-hidden">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage:
-                        "url('https://lh3.googleusercontent.com/aida-public/AB6AXuABpso6McIN3vQ4dBGct_TupsUj__2MparBFwh0HPgxmRYLNN9e2sCsOyG24uRinafVkuI3qYkZxxNbY-Yl0FpQxXL-cYS7ZdwQssFUIZErBMGVeOEtYaS5BEUBLDnKmBruQmB5UQfm8IzhZV0kMRnVeveG96CQa8QJGX-ClnQfWnS92zsQ_LmewJj62gxgwJpG198D7Te0povk5GiBOg3GGl9X6Nq0g4sHnC69RchieQXIUUSqPkgmve89efILQfu_kKSZdp1QcoSV')",
-                    }}
-                  />
-                </div>
-                <div className="absolute top-4 right-4 bg-white/90 dark:bg-surface-dark/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-text-main dark:text-text-main-dark shadow-sm">
-                  Best Seller
-                </div>
-                <div className="p-5 flex flex-col gap-2">
-                  <h4 className="text-lg font-bold text-text-main dark:text-text-main-dark">Manali Highway</h4>
-                  <p className="text-text-muted dark:text-text-muted-dark text-sm">Delhi to Manali</p>
-                  <button
-                    onClick={() => scrollToHero('Delhi', 'Manali')}
-                    className="mt-3 w-full py-2.5 rounded-lg border border-border-light dark:border-border-dark text-text-main dark:text-text-main-dark font-bold text-sm transition-colors hover:bg-primary hover:text-white hover:border-primary"
-                  >
-                    Enquire Now
-                  </button>
-                </div>
+            <div className="p-6 rounded-2xl bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-bold text-primary uppercase">Weekend Express</span>
+                <h3 className="text-xl font-bold text-text-main dark:text-text-main-dark mt-1">Delhi ⇄ Rishikesh</h3>
+                <p className="text-xs text-text-muted dark:text-text-muted-dark mt-1">
+                  Daily departures for river rafting, camping, and spiritual retreats.
+                </p>
               </div>
-
-              {/* Route 2 */}
-              <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-surface-dark">
-                <div className="aspect-[4/3] w-full overflow-hidden">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage:
-                        "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBubW6Mu3ecpt7fD0WVsOeHZCTduoDk682cjaYs_dY_6SYEKeyOmEM9ILQCnRnchyq8oKgNBqquytNCqgeMQw-vg-swIXOD3mZUJ70ypIyxiv71GKWtCuAlV_lkGtC0lXby1hhtRCF5IFRVLtXQPK7h0lPKRKYb38KuNnNrTkzEJYFJMYGmjY6r23pPknSW5vUV_cGJQsQIS3E_DVBvgvgn5U1OW_GnfovDAGjQAjn0GHAySS2i3W4kcwAnJ0SQHrvo0nBBhA_MV5BT')",
-                    }}
-                  />
-                </div>
-                <div className="p-5 flex flex-col gap-2">
-                  <h4 className="text-lg font-bold text-text-main dark:text-text-main-dark">Coastal Cruiser</h4>
-                  <p className="text-text-muted dark:text-text-muted-dark text-sm">Mumbai to Goa</p>
-                  <button
-                    onClick={() => scrollToHero('Mumbai', 'Goa')}
-                    className="mt-3 w-full py-2.5 rounded-lg border border-border-light dark:border-border-dark text-text-main dark:text-text-main-dark font-bold text-sm transition-colors hover:bg-primary hover:text-white hover:border-primary"
-                  >
-                    Enquire Now
-                  </button>
-                </div>
+              <div className="mt-4 pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between">
+                <span className="text-sm font-bold text-primary">From ₹549</span>
+                <button
+                  type="button"
+                  onClick={() => scrollToHero('Delhi', 'Rishikesh')}
+                  className="text-xs font-bold text-primary hover:underline"
+                >
+                  Book Seat →
+                </button>
               </div>
+            </div>
 
-              {/* Route 3 */}
-              <div className="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white dark:bg-surface-dark">
-                <div className="aspect-[4/3] w-full overflow-hidden">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage:
-                        "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvHctBj2JDlK40iSgqgxbgaYA0_TffCkvjmhIhsPKM6_ta7xfWQJkpg5j3ySFrI4o-xRYXWdLJsvIRnINi33-x6pVPB81WiqmBmUA0ezQZc4t0GOkQPUHCFDf-ryKJ2R_-zlVA-R0yuij83IchrMrlrjdJR5Ov_DuRaHcmHQrVH6ikj-l0YgOgyQOAHTy5c0ZnlIx395nxPaAklMhZU0_kFOYoVMGRZETkxwT8JBVkATzU3GcOEm9To5JlgzrNQwXw-n4WgCMMVMXp')",
-                    }}
-                  />
-                </div>
-                <div className="p-5 flex flex-col gap-2">
-                  <h4 className="text-lg font-bold text-text-main dark:text-text-main-dark">Royal Rajasthan</h4>
-                  <p className="text-text-muted dark:text-text-muted-dark text-sm">Jaipur to Udaipur</p>
-                  <button
-                    onClick={() => scrollToHero('Jaipur', 'Udaipur')}
-                    className="mt-3 w-full py-2.5 rounded-lg border border-border-light dark:border-border-dark text-text-main dark:text-text-main-dark font-bold text-sm transition-colors hover:bg-primary hover:text-white hover:border-primary"
-                  >
-                    Enquire Now
-                  </button>
-                </div>
+            <div className="p-6 rounded-2xl bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-bold text-primary uppercase">Devotional Route</span>
+                <h3 className="text-xl font-bold text-text-main dark:text-text-main-dark mt-1">Delhi ⇄ Katra</h3>
+                <p className="text-xs text-text-muted dark:text-text-muted-dark mt-1">
+                  Direct yatra buses with sanitized washroom halts and comfortable berths.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between">
+                <span className="text-sm font-bold text-primary">From ₹1,199</span>
+                <button
+                  type="button"
+                  onClick={() => scrollToHero('Delhi', 'Katra')}
+                  className="text-xs font-bold text-primary hover:underline"
+                >
+                  Book Seat →
+                </button>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </main>
     </>
   );
