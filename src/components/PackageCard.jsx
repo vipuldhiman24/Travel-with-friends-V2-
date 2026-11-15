@@ -1,13 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { WHATSAPP_NUMBER } from '../utils/whatsapp';
 
 export default function PackageCard({ pkg }) {
-  const whatsappUrl = `https://wa.me/918851722264?text=${encodeURIComponent(
+  const navigate = useNavigate();
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     `Hi, I want to enquire about the package: ${pkg.title} (${pkg.duration})`
   )}`;
 
+  const handleCardClick = () => {
+    navigate(`/trips?pkg=${pkg.id}`);
+  };
+
   return (
-    <div className="bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col w-full group">
+    <div
+      onClick={handleCardClick}
+      className="bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col w-full group cursor-pointer"
+    >
       <div className="relative h-48 overflow-hidden">
         <img
           src={pkg.image}
@@ -35,7 +44,7 @@ export default function PackageCard({ pkg }) {
             <span className="material-symbols-outlined text-sm text-primary">location_on</span>
             <span>{pkg.location}</span>
           </div>
-          <h4 className="font-bold text-lg text-text-main dark:text-text-main-dark leading-snug">
+          <h4 className="font-bold text-lg text-text-main dark:text-text-main-dark leading-snug group-hover:text-primary transition-colors">
             {pkg.title}
           </h4>
           <p className="text-xs text-text-muted dark:text-text-muted-dark line-clamp-2">
@@ -43,7 +52,7 @@ export default function PackageCard({ pkg }) {
           </p>
         </div>
 
-        <div className="pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between">
+        <div className="pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
           <div>
             <span className="text-xs text-text-muted dark:text-text-muted-dark block">Starting at</span>
             <span className="text-base font-bold text-primary">{pkg.price}</span>
@@ -51,7 +60,7 @@ export default function PackageCard({ pkg }) {
           <div className="flex items-center gap-2">
             <Link
               to={`/trips?pkg=${pkg.id}`}
-              className="px-3 py-1.5 rounded-lg border border-primary/30 text-primary text-xs font-bold hover:bg-primary/10 transition-colors"
+              className="px-3.5 py-1.5 rounded-lg border border-primary/30 text-primary text-xs font-bold hover:bg-primary hover:text-white transition-colors"
             >
               Details
             </Link>
@@ -59,7 +68,8 @@ export default function PackageCard({ pkg }) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-colors shadow-sm"
+              onClick={(e) => e.stopPropagation()}
+              className="px-3.5 py-1.5 rounded-lg bg-primary text-white text-xs font-bold hover:bg-orange-600 transition-colors shadow-sm"
             >
               Enquire
             </a>

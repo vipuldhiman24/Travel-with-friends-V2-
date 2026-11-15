@@ -24,7 +24,7 @@ export default function Contact() {
     <>
       <SEO
         title="Contact Us | Group Travel Support & Bookings - Fly With Friends"
-        description="Get in touch with Fly With Friends for group flight deals, tour planning, or booking queries. Call +91 88517 22264 or chat with our travel agents on WhatsApp."
+        description="Get in touch with Fly With Friends for group flight deals, tour planning, or booking queries. Call +91 93549 62122 or chat with our travel agents on WhatsApp."
         keywords="contact fly with friends, travel agent contact, group travel customer support, book travel on whatsapp, travel agency phone"
         canonical="https://flywithfriends.com/Contact.html"
         structuredData={structuredData}
@@ -124,7 +124,7 @@ export default function Contact() {
                 <h3 className="text-lg font-bold text-text-main-light dark:text-text-main-dark mb-1">Call Us Directly</h3>
                 <p className="text-xs text-text-sec-light dark:text-text-sec-dark mb-3">Speak with our travel coordinators instantly.</p>
                 <a href={`tel:${PHONE_NUMBER}`} className="text-primary font-bold hover:underline inline-flex items-center gap-1.5">
-                  <span>+91 88517 22264</span>
+                  <span>+91 93549 62122</span>
                   <span className="material-symbols-outlined text-sm">arrow_outward</span>
                 </a>
               </div>
@@ -139,7 +139,7 @@ export default function Contact() {
                 <h3 className="text-lg font-bold text-text-main-light dark:text-text-main-dark mb-1">WhatsApp Chat</h3>
                 <p className="text-xs text-text-sec-light dark:text-text-sec-dark mb-3">Quick quotes & itinerary assistance.</p>
                 <a
-                  href="https://wa.me/918851722264?text=Hello%20Fly%20With%20Friends,%20I%20would%20like%20to%20enquire%20about%20travel%20services."
+                  href="https://wa.me/919354962122?text=Hello%20Fly%20With%20Friends,%20I%20would%20like%20to%20enquire%20about%20travel%20services."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#25D366] font-bold hover:underline inline-flex items-center gap-1.5"

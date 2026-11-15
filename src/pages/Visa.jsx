@@ -265,7 +265,7 @@ Please share the document checklist, processing timeline, and visa fees.`;
                     className="text-primary hover:underline font-bold flex items-center gap-1"
                   >
                     <span className="material-symbols-outlined text-sm">call</span>
-                    Direct Visa Desk: +91 88517 22264
+                    Direct Visa Desk: +91 93549 62122
                   </a>
                 </div>
 

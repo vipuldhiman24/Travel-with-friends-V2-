@@ -180,7 +180,7 @@ Please share a customized package itinerary and budget estimate.`;
                     className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
                   >
                     <span className="material-symbols-outlined text-sm">call</span>
-                    Direct Call: +91 88517 22264
+                    Direct Call: +91 93549 62122
                   </a>
                 </div>
 

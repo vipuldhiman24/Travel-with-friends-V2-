@@ -56,11 +56,11 @@ export default function Navbar() {
         {/* Action Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="tel:+918851722264"
+            href="tel:+919354962122"
             className="flex items-center gap-1.5 text-sm font-bold text-text-main dark:text-text-main-dark hover:text-primary transition-colors"
           >
             <span className="material-symbols-outlined text-primary text-lg">call</span>
-            <span>+91 88517 22264</span>
+            <span>+91 93549 62122</span>
           </a>
           <Link
             to="/contact"
@@ -109,13 +109,12 @@ export default function Navbar() {
               Contact Us
             </Link>
             <a
-              href="tel:+918851722264"
+              href="tel:+919354962122"
               className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-primary/30 text-primary text-center font-bold"
             >
               <span className="material-symbols-outlined text-sm">call</span>
-              <span>Call Us: +91 88517 22264</span>
+              <span>Call Us: +91 93549 62122</span>
             </a>
-            
           </nav>
         </div>
       )}

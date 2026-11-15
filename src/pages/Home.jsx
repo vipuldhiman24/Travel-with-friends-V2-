@@ -66,6 +66,29 @@ export default function Home() {
     if (e && e.preventDefault) e.preventDefault();
     if (!isFormValid) return;
 
+    saveLead({
+      sourcePage: 'Home',
+      enquiryType: 'Custom Trip Plan Request (WhatsApp)',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      travelDate: formData.travelDate,
+      duration: formData.duration,
+      travelers: formData.travelers,
+      travellers: formData.travelers,
+      style: formData.style,
+      requests: formData.requests || ''
+    }).catch(() => {});
+
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Custom Trip (${formData.style} · ${formData.duration})`
+    });
+    setSuccessModalOpen(true);
+
     sendTripEnquiry(formData);
   };
 
@@ -89,19 +112,19 @@ export default function Home() {
       requests: formData.requests || ''
     };
 
-    const result = await saveLead(payload);
-    setIsSubmitting(false);
-
-    if (result.success) {
+    try {
+      await saveLead(payload);
+    } catch (err) {
+      console.warn('saveLead error:', err);
+    } finally {
+      setIsSubmitting(false);
       setSuccessData({
         name: formData.name,
         phone: formData.phone,
         destination: formData.destination,
-        service: `Custom Trip (${formData.style})`
+        service: `Custom Trip (${formData.style} · ${formData.duration})`
       });
       setSuccessModalOpen(true);
-    } else {
-      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
     }
   };
 
@@ -114,7 +137,7 @@ export default function Home() {
     "url": "https://flywithfriends.com",
     "logo": "https://flywithfriends.com/assets/logo.png",
     "image": "https://flywithfriends.com/assets/logo.png",
-    "telephone": "+918851722264",
+    "telephone": "+919354962122",
     "email": "flywithfriends06@gmail.com",
     "priceRange": "$$",
     "sameAs": [
