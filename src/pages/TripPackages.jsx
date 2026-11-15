@@ -1,42 +1,109 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import PackageCard from '../components/PackageCard';
 import WhyChooseUs from '../components/WhyChooseUs';
 import PromoBanner from '../components/PromoBanner';
+import SuccessModal from '../components/SuccessModal';
+import CustomerContactInputs from '../components/CustomerContactInputs';
+import EnquiryActionButtons from '../components/EnquiryActionButtons';
 import { PACKAGES } from '../data/packages';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { fetchPackages, saveLead } from '../utils/firebase';
 
 export default function TripPackages() {
+  const [packagesList, setPackagesList] = useState(PACKAGES);
   const [formData, setFormData] = useState({
     fullName: '',
+    phone: '',
+    email: '',
     destination: '',
     travelDate: '',
     groupSize: '4-8 Friends',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
+
+  useEffect(() => {
+    fetchPackages().then((data) => {
+      if (data && data.length > 0) {
+        setPackagesList(data);
+      }
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleWhatsApp = (e) => {
-    e.preventDefault();
-    if (!formData.fullName.trim() || !formData.destination.trim() || !formData.travelDate) {
-      alert('Please fill in your name, destination, and travel date.');
-      return;
+  const isFormValid = Boolean(
+    formData.fullName.trim() &&
+    formData.destination.trim() &&
+    formData.travelDate &&
+    formData.phone?.trim() &&
+    formData.phone.trim().replace(/\D/g, '').length >= 10
+  );
+
+  const getValidationMessage = () => {
+    if (!formData.fullName.trim()) return 'Please enter your name.';
+    if (!formData.destination.trim()) return 'Please enter dream destination.';
+    if (!formData.travelDate) return 'Please choose a travel date.';
+    if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
+      return 'Please enter a valid 10-digit contact number.';
     }
+    return '';
+  };
+
+  const handleWhatsApp = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid) return;
 
     const message = `Hello Fly With Friends 👋
 
 I want to plan a custom trip:
 Name: ${formData.fullName}
-Destination: ${formData.destination}
+Contact: ${formData.phone}
+${formData.email ? `Email: ${formData.email}\n` : ''}Destination: ${formData.destination}
 Travel Date: ${formData.travelDate}
 Group Size: ${formData.groupSize}
 
 Please share a customized package itinerary and budget estimate.`;
 
     openWhatsApp(message);
+  };
+
+  const handleDropNumber = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const payload = {
+      sourcePage: 'TripPackages',
+      enquiryType: 'Custom Holiday Package Request',
+      name: formData.fullName.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      travelDate: formData.travelDate,
+      groupSize: formData.groupSize,
+      travellers: formData.groupSize
+    };
+
+    const result = await saveLead(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSuccessData({
+        name: formData.fullName,
+        phone: formData.phone,
+        destination: formData.destination,
+        service: `Package Plan (${formData.groupSize})`
+      });
+      setSuccessModalOpen(true);
+    } else {
+      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    }
   };
 
   const schema = {
@@ -165,16 +232,51 @@ Please share a customized package itinerary and budget estimate.`;
                     </div>
                   </div>
 
-                  {/* Button */}
-                  <div className="sm:col-span-2 lg:col-span-2 flex items-center">
-                    <button
-                      type="submit"
-                      className="w-full h-12 px-5 rounded-xl bg-primary hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02]"
+                  {/* Group Size (lg:col-span-2) */}
+                  <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      Group Size
+                    </label>
+                    <select
+                      name="groupSize"
+                      value={formData.groupSize}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
                     >
-                      <span className="material-symbols-outlined text-xl">send</span>
-                      <span>Plan Trip</span>
-                    </button>
+                      <option value="Couple (2 Travelers)">Couple (2)</option>
+                      <option value="4-8 Friends">4–8 Friends</option>
+                      <option value="9-15 Group">9–15 Group</option>
+                      <option value="Large Group (16+)">Large Group (16+)</option>
+                    </select>
                   </div>
+                </div>
+
+                {/* Customer Contact Details */}
+                <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+                  <CustomerContactInputs
+                    name={formData.fullName}
+                    phone={formData.phone}
+                    email={formData.email}
+                    onChange={(e) => {
+                      const { name, value } = e.target;
+                      if (name === 'name') setFormData((prev) => ({ ...prev, fullName: value }));
+                      else setFormData((prev) => ({ ...prev, [name]: value }));
+                    }}
+                    horizontal={true}
+                  />
+                </div>
+
+                {/* Dual Enquiry Action Buttons */}
+                <div className="pt-2">
+                  <EnquiryActionButtons
+                    isValid={isFormValid}
+                    isSubmitting={isSubmitting}
+                    validationMessage={getValidationMessage()}
+                    onWhatsApp={handleWhatsApp}
+                    onDropNumber={handleDropNumber}
+                    whatsAppLabel="Send Enquiry on WhatsApp"
+                    dropNumberLabel="Drop Your Number — We'll Reach Out"
+                  />
                 </div>
               </form>
             </div>
@@ -200,7 +302,7 @@ Please share a customized package itinerary and budget estimate.`;
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto justify-items-center">
-            {PACKAGES.map((pkg) => (
+            {packagesList.map((pkg) => (
               <PackageCard key={pkg.id} pkg={pkg} />
             ))}
           </div>
@@ -266,6 +368,13 @@ Please share a customized package itinerary and budget estimate.`;
             </div>
           </div>
         </section>
+
+        {/* Branded Success Popup */}
+        <SuccessModal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+          data={successData}
+        />
       </main>
     </>
   );

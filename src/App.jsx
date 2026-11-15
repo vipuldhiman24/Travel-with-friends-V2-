@@ -14,6 +14,7 @@ import Trips from './pages/Trips';
 import Visa from './pages/Visa';
 import Contact from './pages/Contact';
 import Terms from './pages/Terms';
+import Admin from './pages/Admin';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -34,10 +35,13 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display">
       {/* 1s Airplane Takeoff Loader on Page Load / Route Changes */}
-      <AirplaneLoader />
+      {!isAdminRoute && <AirplaneLoader />}
 
       {/* Global Datalists for City/Airport/Country autocompletion */}
       <DataLists />
@@ -46,10 +50,14 @@ export default function App() {
       <ScrollToTop />
 
       {/* Shared Navigation Header */}
-      <Navbar />
+      {!isAdminRoute && <Navbar />}
 
       {/* Main Page Routing */}
       <Routes>
+        {/* Admin Portal */}
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/*" element={<Admin />} />
+
         {/* Home */}
         <Route path="/" element={<Home />} />
         <Route path="/index.html" element={<Home />} />
@@ -100,7 +108,7 @@ export default function App() {
       </Routes>
 
       {/* Shared Footer */}
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </div>
   );
 }

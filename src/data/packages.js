@@ -3,11 +3,14 @@ export const PACKAGES = [
     id: 1,
     title: "Divine Vaishno Devi Yatra – 3 Nights / 4 Days",
     location: "Katra – Vaishno Devi, Jammu & Kashmir, India",
-    image: "/assets/Vishnodevi.jpg",
+    image: "/assets/packages/vaishno-devi.jpg",
     price: "Starting from ₹7,499 per person",
     duration: "3 Nights / 4 Days",
     badge: "🙏 Spiritual Journey | Best Seller",
     group: "2 – 12 People",
+    showOnHome: true,
+    status: "published",
+    sortOrder: 1,
     shortDesc:
       "A spiritually enriching journey to Shri Mata Vaishno Devi covering Katra, Bhawan darshan, and nearby sacred attractions — peaceful, comfortable, and well-planned.",
     itinerary: [
@@ -42,11 +45,14 @@ export const PACKAGES = [
     id: 2,
     title: "Scenic Manali Escape – 3 Nights / 4 Days",
     location: "Manali, Himachal Pradesh, India",
-    image: "/assets/Manali.jpg",
+    image: "/assets/packages/manali.jpg",
     price: "Starting from ₹4,999 per person",
     duration: "3 Nights / 4 Days",
     badge: "⭐ Most Popular",
     group: "2 – 10 People",
+    showOnHome: true,
+    status: "published",
+    sortOrder: 2,
     shortDesc:
       "Snow-capped mountains, scenic valleys, famous sightseeing spots, and peaceful river moments — perfect for couples, friends, and small groups.",
     itinerary: [
@@ -81,11 +87,14 @@ export const PACKAGES = [
     id: 3,
     title: "Dubai Dream Holiday with FlyWithFriends",
     location: "Dubai, United Arab Emirates",
-    image: "/assets/Burj Khalifa.jfif",
+    image: "/assets/packages/dubai.jpg",
     price: "₹59,999 per person",
     duration: "5 Days / 4 Nights",
     badge: "🔥 Premium International Trip",
     group: "4 – 15 People",
+    showOnHome: true,
+    status: "published",
+    sortOrder: 3,
     shortDesc:
       "Luxury skyscrapers, desert safari, dhow cruise, shopping, and iconic attractions — Dubai done right.",
     itinerary: [
@@ -126,11 +135,14 @@ export const PACKAGES = [
     id: 4,
     title: "Magical Bali Getaway",
     location: "Bali, Indonesia",
-    image: "/assets/Bali.jfif",
+    image: "/assets/packages/bali.jpg",
     price: "₹69,999 per person (Excluding Flights)",
     duration: "5 Days / 4 Nights",
     badge: "🔥 Best Seller | International Trip",
     group: "2 – 15 Travelers",
+    showOnHome: true,
+    status: "published",
+    sortOrder: 4,
     shortDesc:
       "Beaches, temples, waterfalls, rice terraces, and water sports — Bali at its best.",
     itinerary: [

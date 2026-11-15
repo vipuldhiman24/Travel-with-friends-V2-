@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import WhyChooseUs from '../components/WhyChooseUs';
 import PromoBanner from '../components/PromoBanner';
+import SuccessModal from '../components/SuccessModal';
+import CustomerContactInputs from '../components/CustomerContactInputs';
+import EnquiryActionButtons from '../components/EnquiryActionButtons';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { saveLead } from '../utils/firebase';
 
 export default function Flights() {
   const [tripType, setTripType] = useState('one-way'); // 'one-way' | 'round-trip' | 'multi-city'
@@ -14,7 +18,13 @@ export default function Flights() {
     departureDate: '',
     returnDate: '',
     travelers: 1,
+    name: '',
+    phone: '',
+    email: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,22 +39,40 @@ export default function Flights() {
     }));
   };
 
+  const isFormValid = Boolean(
+    formData.from.trim() &&
+    formData.to.trim() &&
+    formData.departureDate &&
+    formData.name?.trim() &&
+    formData.phone?.trim() &&
+    formData.phone.trim().replace(/\D/g, '').length >= 10
+  );
+
+  const getValidationMessage = () => {
+    if (!formData.from.trim() || !formData.to.trim()) return 'Please enter departure and arrival destinations.';
+    if (!formData.departureDate) return 'Please choose a departure date.';
+    if (!formData.name?.trim()) return 'Please enter your name.';
+    if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
+      return 'Please enter a valid 10-digit phone number.';
+    }
+    return '';
+  };
+
   const handleGroupInquiry = () => {
     const message = `Hello Fly With Friends 👋\nI am looking for *Exclusive Group Flight Fares* for more than 9 travelers. Please connect me with a group flight specialist.`;
     openWhatsApp(message);
   };
 
   const handleWhatsApp = (e) => {
-    e.preventDefault();
-    if (!formData.from.trim() || !formData.to.trim() || !formData.departureDate) {
-      alert('Please fill in departure city, arrival city, and departure date.');
-      return;
-    }
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid) return;
 
     const isRound = tripType === 'round-trip' && formData.returnDate;
     const message = `New FLIGHT Enquiry 🚀
 
-Trip Type: ${tripType === 'round-trip' ? 'Round Trip' : tripType === 'multi-city' ? 'Multi City' : 'One Way'}
+Customer: ${formData.name}
+Phone: ${formData.phone}
+${formData.email ? `Email: ${formData.email}\n` : ''}Trip Type: ${tripType === 'round-trip' ? 'Round Trip' : tripType === 'multi-city' ? 'Multi City' : 'One Way'}
 From: ${formData.from}
 To: ${formData.to}
 Departure Date: ${formData.departureDate}
@@ -56,6 +84,47 @@ Fare Category: ${fareType.toUpperCase()}
 Please share the best flight options and quotes.`;
 
     openWhatsApp(message);
+  };
+
+  const handleDropNumber = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const isRound = tripType === 'round-trip' && formData.returnDate;
+
+    const payload = {
+      sourcePage: 'Flights',
+      enquiryType: 'Flight Booking Enquiry',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      from: formData.from.trim(),
+      to: formData.to.trim(),
+      destination: formData.to.trim(),
+      departureDate: formData.departureDate,
+      returnDate: isRound ? formData.returnDate : '',
+      travelDate: formData.departureDate,
+      travelers: formData.travelers,
+      travelClass,
+      tripType,
+      fareType
+    };
+
+    const result = await saveLead(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSuccessData({
+        name: formData.name,
+        phone: formData.phone,
+        destination: `${formData.from} ➔ ${formData.to}`,
+        service: 'Flight Booking Enquiry'
+      });
+      setSuccessModalOpen(true);
+    } else {
+      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    }
   };
 
   const scrollToQuote = (destination) => {
@@ -327,24 +396,6 @@ Please share the best flight options and quotes.`;
                         </select>
                       </div>
                     </div>
-
-                    {/* Submit CTA Buttons */}
-                    <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-                      <a
-                        href={`tel:${PHONE_NUMBER}`}
-                        className="px-4 py-3 rounded-xl border border-primary text-primary font-bold text-xs sm:text-sm hover:bg-primary/10 transition-colors flex items-center justify-center gap-1.5"
-                      >
-                        <span className="material-symbols-outlined text-base">call</span>
-                        <span className="hidden sm:inline">Call Us</span>
-                      </a>
-                      <button
-                        type="submit"
-                        className="flex-1 md:flex-initial h-12 px-8 rounded-xl bg-primary hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02]"
-                      >
-                        <span className="material-symbols-outlined text-xl">search</span>
-                        <span>Search Flights</span>
-                      </button>
-                    </div>
                   </div>
                 </div>
 
@@ -426,6 +477,30 @@ Please share the best flight options and quotes.`;
                     <span>👥 Group Deal</span>
                     <span className="text-[10px] font-normal text-text-muted">(Special Rates)</span>
                   </label>
+                </div>
+
+                {/* Customer Contact Details */}
+                <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+                  <CustomerContactInputs
+                    name={formData.name}
+                    phone={formData.phone}
+                    email={formData.email}
+                    onChange={handleChange}
+                    horizontal={true}
+                  />
+                </div>
+
+                {/* Dual Enquiry Action Buttons */}
+                <div className="pt-2">
+                  <EnquiryActionButtons
+                    isValid={isFormValid}
+                    isSubmitting={isSubmitting}
+                    validationMessage={getValidationMessage()}
+                    onWhatsApp={handleWhatsApp}
+                    onDropNumber={handleDropNumber}
+                    whatsAppLabel="Send Enquiry on WhatsApp"
+                    dropNumberLabel="Drop Your Number — We'll Reach Out"
+                  />
                 </div>
               </form>
             </div>
@@ -526,6 +601,13 @@ Please share the best flight options and quotes.`;
             </div>
           </div>
         </section>
+
+        {/* Branded Success Popup */}
+        <SuccessModal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+          data={successData}
+        />
       </main>
     </>
   );

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import WhyChooseUs from '../components/WhyChooseUs';
 import PromoBanner from '../components/PromoBanner';
+import SuccessModal from '../components/SuccessModal';
+import CustomerContactInputs from '../components/CustomerContactInputs';
+import EnquiryActionButtons from '../components/EnquiryActionButtons';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { saveLead } from '../utils/firebase';
 
 export default function Hotels() {
   const [formData, setFormData] = useState({
@@ -13,23 +17,46 @@ export default function Hotels() {
     rooms: 1,
     hotelRating: '4 Star',
     stayType: 'Hotel',
+    name: '',
+    phone: '',
+    email: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleWhatsApp = (e) => {
-    e.preventDefault();
-    if (!formData.destination.trim() || !formData.checkIn) {
-      alert('Please fill in your destination city and check-in date.');
-      return;
+  const isFormValid = Boolean(
+    formData.destination.trim() &&
+    formData.checkIn &&
+    formData.name?.trim() &&
+    formData.phone?.trim() &&
+    formData.phone.trim().replace(/\D/g, '').length >= 10
+  );
+
+  const getValidationMessage = () => {
+    if (!formData.destination.trim()) return 'Please enter destination city or hotel name.';
+    if (!formData.checkIn) return 'Please choose a check-in date.';
+    if (!formData.name?.trim()) return 'Please enter your name.';
+    if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
+      return 'Please enter a valid 10-digit phone number.';
     }
+    return '';
+  };
+
+  const handleWhatsApp = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid) return;
 
     const message = `New HOTEL Enquiry 🚀
 
-Destination: ${formData.destination}
+Customer: ${formData.name}
+Phone: ${formData.phone}
+${formData.email ? `Email: ${formData.email}\n` : ''}Destination: ${formData.destination}
 Check-In Date: ${formData.checkIn}
 Check-Out Date: ${formData.checkOut || 'Flexible'}
 Guests: ${formData.guests}
@@ -40,6 +67,44 @@ Stay Type: ${formData.stayType}
 Please share available hotel deals and group discount rates.`;
 
     openWhatsApp(message);
+  };
+
+  const handleDropNumber = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const payload = {
+      sourcePage: 'Hotels',
+      enquiryType: 'Hotel Accommodation Enquiry',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      travelDate: formData.checkIn,
+      checkIn: formData.checkIn,
+      checkOut: formData.checkOut || 'Flexible',
+      guests: formData.guests,
+      travellers: formData.guests,
+      rooms: formData.rooms,
+      hotelRating: formData.hotelRating,
+      stayType: formData.stayType
+    };
+
+    const result = await saveLead(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSuccessData({
+        name: formData.name,
+        phone: formData.phone,
+        destination: formData.destination,
+        service: `Hotel Stay (${formData.hotelRating})`
+      });
+      setSuccessModalOpen(true);
+    } else {
+      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    }
   };
 
   const schema = {
@@ -198,15 +263,30 @@ Please share available hotel deals and group discount rates.`;
                       </select>
                     </div>
                   </div>
+                </div>
 
-                  {/* Search Button */}
-                  <button
-                    type="submit"
-                    className="w-full sm:w-auto h-12 px-6 rounded-xl bg-primary hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] shrink-0"
-                  >
-                    <span className="material-symbols-outlined text-xl">search</span>
-                    <span>Search</span>
-                  </button>
+                {/* Customer Contact Details */}
+                <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+                  <CustomerContactInputs
+                    name={formData.name}
+                    phone={formData.phone}
+                    email={formData.email}
+                    onChange={handleChange}
+                    horizontal={true}
+                  />
+                </div>
+
+                {/* Dual Enquiry Action Buttons */}
+                <div className="pt-2">
+                  <EnquiryActionButtons
+                    isValid={isFormValid}
+                    isSubmitting={isSubmitting}
+                    validationMessage={getValidationMessage()}
+                    onWhatsApp={handleWhatsApp}
+                    onDropNumber={handleDropNumber}
+                    whatsAppLabel="Send Enquiry on WhatsApp"
+                    dropNumberLabel="Drop Your Number — We'll Reach Out"
+                  />
                 </div>
               </div>
             </form>
@@ -332,6 +412,13 @@ Please share available hotel deals and group discount rates.`;
             </div>
           </div>
         </section>
+
+        {/* Branded Success Popup */}
+        <SuccessModal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+          data={successData}
+        />
       </main>
     </>
   );

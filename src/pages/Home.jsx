@@ -1,36 +1,108 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import PackageCard from '../components/PackageCard';
 import WhyChooseUs from '../components/WhyChooseUs';
 import PromoBanner from '../components/PromoBanner';
+import SuccessModal from '../components/SuccessModal';
+import CustomerContactInputs from '../components/CustomerContactInputs';
+import EnquiryActionButtons from '../components/EnquiryActionButtons';
 import { PACKAGES } from '../data/packages';
 import { sendTripEnquiry, PHONE_NUMBER } from '../utils/whatsapp';
+import { fetchHomePagePackages, saveLead } from '../utils/firebase';
 
 export default function Home() {
+  const [packagesList, setPackagesList] = useState(PACKAGES.slice(0, 4));
   const [formData, setFormData] = useState({
     destination: '',
     travelDate: '',
     travelers: 2,
-    duration: '',
+    duration: '3–5 Days',
     style: 'Leisure',
     requests: '',
+    name: '',
+    phone: '',
+    email: '',
   });
-  const [formError, setFormError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
+
+  useEffect(() => {
+    fetchHomePagePackages().then((data) => {
+      if (data && data.length > 0) {
+        setPackagesList(data);
+      }
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleWhatsAppSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.destination.trim() || !formData.travelDate || !formData.travelers || !formData.duration) {
-      setFormError(true);
-      return;
+  const isFormValid = Boolean(
+    formData.destination.trim() &&
+    formData.travelDate &&
+    formData.travelers &&
+    formData.duration &&
+    formData.name?.trim() &&
+    formData.phone?.trim() &&
+    formData.phone.trim().replace(/\D/g, '').length >= 10
+  );
+
+  const getValidationMessage = () => {
+    if (!formData.destination.trim()) return 'Please enter your destination.';
+    if (!formData.travelDate) return 'Please pick travel dates.';
+    if (!formData.duration) return 'Please select trip duration.';
+    if (!formData.name?.trim()) return 'Please enter your name.';
+    if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
+      return 'Please enter a valid 10-digit phone number.';
     }
-    setFormError(false);
+    return '';
+  };
+
+  const handleWhatsAppSubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid) return;
+
     sendTripEnquiry(formData);
+  };
+
+  const handleDropNumber = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const payload = {
+      sourcePage: 'Home',
+      enquiryType: 'Custom Trip Plan Request',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      travelDate: formData.travelDate,
+      duration: formData.duration,
+      travelers: formData.travelers,
+      travellers: formData.travelers,
+      style: formData.style,
+      requests: formData.requests || ''
+    };
+
+    const result = await saveLead(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSuccessData({
+        name: formData.name,
+        phone: formData.phone,
+        destination: formData.destination,
+        service: `Custom Trip (${formData.style})`
+      });
+      setSuccessModalOpen(true);
+    } else {
+      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    }
   };
 
   const schema = {
@@ -144,7 +216,7 @@ export default function Home() {
 
             {/* Package cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {PACKAGES.map((pkg) => (
+              {packagesList.map((pkg) => (
                 <PackageCard key={pkg.id} pkg={pkg} />
               ))}
             </div>
@@ -289,28 +361,30 @@ export default function Home() {
                   />
                 </div>
 
-                {formError && (
-                  <p className="text-xs text-red-500 font-semibold text-center">
-                    Please fill destination, date, travelers and duration.
-                  </p>
-                )}
+                {/* Customer Contact Details */}
+                <div className="pt-2 border-t border-gray-100 dark:border-gray-800">
+                  <CustomerContactInputs
+                    name={formData.name}
+                    phone={formData.phone}
+                    email={formData.email}
+                    onChange={handleChange}
+                    horizontal={false}
+                  />
+                </div>
 
-                {/* WhatsApp Button */}
-                <button
-                  type="submit"
-                  className="w-full py-3.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg transition-all"
-                >
-                  Send via WhatsApp
-                </button>
-
-                {/* Call Button */}
-                <a
-                  href={`tel:${PHONE_NUMBER}`}
-                  className="w-full py-3.5 rounded-xl border border-primary/30 text-primary hover:bg-primary/10 font-bold text-base shadow-sm flex items-center justify-center gap-2 transition-all"
-                >
-                  <span className="material-symbols-outlined text-lg">call</span>
-                  Call Us Now
-                </a>
+                {/* Dual Enquiry Action Buttons */}
+                <div className="pt-2">
+                  <EnquiryActionButtons
+                    isValid={isFormValid}
+                    isSubmitting={isSubmitting}
+                    validationMessage={getValidationMessage()}
+                    onWhatsApp={handleWhatsAppSubmit}
+                    onDropNumber={handleDropNumber}
+                    whatsAppLabel="Send Enquiry on WhatsApp"
+                    dropNumberLabel="Drop Your Number — We'll Reach Out"
+                    showCallButton={true}
+                  />
+                </div>
               </form>
             </div>
           </div>
@@ -322,6 +396,12 @@ export default function Home() {
         {/* Why Choose Us USP Section */}
         <WhyChooseUs />
 
+        {/* Branded Success Popup */}
+        <SuccessModal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+          data={successData}
+        />
       </main>
     </>
   );

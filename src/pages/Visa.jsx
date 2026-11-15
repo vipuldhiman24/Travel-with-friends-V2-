@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import WhyChooseUs from '../components/WhyChooseUs';
 import PromoBanner from '../components/PromoBanner';
+import SuccessModal from '../components/SuccessModal';
+import CustomerContactInputs from '../components/CustomerContactInputs';
+import EnquiryActionButtons from '../components/EnquiryActionButtons';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { saveLead } from '../utils/firebase';
 
 export default function Visa() {
   const [formData, setFormData] = useState({
@@ -11,23 +15,44 @@ export default function Visa() {
     purpose: 'Tourist & Leisure',
     travelDate: '',
     travelers: 1,
+    name: '',
+    phone: '',
+    email: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.destination.trim()) {
-      alert('Please enter your destination country.');
-      return;
+  const isFormValid = Boolean(
+    formData.destination.trim() &&
+    formData.name?.trim() &&
+    formData.phone?.trim() &&
+    formData.phone.trim().replace(/\D/g, '').length >= 10
+  );
+
+  const getValidationMessage = () => {
+    if (!formData.destination.trim()) return 'Please enter your destination country.';
+    if (!formData.name?.trim()) return 'Please enter your name.';
+    if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
+      return 'Please enter a valid 10-digit phone number.';
     }
+    return '';
+  };
+
+  const handleWhatsApp = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid) return;
 
     const message = `New VISA Consultation Request 🚀
 
-Destination Country: ${formData.destination}
+Customer: ${formData.name}
+Phone: ${formData.phone}
+${formData.email ? `Email: ${formData.email}\n` : ''}Destination Country: ${formData.destination}
 Passport Issuing Country: ${formData.passportCountry}
 Purpose of Visit: ${formData.purpose}
 Expected Travel Date: ${formData.travelDate || 'Flexible'}
@@ -36,6 +61,41 @@ Travelers: ${formData.travelers} Pax
 Please share the document checklist, processing timeline, and visa fees.`;
 
     openWhatsApp(message);
+  };
+
+  const handleDropNumber = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const payload = {
+      sourcePage: 'Visa',
+      enquiryType: 'Visa Consultation Enquiry',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      passportCountry: formData.passportCountry,
+      purpose: formData.purpose,
+      travelDate: formData.travelDate || 'Flexible',
+      travelers: formData.travelers,
+      travellers: formData.travelers
+    };
+
+    const result = await saveLead(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSuccessData({
+        name: formData.name,
+        phone: formData.phone,
+        destination: formData.destination,
+        service: `Visa (${formData.purpose})`
+      });
+      setSuccessModalOpen(true);
+    } else {
+      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    }
   };
 
   const handleSelectCountry = (country) => {
@@ -141,8 +201,8 @@ Please share the document checklist, processing timeline, and visa fees.`;
                     </div>
                   </div>
 
-                  {/* Passport Issuing Country (lg:col-span-3) */}
-                  <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                  {/* Passport Issuing Country (lg:col-span-4) */}
+                  <div className="lg:col-span-4 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
                       Passport Country
                     </label>
@@ -161,8 +221,8 @@ Please share the document checklist, processing timeline, and visa fees.`;
                     </div>
                   </div>
 
-                  {/* Purpose of Visit (lg:col-span-3) */}
-                  <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                  {/* Purpose of Visit (lg:col-span-4) */}
+                  <div className="lg:col-span-4 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
                       Purpose of Visit
                     </label>
@@ -181,17 +241,6 @@ Please share the document checklist, processing timeline, and visa fees.`;
                         <option value="Student Visa">Student Visa</option>
                       </select>
                     </div>
-                  </div>
-
-                  {/* Submit Button (lg:col-span-2) */}
-                  <div className="sm:col-span-2 lg:col-span-2 flex items-center gap-2">
-                    <button
-                      type="submit"
-                      className="w-full h-12 px-5 rounded-xl bg-primary hover:bg-orange-600 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02]"
-                    >
-                      <span className="material-symbols-outlined text-xl">search</span>
-                      <span>Check Visa</span>
-                    </button>
                   </div>
                 </div>
 
@@ -213,11 +262,35 @@ Please share the document checklist, processing timeline, and visa fees.`;
 
                   <a
                     href={`tel:${PHONE_NUMBER}`}
-                    className="inline-flex items-center gap-1 font-bold text-primary hover:underline"
+                    className="text-primary hover:underline font-bold flex items-center gap-1"
                   >
                     <span className="material-symbols-outlined text-sm">call</span>
-                    <span>Direct Call: +91 88517 22264</span>
+                    Direct Visa Desk: +91 88517 22264
                   </a>
+                </div>
+
+                {/* Customer Contact Details */}
+                <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+                  <CustomerContactInputs
+                    name={formData.name}
+                    phone={formData.phone}
+                    email={formData.email}
+                    onChange={handleChange}
+                    horizontal={true}
+                  />
+                </div>
+
+                {/* Dual Enquiry Action Buttons */}
+                <div className="pt-2">
+                  <EnquiryActionButtons
+                    isValid={isFormValid}
+                    isSubmitting={isSubmitting}
+                    validationMessage={getValidationMessage()}
+                    onWhatsApp={handleWhatsApp}
+                    onDropNumber={handleDropNumber}
+                    whatsAppLabel="Send Enquiry on WhatsApp"
+                    dropNumberLabel="Drop Your Number — We'll Reach Out"
+                  />
                 </div>
               </form>
             </div>
@@ -320,6 +393,13 @@ Please share the document checklist, processing timeline, and visa fees.`;
             </div>
           </div>
         </section>
+
+        {/* Branded Success Popup */}
+        <SuccessModal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+          data={successData}
+        />
       </main>
     </>
   );
