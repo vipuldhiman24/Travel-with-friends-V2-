@@ -61,6 +61,28 @@ Travelers: ${formData.travelers} Pax
 Please share the document checklist, processing timeline, and visa fees.`;
 
     openWhatsApp(message);
+
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Visa (${formData.purpose}) (WhatsApp)`
+    });
+    setSuccessModalOpen(true);
+
+    saveLead({
+      sourcePage: 'Visa',
+      enquiryType: 'Visa Consultation Enquiry (WhatsApp)',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      passportCountry: formData.passportCountry,
+      purpose: formData.purpose,
+      travelDate: formData.travelDate || 'Flexible',
+      travelers: formData.travelers,
+      travellers: formData.travelers
+    }).catch((err) => console.warn('saveLead warning:', err));
   };
 
   const handleDropNumber = async (e) => {
@@ -68,6 +90,14 @@ Please share the document checklist, processing timeline, and visa fees.`;
     if (!isFormValid || isSubmitting) return;
 
     setIsSubmitting(true);
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Visa (${formData.purpose})`
+    });
+    setSuccessModalOpen(true);
+
     const payload = {
       sourcePage: 'Visa',
       enquiryType: 'Visa Consultation Enquiry',
@@ -82,19 +112,12 @@ Please share the document checklist, processing timeline, and visa fees.`;
       travellers: formData.travelers
     };
 
-    const result = await saveLead(payload);
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setSuccessData({
-        name: formData.name,
-        phone: formData.phone,
-        destination: formData.destination,
-        service: `Visa (${formData.purpose})`
-      });
-      setSuccessModalOpen(true);
-    } else {
-      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    try {
+      await saveLead(payload);
+    } catch (err) {
+      console.warn('saveLead error:', err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

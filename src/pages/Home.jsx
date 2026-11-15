@@ -48,10 +48,7 @@ export default function Home() {
 
   const isFormValid = Boolean(
     formData.destination.trim() &&
-    formData.travelDate &&
-    formData.travelDate >= todayStr &&
-    formData.travelers &&
-    formData.duration &&
+    (!formData.travelDate || formData.travelDate >= todayStr) &&
     formData.name?.trim() &&
     formData.phone?.trim() &&
     formData.phone.trim().replace(/\D/g, '').length >= 10
@@ -59,9 +56,7 @@ export default function Home() {
 
   const getValidationMessage = () => {
     if (!formData.destination.trim()) return 'Please enter your destination.';
-    if (!formData.travelDate) return 'Please pick travel dates.';
-    if (formData.travelDate < todayStr) return 'Travel date cannot be in the past.';
-    if (!formData.duration) return 'Please select trip duration.';
+    if (formData.travelDate && formData.travelDate < todayStr) return 'Travel date cannot be in the past.';
     if (!formData.name?.trim()) return 'Please enter your name.';
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
       return 'Please enter a valid 10-digit phone number.';
@@ -74,6 +69,30 @@ export default function Home() {
     if (!isFormValid || isSubmitting) return;
 
     sendTripEnquiry(formData);
+
+    const payload = {
+      sourcePage: 'Home',
+      enquiryType: 'Custom Trip Plan (WhatsApp)',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      travelDate: formData.travelDate || 'Flexible',
+      duration: formData.duration || 'Flexible',
+      travelers: formData.travelers,
+      travellers: formData.travelers,
+      style: formData.style,
+      requests: formData.requests || ''
+    };
+
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Custom Trip (${formData.style} · ${formData.duration || 'Flexible'})`
+    });
+    setSuccessModalOpen(true);
+    saveLead(payload).catch((err) => console.warn('saveLead warning:', err));
   };
 
   const handleDropNumber = async (e) => {
@@ -88,41 +107,38 @@ export default function Home() {
       phone: formData.phone.trim(),
       email: formData.email?.trim() || '',
       destination: formData.destination.trim(),
-      travelDate: formData.travelDate,
-      duration: formData.duration,
+      travelDate: formData.travelDate || 'Flexible',
+      duration: formData.duration || 'Flexible',
       travelers: formData.travelers,
       travellers: formData.travelers,
       style: formData.style,
       requests: formData.requests || ''
     };
 
+    // Immediately present the branded Success Popup to the customer
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Custom Trip (${formData.style} · ${formData.duration || 'Flexible'})`
+    });
+    setSuccessModalOpen(true);
+
     try {
-      const result = await saveLead(payload);
-      if (result && result.success) {
-        setSuccessData({
-          name: formData.name,
-          phone: formData.phone,
-          destination: formData.destination,
-          service: `Custom Trip (${formData.style} · ${formData.duration})`
-        });
-        setSuccessModalOpen(true);
-        setFormData({
-          destination: '',
-          travelDate: '',
-          travelers: 2,
-          duration: '3–5 Days',
-          style: 'Leisure',
-          requests: '',
-          name: '',
-          phone: '',
-          email: '',
-        });
-      } else {
-        alert('Unable to submit your enquiry at this moment. Please check your network or call us directly.');
-      }
+      await saveLead(payload);
+      setFormData({
+        destination: '',
+        travelDate: '',
+        travelers: 2,
+        duration: '3–5 Days',
+        style: 'Leisure',
+        requests: '',
+        name: '',
+        phone: '',
+        email: '',
+      });
     } catch (err) {
-      console.error('saveLead error:', err);
-      alert('Unable to submit your enquiry at this moment. Please check your network or call us directly.');
+      console.warn('saveLead error:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -269,11 +285,11 @@ export default function Home() {
                 </div>
               </div>
 
-              <form onSubmit={handleWhatsAppSubmit} className="flex flex-col gap-4">
+              <form onSubmit={handleDropNumber} className="flex flex-col gap-4">
                 {/* Destination */}
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-                    Destination
+                    Destination <span className="text-primary">*</span>
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">
@@ -295,11 +311,10 @@ export default function Home() {
                 {/* Travel Date */}
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark ml-1">
-                    Travel Dates
+                    Travel Dates <span className="lowercase font-normal text-gray-400">(optional)</span>
                   </label>
                   <input
                     name="travelDate"
-                    required
                     type="date"
                     min={todayStr}
                     value={formData.travelDate}

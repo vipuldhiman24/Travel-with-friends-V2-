@@ -59,18 +59,18 @@ export default function Navbar() {
             <span className="text-[10px] uppercase font-bold text-text-muted dark:text-text-muted-dark tracking-wider">24/7 Helpline</span>
             <div className="flex items-center gap-2 mt-0.5">
               <a
-                href="tel:+919354962122"
-                className="flex items-center gap-1 font-bold text-text-main dark:text-text-main-dark hover:text-primary transition-colors text-xs whitespace-nowrap"
-              >
-                <span className="material-symbols-outlined text-primary text-sm">call</span>
-                +91 93549 62122
-              </a>
-              <span className="text-gray-300 dark:text-gray-600">|</span>
-              <a
                 href="tel:+918851722264"
                 className="flex items-center gap-1 font-bold text-text-main dark:text-text-main-dark hover:text-primary transition-colors text-xs whitespace-nowrap"
               >
+                <span className="material-symbols-outlined text-primary text-sm">call</span>
                 +91 88517 22264
+              </a>
+              <span className="text-gray-300 dark:text-gray-600">|</span>
+              <a
+                href="tel:+919354962122"
+                className="flex items-center gap-1 font-bold text-text-main dark:text-text-main-dark hover:text-primary transition-colors text-xs whitespace-nowrap"
+              >
+                +91 93549 62122
               </a>
             </div>
           </div>
@@ -124,18 +124,18 @@ export default function Navbar() {
               <span className="text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark">24/7 Helpline</span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <a
+                  href="tel:+918851722264"
+                  className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-primary text-white text-center font-bold text-xs shadow-sm"
+                >
+                  <span className="material-symbols-outlined text-sm">call</span>
+                  <span>+91 88517 22264</span>
+                </a>
+                <a
                   href="tel:+919354962122"
                   className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-primary/30 text-primary text-center font-bold text-xs"
                 >
                   <span className="material-symbols-outlined text-sm">call</span>
                   <span>+91 93549 62122</span>
-                </a>
-                <a
-                  href="tel:+918851722264"
-                  className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-primary/30 text-primary text-center font-bold text-xs"
-                >
-                  <span className="material-symbols-outlined text-sm">call</span>
-                  <span>+91 88517 22264</span>
                 </a>
               </div>
             </div>

@@ -252,27 +252,36 @@ export async function saveLead(leadData) {
     createdAt: new Date().toISOString()
   };
 
-  let firestoreId = null;
+  // 1. Immediately cache locally so the lead is NEVER lost and admin always has it
+  try {
+    if (typeof localStorage !== 'undefined') {
+      const existing = getStoredLeads();
+      localStorage.setItem(LOCAL_LEADS_KEY, JSON.stringify([localLead, ...existing]));
+    }
+  } catch (e) {
+    console.warn("Could not cache lead to localStorage:", e);
+  }
 
+  // 2. Try pushing to Firestore with a fast 2000ms race timeout
+  // If Firestore is offline or DNS/network is unavailable, it won't hang the UI!
+  let firestoreId = null;
   try {
     const leadsCol = collection(db, 'leads');
-    const docRef = await addDoc(leadsCol, {
+    const firestorePromise = addDoc(leadsCol, {
       ...leadData,
       status: 'new',
       createdAt: serverTimestamp()
     });
+
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Firestore write timeout')), 2000)
+    );
+
+    const docRef = await Promise.race([firestorePromise, timeoutPromise]);
     firestoreId = docRef.id;
     localLead.id = docRef.id;
   } catch (err) {
-    console.warn("Direct Firestore addDoc failed, storing in resilient local queue:", err.message);
-  }
-
-  // Store in local leads list so it's guaranteed to appear in Admin Dashboard
-  try {
-    const existing = getStoredLeads();
-    localStorage.setItem(LOCAL_LEADS_KEY, JSON.stringify([localLead, ...existing]));
-  } catch (e) {
-    console.warn("Could not cache lead to localStorage:", e);
+    console.warn("Firestore addDoc backgrounded or unavailable:", err.message);
   }
 
   return {

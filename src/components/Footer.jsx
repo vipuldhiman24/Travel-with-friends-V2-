@@ -76,16 +76,16 @@ export default function Footer() {
                 <span className="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5">call</span>
                 <div className="flex flex-col gap-1">
                   <a
-                    href="tel:+919354962122"
-                    className="font-semibold text-text-main dark:text-text-main-dark hover:text-primary transition-colors"
-                  >
-                    +91 93549 62122
-                  </a>
-                  <a
                     href="tel:+918851722264"
                     className="font-semibold text-text-main dark:text-text-main-dark hover:text-primary transition-colors"
                   >
                     +91 88517 22264
+                  </a>
+                  <a
+                    href="tel:+919354962122"
+                    className="font-semibold text-text-main dark:text-text-main-dark hover:text-primary transition-colors"
+                  >
+                    +91 93549 62122
                   </a>
                 </div>
               </div>

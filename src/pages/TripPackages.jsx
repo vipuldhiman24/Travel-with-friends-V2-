@@ -85,6 +85,29 @@ Approximate Budget: ${formData.budget || 'Not decided yet'}
 Please share a customized package itinerary and budget estimate.`;
 
     openWhatsApp(message);
+
+    setSuccessData({
+      name: formData.fullName,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Package Plan (${formData.travelers} Pax) (WhatsApp)`
+    });
+    setSuccessModalOpen(true);
+
+    saveLead({
+      sourcePage: 'TripPackages',
+      enquiryType: 'Custom Holiday Package Request (WhatsApp)',
+      name: formData.fullName.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      preferredTravelDate: formData.preferredTravelDate,
+      travelDate: formData.preferredTravelDate,
+      travelers: formData.travelers,
+      travellers: formData.travelers,
+      budget: formData.budget || 'Not decided yet',
+      groupSize: `${formData.travelers} Travellers`
+    }).catch((err) => console.warn('saveLead warning:', err));
   };
 
   const handleDropNumber = async (e) => {
@@ -92,6 +115,14 @@ Please share a customized package itinerary and budget estimate.`;
     if (!isFormValid || isSubmitting) return;
 
     setIsSubmitting(true);
+    setSuccessData({
+      name: formData.fullName,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Package Plan (${formData.travelers} Pax · ${formData.budget || 'Flexible'})`
+    });
+    setSuccessModalOpen(true);
+
     const payload = {
       sourcePage: 'TripPackages',
       enquiryType: 'Custom Holiday Package Request',
@@ -107,19 +138,12 @@ Please share a customized package itinerary and budget estimate.`;
       groupSize: `${formData.travelers} Travellers`
     };
 
-    const result = await saveLead(payload);
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setSuccessData({
-        name: formData.fullName,
-        phone: formData.phone,
-        destination: formData.destination,
-        service: `Package Plan (${formData.travelers} Pax · ${formData.budget || 'Flexible'})`
-      });
-      setSuccessModalOpen(true);
-    } else {
-      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    try {
+      await saveLead(payload);
+    } catch (err) {
+      console.warn('saveLead error:', err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

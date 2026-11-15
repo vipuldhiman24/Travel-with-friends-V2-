@@ -9,13 +9,33 @@ export default function EnquiryActionButtons({
   onDropNumber,
   whatsAppLabel = 'Send Enquiry on WhatsApp',
   dropNumberLabel = "Drop Your Number — We'll Reach Out",
-  showCallButton = false,
+  showCallButton = true,
+  callPhoneNumber = PHONE_NUMBER, // tel:+918851722264
+  callButtonLabel = `Call Now: ${DISPLAY_PHONE_NUMBER}`, // +91 88517 22264
   stacked = false,
   className = ''
 }) {
+  const handleDropClick = (e) => {
+    if (!isValid) {
+      if (e && e.preventDefault) e.preventDefault();
+      alert(validationMessage || 'Please enter your name, contact number, and destination details.');
+      return;
+    }
+    if (onDropNumber) onDropNumber(e);
+  };
+
+  const handleWhatsAppClick = (e) => {
+    if (!isValid) {
+      if (e && e.preventDefault) e.preventDefault();
+      alert(validationMessage || 'Please enter your name, contact number, and destination details.');
+      return;
+    }
+    if (onWhatsApp) onWhatsApp(e);
+  };
+
   return (
     <div className={`flex flex-col gap-2.5 w-full ${className}`}>
-      {/* Inline validation hint when disabled */}
+      {/* Inline validation hint when fields are incomplete */}
       {!isValid && validationMessage && (
         <div className="flex items-center gap-1.5 text-[11px] text-amber-600 dark:text-amber-400 font-semibold bg-amber-50 dark:bg-amber-950/30 px-3 py-1.5 rounded-xl border border-amber-200 dark:border-amber-800/40">
           <span className="material-symbols-outlined text-sm">info</span>
@@ -23,50 +43,60 @@ export default function EnquiryActionButtons({
         </div>
       )}
 
-      {/* Buttons layout: 2-column or stacked, perfectly contained within the container */}
-      <div className={`grid ${stacked ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'} gap-2.5 w-full`}>
-        {/* Button 1: Send Enquiry on WhatsApp */}
-        <button
-          type="button"
-          onClick={onWhatsApp}
-          disabled={!isValid || isSubmitting}
-          className="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold text-xs sm:text-sm shadow-md shadow-green-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+      {/* MAIN BUTTON ON THE FORMS: Direct Call to +91 88517 22264 */}
+      {showCallButton && (
+        <a
+          href={`tel:${callPhoneNumber}`}
+          className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-orange-500 via-primary to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-orange-500/30 transition-all flex items-center justify-center gap-2.5 cursor-pointer transform hover:scale-[1.01] active:scale-[0.99] group"
         >
-          <span className="material-symbols-outlined text-lg">chat</span>
-          <span className="text-center">{whatsAppLabel}</span>
-        </button>
+          <span className="material-symbols-outlined text-xl group-hover:rotate-12 transition-transform">
+            call
+          </span>
+          <span className="tracking-wide">{callButtonLabel}</span>
+        </a>
+      )}
 
-        {/* Button 2: Drop Your Number — We'll Reach Out */}
+      {/* Secondary Actions: Drop Your Number & WhatsApp */}
+      <div className={`grid ${stacked ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'} gap-2 w-full`}>
+        {/* Drop Your Number — We'll Reach Out */}
         <button
           type="button"
-          onClick={onDropNumber}
-          disabled={!isValid || isSubmitting}
-          className="w-full py-3.5 px-4 rounded-xl bg-primary hover:bg-orange-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold text-xs sm:text-sm shadow-md shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+          onClick={handleDropClick}
+          disabled={isSubmitting}
+          className={`w-full py-3 px-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] ${
+            isValid
+              ? 'bg-primary hover:bg-orange-600 text-white shadow-md shadow-orange-500/20'
+              : 'bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30'
+          }`}
         >
           {isSubmitting ? (
             <>
-              <span className="animate-spin material-symbols-outlined text-lg">sync</span>
-              <span>Sending...</span>
+              <span className="animate-spin material-symbols-outlined text-base">sync</span>
+              <span>Submitting...</span>
             </>
           ) : (
             <>
-              <span className="material-symbols-outlined text-lg">ring_volume</span>
+              <span className="material-symbols-outlined text-base">ring_volume</span>
               <span className="text-center">{dropNumberLabel}</span>
             </>
           )}
         </button>
-      </div>
 
-      {/* Direct Call Button (full-width row, prevents overflow on narrow sidebars) */}
-      {showCallButton && (
-        <a
-          href={`tel:${PHONE_NUMBER}`}
-          className="w-full py-2.5 px-4 rounded-xl border border-primary/30 text-primary hover:bg-primary/10 font-bold text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+        {/* Send Enquiry on WhatsApp */}
+        <button
+          type="button"
+          onClick={handleWhatsAppClick}
+          disabled={isSubmitting}
+          className={`w-full py-3 px-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] ${
+            isValid
+              ? 'bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md shadow-green-600/20'
+              : 'bg-[#25D366]/20 hover:bg-[#25D366]/30 text-green-700 dark:text-green-400 border border-[#25D366]/30'
+          }`}
         >
-          <span className="material-symbols-outlined text-base">call</span>
-          <span>Call Us Directly: {DISPLAY_PHONE_NUMBER}</span>
-        </a>
-      )}
+          <span className="material-symbols-outlined text-base">chat</span>
+          <span className="text-center">{whatsAppLabel}</span>
+        </button>
+      </div>
     </div>
   );
 }

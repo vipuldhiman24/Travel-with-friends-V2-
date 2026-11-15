@@ -4,7 +4,7 @@ export default function SuccessModal({ isOpen, onClose, data }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
       <div
         className="relative w-full max-w-md bg-white dark:bg-[#201813] rounded-3xl p-6 sm:p-8 shadow-2xl border border-primary/20 text-center transform transition-all animate-scale-up"
         role="dialog"

@@ -86,6 +86,31 @@ Stay Type: ${formData.stayType}
 Please share available hotel deals and group discount rates.`;
 
     openWhatsApp(message);
+
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Hotel Stay (${formData.hotelRating}) (WhatsApp)`
+    });
+    setSuccessModalOpen(true);
+
+    saveLead({
+      sourcePage: 'Hotels',
+      enquiryType: 'Hotel Accommodation Enquiry (WhatsApp)',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      travelDate: formData.checkIn,
+      checkIn: formData.checkIn,
+      checkOut: formData.checkOut || 'Flexible',
+      guests: formData.guests,
+      travellers: formData.guests,
+      rooms: formData.rooms,
+      hotelRating: formData.hotelRating,
+      stayType: formData.stayType
+    }).catch((err) => console.warn('saveLead warning:', err));
   };
 
   const handleDropNumber = async (e) => {
@@ -93,6 +118,14 @@ Please share available hotel deals and group discount rates.`;
     if (!isFormValid || isSubmitting) return;
 
     setIsSubmitting(true);
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: formData.destination,
+      service: `Hotel Stay (${formData.hotelRating})`
+    });
+    setSuccessModalOpen(true);
+
     const payload = {
       sourcePage: 'Hotels',
       enquiryType: 'Hotel Accommodation Enquiry',
@@ -110,19 +143,12 @@ Please share available hotel deals and group discount rates.`;
       stayType: formData.stayType
     };
 
-    const result = await saveLead(payload);
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setSuccessData({
-        name: formData.name,
-        phone: formData.phone,
-        destination: formData.destination,
-        service: `Hotel Stay (${formData.hotelRating})`
-      });
-      setSuccessModalOpen(true);
-    } else {
-      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    try {
+      await saveLead(payload);
+    } catch (err) {
+      console.warn('saveLead error:', err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

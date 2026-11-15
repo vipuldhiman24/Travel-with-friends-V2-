@@ -83,6 +83,31 @@ Bus Category: ${busType}
 Please share bus availability, timings, and ticket/charter rates.`;
 
     openWhatsApp(message);
+
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: `${formData.from} ➔ ${formData.to}`,
+      service: `Bus (${busType}) (WhatsApp)`
+    });
+    setSuccessModalOpen(true);
+
+    saveLead({
+      sourcePage: 'Bus',
+      enquiryType: 'Bus Booking / Charter Enquiry (WhatsApp)',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      from: formData.from.trim(),
+      to: formData.to.trim(),
+      destination: formData.to.trim(),
+      departureDate: formData.departureDate,
+      returnDate: formData.returnDate || '',
+      travelDate: formData.departureDate,
+      passengers: formData.passengers,
+      travellers: formData.passengers,
+      busType
+    }).catch((err) => console.warn('saveLead warning:', err));
   };
 
   const handleDropNumber = async (e) => {
@@ -90,6 +115,14 @@ Please share bus availability, timings, and ticket/charter rates.`;
     if (!isFormValid || isSubmitting) return;
 
     setIsSubmitting(true);
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: `${formData.from} ➔ ${formData.to}`,
+      service: `Bus (${busType})`
+    });
+    setSuccessModalOpen(true);
+
     const payload = {
       sourcePage: 'Bus',
       enquiryType: 'Bus Booking / Charter Enquiry',
@@ -107,19 +140,12 @@ Please share bus availability, timings, and ticket/charter rates.`;
       busType
     };
 
-    const result = await saveLead(payload);
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setSuccessData({
-        name: formData.name,
-        phone: formData.phone,
-        destination: `${formData.from} ➔ ${formData.to}`,
-        service: `Bus (${busType})`
-      });
-      setSuccessModalOpen(true);
-    } else {
-      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    try {
+      await saveLead(payload);
+    } catch (err) {
+      console.warn('saveLead error:', err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

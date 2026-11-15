@@ -98,6 +98,32 @@ Fare Category: ${fareType.toUpperCase()}
 Please share the best flight options and quotes.`;
 
     openWhatsApp(message);
+
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: `${formData.from} ➔ ${formData.to}`,
+      service: 'Flight Booking Enquiry (WhatsApp)'
+    });
+    setSuccessModalOpen(true);
+
+    saveLead({
+      sourcePage: 'Flights',
+      enquiryType: 'Flight Booking Enquiry (WhatsApp)',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      from: formData.from.trim(),
+      to: formData.to.trim(),
+      destination: formData.to.trim(),
+      departureDate: formData.departureDate,
+      returnDate: isRound ? formData.returnDate : '',
+      travelDate: formData.departureDate,
+      travelers: formData.travelers,
+      travelClass,
+      tripType,
+      fareType
+    }).catch((err) => console.warn('saveLead warning:', err));
   };
 
   const handleDropNumber = async (e) => {
@@ -106,6 +132,14 @@ Please share the best flight options and quotes.`;
 
     setIsSubmitting(true);
     const isRound = tripType === 'round-trip' && formData.returnDate;
+
+    setSuccessData({
+      name: formData.name,
+      phone: formData.phone,
+      destination: `${formData.from} ➔ ${formData.to}`,
+      service: 'Flight Booking Enquiry'
+    });
+    setSuccessModalOpen(true);
 
     const payload = {
       sourcePage: 'Flights',
@@ -125,19 +159,12 @@ Please share the best flight options and quotes.`;
       fareType
     };
 
-    const result = await saveLead(payload);
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setSuccessData({
-        name: formData.name,
-        phone: formData.phone,
-        destination: `${formData.from} ➔ ${formData.to}`,
-        service: 'Flight Booking Enquiry'
-      });
-      setSuccessModalOpen(true);
-    } else {
-      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    try {
+      await saveLead(payload);
+    } catch (err) {
+      console.warn('saveLead error:', err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
