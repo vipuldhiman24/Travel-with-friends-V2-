@@ -115,6 +115,7 @@ export default function Navbar() {
               <span className="material-symbols-outlined text-sm">call</span>
               <span>Call Us: +91 88517 22264</span>
             </a>
+            
           </nav>
         </div>
       )}
