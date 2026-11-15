@@ -15,7 +15,16 @@ export default function PackageCard({ pkg }) {
   return (
     <div
       onClick={handleCardClick}
-      className="bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col w-full group cursor-pointer"
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={`View details for ${pkg.title}`}
+      className="bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col w-full group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50"
     >
       <div className="relative h-48 overflow-hidden">
         <img

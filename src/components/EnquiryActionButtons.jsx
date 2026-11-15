@@ -1,5 +1,5 @@
 import React from 'react';
-import { PHONE_NUMBER } from '../utils/whatsapp';
+import { PHONE_NUMBER, DISPLAY_PHONE_NUMBER } from '../utils/whatsapp';
 
 export default function EnquiryActionButtons({
   isValid,
@@ -9,7 +9,8 @@ export default function EnquiryActionButtons({
   onDropNumber,
   whatsAppLabel = 'Send Enquiry on WhatsApp',
   dropNumberLabel = "Drop Your Number — We'll Reach Out",
-  showCallButton = true,
+  showCallButton = false,
+  stacked = false,
   className = ''
 }) {
   return (
@@ -22,17 +23,17 @@ export default function EnquiryActionButtons({
         </div>
       )}
 
-      {/* Buttons layout */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+      {/* Buttons layout: 2-column or stacked, perfectly contained within the container */}
+      <div className={`grid ${stacked ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2'} gap-2.5 w-full`}>
         {/* Button 1: Send Enquiry on WhatsApp */}
         <button
           type="button"
           onClick={onWhatsApp}
           disabled={!isValid || isSubmitting}
-          className="flex-1 py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold text-xs sm:text-sm shadow-md shadow-green-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+          className="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold text-xs sm:text-sm shadow-md shadow-green-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
         >
           <span className="material-symbols-outlined text-lg">chat</span>
-          <span>{whatsAppLabel}</span>
+          <span className="text-center">{whatsAppLabel}</span>
         </button>
 
         {/* Button 2: Drop Your Number — We'll Reach Out */}
@@ -40,7 +41,7 @@ export default function EnquiryActionButtons({
           type="button"
           onClick={onDropNumber}
           disabled={!isValid || isSubmitting}
-          className="flex-1 py-3.5 px-4 rounded-xl bg-primary hover:bg-orange-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold text-xs sm:text-sm shadow-md shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+          className="w-full py-3.5 px-4 rounded-xl bg-primary hover:bg-orange-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-extrabold text-xs sm:text-sm shadow-md shadow-orange-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
         >
           {isSubmitting ? (
             <>
@@ -50,22 +51,22 @@ export default function EnquiryActionButtons({
           ) : (
             <>
               <span className="material-symbols-outlined text-lg">ring_volume</span>
-              <span>{dropNumberLabel}</span>
+              <span className="text-center">{dropNumberLabel}</span>
             </>
           )}
         </button>
-
-        {/* Direct Call Button (optional) */}
-        {showCallButton && (
-          <a
-            href={`tel:${PHONE_NUMBER}`}
-            className="py-3.5 px-4 rounded-xl border border-primary/40 text-primary hover:bg-primary/10 font-bold text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-1.5 whitespace-nowrap"
-          >
-            <span className="material-symbols-outlined text-base">call</span>
-            <span className="hidden md:inline">Call Us</span>
-          </a>
-        )}
       </div>
+
+      {/* Direct Call Button (full-width row, prevents overflow on narrow sidebars) */}
+      {showCallButton && (
+        <a
+          href={`tel:${PHONE_NUMBER}`}
+          className="w-full py-2.5 px-4 rounded-xl border border-primary/30 text-primary hover:bg-primary/10 font-bold text-xs sm:text-sm shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span className="material-symbols-outlined text-base">call</span>
+          <span>Call Us Directly: {DISPLAY_PHONE_NUMBER}</span>
+        </a>
+      )}
     </div>
   );
 }

@@ -24,6 +24,11 @@ export default function Bus() {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [successData, setSuccessData] = useState(null);
 
+  const todayStr = (() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  })();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -41,6 +46,8 @@ export default function Bus() {
     formData.from.trim() &&
     formData.to.trim() &&
     formData.departureDate &&
+    formData.departureDate >= todayStr &&
+    (!formData.returnDate || formData.returnDate >= formData.departureDate) &&
     formData.name?.trim() &&
     formData.phone?.trim() &&
     formData.phone.trim().replace(/\D/g, '').length >= 10
@@ -49,6 +56,8 @@ export default function Bus() {
   const getValidationMessage = () => {
     if (!formData.from.trim() || !formData.to.trim()) return 'Please enter departure and destination cities.';
     if (!formData.departureDate) return 'Please choose a departure date.';
+    if (formData.departureDate < todayStr) return 'Departure date cannot be in the past.';
+    if (formData.returnDate && formData.returnDate < formData.departureDate) return 'Return date cannot be earlier than departure date.';
     if (!formData.name?.trim()) return 'Please enter your name.';
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
       return 'Please enter a valid 10-digit phone number.';
@@ -273,6 +282,7 @@ Please share bus availability, timings, and ticket/charter rates.`;
                         type="date"
                         required
                         name="departureDate"
+                        min={todayStr}
                         value={formData.departureDate}
                         onChange={handleChange}
                         className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
@@ -290,6 +300,7 @@ Please share bus availability, timings, and ticket/charter rates.`;
                       <input
                         type="date"
                         name="returnDate"
+                        min={formData.departureDate || todayStr}
                         value={formData.returnDate}
                         onChange={handleChange}
                         className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"

@@ -1,6 +1,8 @@
 export const WHATSAPP_NUMBER = "919354962122";
 export const PHONE_NUMBER = "+919354962122";
 export const DISPLAY_PHONE_NUMBER = "+91 93549 62122";
+export const SECONDARY_PHONE_NUMBER = "+918851722264";
+export const SECONDARY_DISPLAY_PHONE_NUMBER = "+91 88517 22264";
 
 export function openWhatsApp(message) {
   const text = typeof message === 'string' ? message : JSON.stringify(message);

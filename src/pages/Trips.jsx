@@ -26,6 +26,11 @@ export default function Trips() {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [successData, setSuccessData] = useState(null);
 
+  const todayStr = (() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  })();
+
   useEffect(() => {
     fetchPackages().then((data) => {
       if (data && data.length > 0) setPackagesList(data);
@@ -42,13 +47,17 @@ export default function Trips() {
   const isFormValid = Boolean(
     formData.name?.trim() &&
     formData.phone?.trim() &&
-    formData.phone.trim().replace(/\D/g, '').length >= 10
+    formData.phone.trim().replace(/\D/g, '').length >= 10 &&
+    (!formData.travelDate || formData.travelDate >= todayStr)
   );
 
   const getValidationMessage = () => {
     if (!formData.name?.trim()) return 'Please enter your name.';
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
       return 'Please enter a valid 10-digit phone number.';
+    }
+    if (formData.travelDate && formData.travelDate < todayStr) {
+      return 'Travel date cannot be in the past.';
     }
     return '';
   };
@@ -288,6 +297,7 @@ Please share availability and group discount details.`;
                           <input
                             type="date"
                             name="travelDate"
+                            min={todayStr}
                             value={formData.travelDate}
                             onChange={handleChange}
                             className="w-full bg-transparent border-none p-0 text-xs font-bold text-text-main dark:text-white focus:ring-0"
@@ -325,6 +335,7 @@ Please share availability and group discount details.`;
                         whatsAppLabel="Send Enquiry on WhatsApp"
                         dropNumberLabel="Drop Your Number — We'll Reach Out"
                         showCallButton={true}
+                        stacked={true}
                       />
                     </div>
                   </div>

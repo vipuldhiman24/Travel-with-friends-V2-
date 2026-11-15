@@ -36,6 +36,11 @@ export default function Home() {
     });
   }, []);
 
+  const todayStr = (() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  })();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -44,6 +49,7 @@ export default function Home() {
   const isFormValid = Boolean(
     formData.destination.trim() &&
     formData.travelDate &&
+    formData.travelDate >= todayStr &&
     formData.travelers &&
     formData.duration &&
     formData.name?.trim() &&
@@ -54,6 +60,7 @@ export default function Home() {
   const getValidationMessage = () => {
     if (!formData.destination.trim()) return 'Please enter your destination.';
     if (!formData.travelDate) return 'Please pick travel dates.';
+    if (formData.travelDate < todayStr) return 'Travel date cannot be in the past.';
     if (!formData.duration) return 'Please select trip duration.';
     if (!formData.name?.trim()) return 'Please enter your name.';
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
@@ -64,30 +71,7 @@ export default function Home() {
 
   const handleWhatsAppSubmit = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (!isFormValid) return;
-
-    saveLead({
-      sourcePage: 'Home',
-      enquiryType: 'Custom Trip Plan Request (WhatsApp)',
-      name: formData.name.trim(),
-      phone: formData.phone.trim(),
-      email: formData.email?.trim() || '',
-      destination: formData.destination.trim(),
-      travelDate: formData.travelDate,
-      duration: formData.duration,
-      travelers: formData.travelers,
-      travellers: formData.travelers,
-      style: formData.style,
-      requests: formData.requests || ''
-    }).catch(() => {});
-
-    setSuccessData({
-      name: formData.name,
-      phone: formData.phone,
-      destination: formData.destination,
-      service: `Custom Trip (${formData.style} · ${formData.duration})`
-    });
-    setSuccessModalOpen(true);
+    if (!isFormValid || isSubmitting) return;
 
     sendTripEnquiry(formData);
   };
@@ -113,18 +97,34 @@ export default function Home() {
     };
 
     try {
-      await saveLead(payload);
+      const result = await saveLead(payload);
+      if (result && result.success) {
+        setSuccessData({
+          name: formData.name,
+          phone: formData.phone,
+          destination: formData.destination,
+          service: `Custom Trip (${formData.style} · ${formData.duration})`
+        });
+        setSuccessModalOpen(true);
+        setFormData({
+          destination: '',
+          travelDate: '',
+          travelers: 2,
+          duration: '3–5 Days',
+          style: 'Leisure',
+          requests: '',
+          name: '',
+          phone: '',
+          email: '',
+        });
+      } else {
+        alert('Unable to submit your enquiry at this moment. Please check your network or call us directly.');
+      }
     } catch (err) {
-      console.warn('saveLead error:', err);
+      console.error('saveLead error:', err);
+      alert('Unable to submit your enquiry at this moment. Please check your network or call us directly.');
     } finally {
       setIsSubmitting(false);
-      setSuccessData({
-        name: formData.name,
-        phone: formData.phone,
-        destination: formData.destination,
-        service: `Custom Trip (${formData.style} · ${formData.duration})`
-      });
-      setSuccessModalOpen(true);
     }
   };
 
@@ -301,6 +301,7 @@ export default function Home() {
                     name="travelDate"
                     required
                     type="date"
+                    min={todayStr}
                     value={formData.travelDate}
                     onChange={handleChange}
                     className="w-full bg-background-light dark:bg-background-dark border-0 rounded-xl py-3 px-4 text-text-main dark:text-text-main-dark focus:ring-2 focus:ring-primary font-medium text-sm"
@@ -406,6 +407,7 @@ export default function Home() {
                     whatsAppLabel="Send Enquiry on WhatsApp"
                     dropNumberLabel="Drop Your Number — We'll Reach Out"
                     showCallButton={true}
+                    stacked={true}
                   />
                 </div>
               </form>

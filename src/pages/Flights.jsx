@@ -26,6 +26,11 @@ export default function Flights() {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [successData, setSuccessData] = useState(null);
 
+  const todayStr = (() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  })();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -43,6 +48,8 @@ export default function Flights() {
     formData.from.trim() &&
     formData.to.trim() &&
     formData.departureDate &&
+    formData.departureDate >= todayStr &&
+    (!formData.returnDate || formData.returnDate >= formData.departureDate) &&
     formData.travelers &&
     (typeof formData.travelers === 'string' ? formData.travelers.trim() : formData.travelers >= 1) &&
     formData.name?.trim() &&
@@ -53,6 +60,8 @@ export default function Flights() {
   const getValidationMessage = () => {
     if (!formData.from.trim() || !formData.to.trim()) return 'Please enter departure and arrival destinations.';
     if (!formData.departureDate) return 'Please choose a departure date.';
+    if (formData.departureDate < todayStr) return 'Departure date cannot be in the past.';
+    if (formData.returnDate && formData.returnDate < formData.departureDate) return 'Return date cannot be earlier than departure date.';
     if (!formData.travelers || (typeof formData.travelers === 'number' && formData.travelers < 1)) {
       return 'Please enter or select number of passengers.';
     }
@@ -320,6 +329,7 @@ Please share the best flight options and quotes.`;
                       <input
                         type="date"
                         required
+                        min={todayStr}
                         name="departureDate"
                         value={formData.departureDate}
                         onChange={handleChange}
@@ -349,6 +359,7 @@ Please share the best flight options and quotes.`;
                       {tripType === 'round-trip' ? (
                         <input
                           type="date"
+                          min={formData.departureDate || todayStr}
                           name="returnDate"
                           value={formData.returnDate}
                           onChange={handleChange}

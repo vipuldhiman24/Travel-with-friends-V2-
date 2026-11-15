@@ -25,6 +25,11 @@ export default function TripPackages() {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [successData, setSuccessData] = useState(null);
 
+  const todayStr = (() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  })();
+
   useEffect(() => {
     fetchPackages().then((data) => {
       if (data && data.length > 0) {
@@ -42,6 +47,7 @@ export default function TripPackages() {
     formData.fullName.trim() &&
     formData.destination.trim() &&
     formData.preferredTravelDate &&
+    formData.preferredTravelDate >= todayStr &&
     formData.travelers &&
     (typeof formData.travelers === 'string' ? formData.travelers.trim() : formData.travelers >= 1) &&
     formData.phone?.trim() &&
@@ -52,6 +58,7 @@ export default function TripPackages() {
     if (!formData.fullName.trim()) return 'Please enter your name.';
     if (!formData.destination.trim()) return 'Please enter dream destination.';
     if (!formData.preferredTravelDate) return 'Please choose a preferred travel date.';
+    if (formData.preferredTravelDate < todayStr) return 'Preferred travel date cannot be in the past.';
     if (!formData.travelers || (typeof formData.travelers === 'number' && formData.travelers < 1)) {
       return 'Please enter or select number of travellers.';
     }
@@ -215,6 +222,7 @@ Please share a customized package itinerary and budget estimate.`;
                       <input
                         type="date"
                         required
+                        min={todayStr}
                         name="preferredTravelDate"
                         value={formData.preferredTravelDate}
                         onChange={handleChange}

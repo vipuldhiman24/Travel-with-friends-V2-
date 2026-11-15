@@ -72,14 +72,22 @@ export default function Footer() {
               Get in Touch
             </h4>
             <div className="space-y-3 text-sm text-text-muted dark:text-text-muted-dark">
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-primary text-xl shrink-0">call</span>
-                <a
-                  href="tel:+919354962122"
-                  className="font-semibold text-text-main dark:text-text-main-dark hover:text-primary transition-colors"
-                >
-                  +91 93549 62122
-                </a>
+              <div className="flex items-start gap-3">
+                <span className="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5">call</span>
+                <div className="flex flex-col gap-1">
+                  <a
+                    href="tel:+919354962122"
+                    className="font-semibold text-text-main dark:text-text-main-dark hover:text-primary transition-colors"
+                  >
+                    +91 93549 62122
+                  </a>
+                  <a
+                    href="tel:+918851722264"
+                    className="font-semibold text-text-main dark:text-text-main-dark hover:text-primary transition-colors"
+                  >
+                    +91 88517 22264
+                  </a>
+                </div>
               </div>
               <div className="flex items-center gap-3">
                 <span className="material-symbols-outlined text-primary text-xl shrink-0">mail</span>

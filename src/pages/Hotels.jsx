@@ -25,6 +25,11 @@ export default function Hotels() {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [successData, setSuccessData] = useState(null);
 
+  const todayStr = (() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  })();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -43,6 +48,8 @@ export default function Hotels() {
   const isFormValid = Boolean(
     formData.destination.trim() &&
     formData.checkIn &&
+    formData.checkIn >= todayStr &&
+    (!formData.checkOut || formData.checkOut >= formData.checkIn) &&
     formData.name?.trim() &&
     formData.phone?.trim() &&
     formData.phone.trim().replace(/\D/g, '').length >= 10
@@ -51,6 +58,8 @@ export default function Hotels() {
   const getValidationMessage = () => {
     if (!formData.destination.trim()) return 'Please enter destination city or hotel name.';
     if (!formData.checkIn) return 'Please choose a check-in date.';
+    if (formData.checkIn < todayStr) return 'Check-in date cannot be in the past.';
+    if (formData.checkOut && formData.checkOut < formData.checkIn) return 'Check-out date cannot be earlier than check-in date.';
     if (!formData.name?.trim()) return 'Please enter your name.';
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
       return 'Please enter a valid 10-digit phone number.';
@@ -229,6 +238,7 @@ Please share available hotel deals and group discount rates.`;
                       <input
                         type="date"
                         required
+                        min={todayStr}
                         name="checkIn"
                         value={formData.checkIn}
                         onChange={handleChange}
@@ -246,6 +256,7 @@ Please share available hotel deals and group discount rates.`;
                       <span className="material-symbols-outlined text-primary text-xl">event_repeat</span>
                       <input
                         type="date"
+                        min={formData.checkIn || todayStr}
                         name="checkOut"
                         value={formData.checkOut}
                         onChange={handleChange}
