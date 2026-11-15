@@ -16,21 +16,15 @@ export default function EnquiryActionButtons({
   className = ''
 }) {
   const handleDropClick = (e) => {
-    if (!isValid) {
-      if (e && e.preventDefault) e.preventDefault();
-      alert(validationMessage || 'Please enter your name, contact number, and destination details.');
-      return;
+    if (onDropNumber) {
+      onDropNumber(e);
     }
-    if (onDropNumber) onDropNumber(e);
   };
 
   const handleWhatsAppClick = (e) => {
-    if (!isValid) {
-      if (e && e.preventDefault) e.preventDefault();
-      alert(validationMessage || 'Please enter your name, contact number, and destination details.');
-      return;
+    if (onWhatsApp) {
+      onWhatsApp(e);
     }
-    if (onWhatsApp) onWhatsApp(e);
   };
 
   return (

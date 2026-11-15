@@ -47,17 +47,13 @@ export default function Home() {
   };
 
   const isFormValid = Boolean(
-    formData.destination.trim() &&
-    (!formData.travelDate || formData.travelDate >= todayStr) &&
-    formData.name?.trim() &&
     formData.phone?.trim() &&
-    formData.phone.trim().replace(/\D/g, '').length >= 10
+    formData.phone.trim().replace(/\D/g, '').length >= 10 &&
+    (!formData.travelDate || formData.travelDate >= todayStr)
   );
 
   const getValidationMessage = () => {
-    if (!formData.destination.trim()) return 'Please enter your destination.';
     if (formData.travelDate && formData.travelDate < todayStr) return 'Travel date cannot be in the past.';
-    if (!formData.name?.trim()) return 'Please enter your name.';
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
       return 'Please enter a valid 10-digit phone number.';
     }
@@ -66,77 +62,87 @@ export default function Home() {
 
   const handleWhatsAppSubmit = (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (!isFormValid || isSubmitting) return;
 
-    sendTripEnquiry(formData);
+    const customerName = formData.name?.trim() || 'Traveler';
+    const customerPhone = formData.phone?.trim() || 'Direct Inquiry';
+    const customerDest = formData.destination?.trim() || 'Custom Plan / Flexible';
+    const serviceName = `Custom Trip (${formData.style || 'Leisure'} · ${formData.duration || 'Flexible'})`;
+
+    // Immediately present the branded Success Popup to the customer
+    setSuccessData({
+      name: customerName,
+      phone: customerPhone,
+      destination: customerDest,
+      service: serviceName
+    });
+    setSuccessModalOpen(true);
+
+    sendTripEnquiry({
+      ...formData,
+      name: customerName,
+      phone: customerPhone,
+      destination: customerDest
+    });
 
     const payload = {
       sourcePage: 'Home',
       enquiryType: 'Custom Trip Plan (WhatsApp)',
-      name: formData.name.trim(),
-      phone: formData.phone.trim(),
+      name: customerName,
+      phone: customerPhone,
       email: formData.email?.trim() || '',
-      destination: formData.destination.trim(),
+      destination: customerDest,
       travelDate: formData.travelDate || 'Flexible',
       duration: formData.duration || 'Flexible',
-      travelers: formData.travelers,
-      travellers: formData.travelers,
-      style: formData.style,
+      travelers: formData.travelers || 2,
+      travellers: formData.travelers || 2,
+      style: formData.style || 'Leisure',
       requests: formData.requests || ''
     };
 
-    setSuccessData({
-      name: formData.name,
-      phone: formData.phone,
-      destination: formData.destination,
-      service: `Custom Trip (${formData.style} · ${formData.duration || 'Flexible'})`
-    });
-    setSuccessModalOpen(true);
     saveLead(payload).catch((err) => console.warn('saveLead warning:', err));
   };
 
   const handleDropNumber = async (e) => {
     if (e && e.preventDefault) e.preventDefault();
-    if (!isFormValid || isSubmitting) return;
+
+    const customerName = formData.name?.trim() || 'Traveler';
+    const customerPhone = formData.phone?.trim();
+
+    if (!customerPhone || customerPhone.replace(/\D/g, '').length < 10) {
+      alert('Please enter a valid 10-digit mobile number so our team can reach out.');
+      return;
+    }
 
     setIsSubmitting(true);
-    const payload = {
-      sourcePage: 'Home',
-      enquiryType: 'Custom Trip Plan Request',
-      name: formData.name.trim(),
-      phone: formData.phone.trim(),
-      email: formData.email?.trim() || '',
-      destination: formData.destination.trim(),
-      travelDate: formData.travelDate || 'Flexible',
-      duration: formData.duration || 'Flexible',
-      travelers: formData.travelers,
-      travellers: formData.travelers,
-      style: formData.style,
-      requests: formData.requests || ''
-    };
+    const customerDest = formData.destination?.trim() || 'Custom Plan / Flexible';
+    const serviceName = `Custom Trip (${formData.style || 'Leisure'} · ${formData.duration || 'Flexible'})`;
 
     // Immediately present the branded Success Popup to the customer
     setSuccessData({
-      name: formData.name,
-      phone: formData.phone,
-      destination: formData.destination,
-      service: `Custom Trip (${formData.style} · ${formData.duration || 'Flexible'})`
+      name: customerName,
+      phone: customerPhone,
+      destination: customerDest,
+      service: serviceName
     });
     setSuccessModalOpen(true);
 
+    const payload = {
+      sourcePage: 'Home',
+      enquiryType: 'Custom Trip Plan Request',
+      name: customerName,
+      phone: customerPhone,
+      email: formData.email?.trim() || '',
+      destination: customerDest,
+      travelDate: formData.travelDate || 'Flexible',
+      duration: formData.duration || 'Flexible',
+      travelers: formData.travelers || 2,
+      travellers: formData.travelers || 2,
+      style: formData.style || 'Leisure',
+      requests: formData.requests || ''
+    };
+
     try {
       await saveLead(payload);
-      setFormData({
-        destination: '',
-        travelDate: '',
-        travelers: 2,
-        duration: '3–5 Days',
-        style: 'Leisure',
-        requests: '',
-        name: '',
-        phone: '',
-        email: '',
-      });
     } catch (err) {
       console.warn('saveLead error:', err);
     } finally {

@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 export default function SuccessModal({ isOpen, onClose, data }) {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
+  useEffect(() => {
+    setMounted(true);
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  if (!isOpen || !mounted) return null;
+
+  const modalContent = (
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
       <div
         className="relative w-full max-w-md bg-white dark:bg-[#201813] rounded-3xl p-6 sm:p-8 shadow-2xl border border-primary/20 text-center transform transition-all animate-scale-up"
@@ -84,4 +99,6 @@ export default function SuccessModal({ isOpen, onClose, data }) {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
