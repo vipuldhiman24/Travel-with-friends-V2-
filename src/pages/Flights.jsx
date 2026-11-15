@@ -43,6 +43,8 @@ export default function Flights() {
     formData.from.trim() &&
     formData.to.trim() &&
     formData.departureDate &&
+    formData.travelers &&
+    (typeof formData.travelers === 'string' ? formData.travelers.trim() : formData.travelers >= 1) &&
     formData.name?.trim() &&
     formData.phone?.trim() &&
     formData.phone.trim().replace(/\D/g, '').length >= 10
@@ -51,6 +53,9 @@ export default function Flights() {
   const getValidationMessage = () => {
     if (!formData.from.trim() || !formData.to.trim()) return 'Please enter departure and arrival destinations.';
     if (!formData.departureDate) return 'Please choose a departure date.';
+    if (!formData.travelers || (typeof formData.travelers === 'number' && formData.travelers < 1)) {
+      return 'Please enter or select number of passengers.';
+    }
     if (!formData.name?.trim()) return 'Please enter your name.';
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
       return 'Please enter a valid 10-digit phone number.';
@@ -367,8 +372,11 @@ Please share the best flight options and quotes.`;
                     <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
                       <div className="flex items-center gap-2 bg-background-light dark:bg-background-dark/70 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700/80">
                         <span className="material-symbols-outlined text-primary text-lg">group</span>
-                        <span className="text-xs font-bold text-text-muted dark:text-text-muted-dark">Pax:</span>
+                        <span className="text-xs font-bold text-text-muted dark:text-text-muted-dark">
+                          Passengers <span className="text-red-500 font-extrabold">*</span>:
+                        </span>
                         <select
+                          required
                           name="travelers"
                           value={formData.travelers}
                           onChange={handleChange}
@@ -376,7 +384,7 @@ Please share the best flight options and quotes.`;
                         >
                           {[1, 2, 3, 4, 5, 6, 7, 8, 9, '10+ Group'].map((n) => (
                             <option key={n} value={n}>
-                              {n} {n === 1 ? 'Traveler' : 'Travelers'}
+                              {n} {n === 1 ? 'Passenger' : 'Passengers'}
                             </option>
                           ))}
                         </select>
@@ -384,6 +392,9 @@ Please share the best flight options and quotes.`;
 
                       <div className="flex items-center gap-2 bg-background-light dark:bg-background-dark/70 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700/80">
                         <span className="material-symbols-outlined text-primary text-lg">airline_seat_recline_extra</span>
+                        <span className="text-xs font-semibold text-text-muted dark:text-text-muted-dark">
+                          Class <span className="text-[10px] text-gray-400 font-normal">(Optional)</span>:
+                        </span>
                         <select
                           value={travelClass}
                           onChange={(e) => setTravelClass(e.target.value)}
@@ -527,11 +538,12 @@ Please share the best flight options and quotes.`;
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Route 1 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Route 1: Manali */}
             <div className="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-md hover:shadow-xl transition-all">
               <img
-                src="/assets/Manali.jpg"
+                src="/assets/packages/manali.jpg"
+                onError={(e) => { e.currentTarget.src = '/assets/Manali.jpg'; }}
                 alt="Delhi to Kullu Manali Flights"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -539,23 +551,24 @@ Please share the best flight options and quotes.`;
               <div className="absolute bottom-5 left-5 right-5 text-white flex justify-between items-end">
                 <div>
                   <span className="text-xs font-bold text-orange-300 uppercase">Mountain Getaway</span>
-                  <h3 className="text-xl font-bold">Delhi ⇄ Kullu / Manali</h3>
+                  <h3 className="text-lg font-bold">Delhi ⇄ Kullu</h3>
                   <p className="text-xs text-gray-200 mt-0.5">Starting from ₹3,499</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => scrollToQuote('Kullu (KUU)')}
-                  className="px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
+                  className="px-3 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
                 >
                   Enquire
                 </button>
               </div>
             </div>
 
-            {/* Route 2 */}
+            {/* Route 2: Dubai */}
             <div className="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-md hover:shadow-xl transition-all">
               <img
-                src="/assets/Burj Khalifa.jfif"
+                src="/assets/packages/dubai.jpg"
+                onError={(e) => { e.currentTarget.src = '/assets/Burj Khalifa.jfif'; }}
                 alt="Mumbai to Dubai Flights"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
@@ -563,37 +576,63 @@ Please share the best flight options and quotes.`;
               <div className="absolute bottom-5 left-5 right-5 text-white flex justify-between items-end">
                 <div>
                   <span className="text-xs font-bold text-orange-300 uppercase">International</span>
-                  <h3 className="text-xl font-bold">Mumbai ⇄ Dubai (DXB)</h3>
+                  <h3 className="text-lg font-bold">Mumbai ⇄ Dubai</h3>
                   <p className="text-xs text-gray-200 mt-0.5">Starting from ₹12,999</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => scrollToQuote('Dubai (DXB)')}
-                  className="px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
+                  className="px-3 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
                 >
                   Enquire
                 </button>
               </div>
             </div>
 
-            {/* Route 3 */}
+            {/* Route 3: Bali */}
             <div className="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-md hover:shadow-xl transition-all">
               <img
-                src="/assets/Bali.jfif"
+                src="/assets/packages/bali.jpg"
+                onError={(e) => { e.currentTarget.src = '/assets/Bali.jfif'; }}
                 alt="Delhi to Bali Flights"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 text-white flex justify-between items-end">
                 <div>
-                  <span className="text-xs font-bold text-orange-300 uppercase">Tropical Vacation</span>
-                  <h3 className="text-xl font-bold">Delhi ⇄ Bali (DPS)</h3>
+                  <span className="text-xs font-bold text-orange-300 uppercase">Tropical Escape</span>
+                  <h3 className="text-lg font-bold">Delhi ⇄ Bali</h3>
                   <p className="text-xs text-gray-200 mt-0.5">Starting from ₹18,499</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => scrollToQuote('Bali (DPS)')}
-                  className="px-3.5 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
+                  className="px-3 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
+                >
+                  Enquire
+                </button>
+              </div>
+            </div>
+
+            {/* Route 4: Katra / Vaishno Devi / Expedition */}
+            <div className="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-md hover:shadow-xl transition-all">
+              <img
+                src="/assets/packages/vaishno-devi.jpg"
+                onError={(e) => { e.currentTarget.src = '/assets/Vishnodevi.jpg'; }}
+                alt="Delhi to Jammu Katra Flights"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 text-white flex justify-between items-end">
+                <div>
+                  <span className="text-xs font-bold text-orange-300 uppercase">Spiritual Expedition</span>
+                  <h3 className="text-lg font-bold">Delhi ⇄ Jammu / Katra</h3>
+                  <p className="text-xs text-gray-200 mt-0.5">Starting from ₹2,999</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => scrollToQuote('Jammu (IXJ)')}
+                  className="px-3 py-1.5 rounded-xl bg-primary text-white text-xs font-bold shadow hover:bg-orange-600 transition-colors"
                 >
                   Enquire
                 </button>

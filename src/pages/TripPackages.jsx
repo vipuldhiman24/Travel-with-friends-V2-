@@ -17,8 +17,9 @@ export default function TripPackages() {
     phone: '',
     email: '',
     destination: '',
-    travelDate: '',
-    groupSize: '4-8 Friends',
+    preferredTravelDate: '',
+    travelers: 2,
+    budget: 'Not decided yet',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
@@ -40,7 +41,9 @@ export default function TripPackages() {
   const isFormValid = Boolean(
     formData.fullName.trim() &&
     formData.destination.trim() &&
-    formData.travelDate &&
+    formData.preferredTravelDate &&
+    formData.travelers &&
+    (typeof formData.travelers === 'string' ? formData.travelers.trim() : formData.travelers >= 1) &&
     formData.phone?.trim() &&
     formData.phone.trim().replace(/\D/g, '').length >= 10
   );
@@ -48,7 +51,10 @@ export default function TripPackages() {
   const getValidationMessage = () => {
     if (!formData.fullName.trim()) return 'Please enter your name.';
     if (!formData.destination.trim()) return 'Please enter dream destination.';
-    if (!formData.travelDate) return 'Please choose a travel date.';
+    if (!formData.preferredTravelDate) return 'Please choose a preferred travel date.';
+    if (!formData.travelers || (typeof formData.travelers === 'number' && formData.travelers < 1)) {
+      return 'Please enter or select number of travellers.';
+    }
     if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
       return 'Please enter a valid 10-digit contact number.';
     }
@@ -61,12 +67,13 @@ export default function TripPackages() {
 
     const message = `Hello Fly With Friends 👋
 
-I want to plan a custom trip:
+I want to plan a custom holiday trip:
 Name: ${formData.fullName}
 Contact: ${formData.phone}
 ${formData.email ? `Email: ${formData.email}\n` : ''}Destination: ${formData.destination}
-Travel Date: ${formData.travelDate}
-Group Size: ${formData.groupSize}
+Preferred Travel Date: ${formData.preferredTravelDate}
+Number of Travellers: ${formData.travelers} Pax
+Approximate Budget: ${formData.budget || 'Not decided yet'}
 
 Please share a customized package itinerary and budget estimate.`;
 
@@ -85,9 +92,12 @@ Please share a customized package itinerary and budget estimate.`;
       phone: formData.phone.trim(),
       email: formData.email?.trim() || '',
       destination: formData.destination.trim(),
-      travelDate: formData.travelDate,
-      groupSize: formData.groupSize,
-      travellers: formData.groupSize
+      preferredTravelDate: formData.preferredTravelDate,
+      travelDate: formData.preferredTravelDate,
+      travelers: formData.travelers,
+      travellers: formData.travelers,
+      budget: formData.budget || 'Not decided yet',
+      groupSize: `${formData.travelers} Travellers`
     };
 
     const result = await saveLead(payload);
@@ -98,7 +108,7 @@ Please share a customized package itinerary and budget estimate.`;
         name: formData.fullName,
         phone: formData.phone,
         destination: formData.destination,
-        service: `Package Plan (${formData.groupSize})`
+        service: `Package Plan (${formData.travelers} Pax · ${formData.budget || 'Flexible'})`
       });
       setSuccessModalOpen(true);
     } else {
@@ -175,26 +185,7 @@ Please share a customized package itinerary and budget estimate.`;
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
-                  {/* Your Name */}
-                  <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
-                      Your Name
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-primary text-xl">person</span>
-                      <input
-                        type="text"
-                        required
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        placeholder="E.g. Rahul Sharma"
-                        className="w-full bg-transparent border-none p-0 text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 placeholder:text-gray-400 placeholder:font-normal"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Destination */}
+                  {/* Destination (lg:col-span-4) */}
                   <div className="lg:col-span-4 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
                       Dream Destination
@@ -214,45 +205,73 @@ Please share a customized package itinerary and budget estimate.`;
                     </div>
                   </div>
 
-                  {/* Travel Date */}
+                  {/* Preferred Travel Date (lg:col-span-3) */}
                   <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
-                      Travel Date
+                      Preferred Travel Date <span className="text-red-500 font-extrabold">*</span>
                     </label>
                     <div className="flex items-center gap-2">
                       <span className="material-symbols-outlined text-primary text-xl">calendar_month</span>
                       <input
                         type="date"
                         required
-                        name="travelDate"
-                        value={formData.travelDate}
+                        name="preferredTravelDate"
+                        value={formData.preferredTravelDate}
                         onChange={handleChange}
                         className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
                       />
                     </div>
                   </div>
 
-                  {/* Group Size (lg:col-span-2) */}
+                  {/* Number of Travellers (lg:col-span-2) */}
                   <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
-                      Group Size
+                      Travellers <span className="text-red-500 font-extrabold">*</span>
                     </label>
-                    <select
-                      name="groupSize"
-                      value={formData.groupSize}
-                      onChange={handleChange}
-                      className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
-                    >
-                      <option value="Couple (2 Travelers)">Couple (2)</option>
-                      <option value="4-8 Friends">4–8 Friends</option>
-                      <option value="9-15 Group">9–15 Group</option>
-                      <option value="Large Group (16+)">Large Group (16+)</option>
-                    </select>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">group</span>
+                      <select
+                        required
+                        name="travelers"
+                        value={formData.travelers}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
+                      >
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, '10+ Group'].map((n) => (
+                          <option key={n} value={n}>
+                            {n} {n === 1 ? 'Person' : 'People'}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Approximate Budget Per Person (lg:col-span-3) */}
+                  <div className="lg:col-span-3 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      Budget Per Person <span className="text-[10px] text-gray-400 font-normal">(Optional)</span>
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">payments</span>
+                      <select
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
+                      >
+                        <option value="Not decided yet">Not decided yet</option>
+                        <option value="Under ₹5,000">Under ₹5,000</option>
+                        <option value="₹5,000–₹10,000">₹5,000–₹10,000</option>
+                        <option value="₹10,000–₹20,000">₹10,000–₹20,000</option>
+                        <option value="₹20,000–₹50,000">₹20,000–₹50,000</option>
+                        <option value="Above ₹50,000">Above ₹50,000</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
-                {/* Customer Contact Details */}
-                <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+                {/* Customer Contact Details (Full Width) */}
+                <div className="w-full pt-3 border-t border-gray-100 dark:border-gray-800">
                   <CustomerContactInputs
                     name={formData.fullName}
                     phone={formData.phone}
@@ -266,8 +285,8 @@ Please share a customized package itinerary and budget estimate.`;
                   />
                 </div>
 
-                {/* Dual Enquiry Action Buttons */}
-                <div className="pt-2">
+                {/* Dual Enquiry Action Buttons (Full Width) */}
+                <div className="w-full pt-2">
                   <EnquiryActionButtons
                     isValid={isFormValid}
                     isSubmitting={isSubmitting}
@@ -283,13 +302,7 @@ Please share a customized package itinerary and budget estimate.`;
           </div>
         </header>
 
-        {/* Promo Offers Banner */}
-        <PromoBanner title="Package Discounts &amp; Group Savings" />
-
-        {/* Why Choose Us USP Section */}
-        <WhyChooseUs />
-
-        {/* Packages Grid */}
+        {/* 1. All Trip Packages (Package Catalogue immediately visible after Hero) */}
         <section className="py-16 px-4 md:px-10 max-w-7xl mx-auto w-full">
           <div className="flex flex-col items-center text-center gap-3 mb-10">
             <span className="text-primary text-xs font-bold uppercase tracking-wider">Top Packages</span>
@@ -308,7 +321,10 @@ Please share a customized package itinerary and budget estimate.`;
           </div>
         </section>
 
-        {/* Testimonials */}
+        {/* 2. Why Choose Us USP Section */}
+        <WhyChooseUs />
+
+        {/* 3. Testimonials (What Our Travelers Say) */}
         <section className="w-full px-4 md:px-10 py-16 bg-surface-light dark:bg-surface-dark border-t border-[#f4ece7] dark:border-[#3a2d25]">
           <div className="max-w-4xl mx-auto flex flex-col gap-8 text-center">
             <div>
@@ -368,6 +384,9 @@ Please share a customized package itinerary and budget estimate.`;
             </div>
           </div>
         </section>
+
+        {/* 4. Promotional Offers Banner (Relocated after catalogue & testimonials) */}
+        <PromoBanner title="Package Discounts &amp; Group Savings" />
 
         {/* Branded Success Popup */}
         <SuccessModal

@@ -30,6 +30,16 @@ export default function Hotels() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const scrollToSearch = (destination) => {
+    if (destination) {
+      setFormData((prev) => ({ ...prev, destination }));
+    }
+    const bar = document.getElementById('hotel-search-bar');
+    if (bar) {
+      bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   const isFormValid = Boolean(
     formData.destination.trim() &&
     formData.checkIn &&
@@ -133,140 +143,157 @@ Please share available hotel deals and group discount rates.`;
       />
 
       <main className="flex-grow">
-        {/* Hero Section with Horizontal Hotel Search Bar */}
-        <section className="relative px-4 sm:px-6 lg:px-8 pt-8 pb-14 md:pt-12 md:pb-20 max-w-7xl mx-auto">
-          {/* Header Copy */}
-          <div className="text-center max-w-3xl mx-auto mb-8 animate-fade-in-up">
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-3">
-              <span className="material-symbols-outlined text-sm">hotel</span>
-              Curated Stays &amp; Group Rooms
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-text-main dark:text-text-main-dark leading-tight">
-              Group Stays Handpicked for <br className="hidden sm:inline" />
-              <span className="text-primary">Comfort &amp; Community.</span>
-            </h1>
-            <p className="text-sm sm:text-base text-text-muted dark:text-text-muted-dark mt-2 max-w-xl mx-auto">
-              Skip endless booking tabs. Get handpicked, verified resorts with adjoining rooms and special group rates across India and abroad.
-            </p>
+        {/* Hero Section with Full-Width Luxury Resort Background */}
+        <section className="relative w-full overflow-hidden pt-8 pb-14 md:pt-12 md:pb-20 px-4 sm:px-6 lg:px-8 bg-[#1f1610]">
+          {/* Background image layer with luxury hotel ambience */}
+          <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+            <img
+              src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2000&q=80"
+              alt="Luxury Resort Stays"
+              className="w-full h-full object-cover opacity-35 filter brightness-75 scale-105"
+            />
+            {/* Dark overlays for high contrast and readability on all devices */}
+            <div className="absolute inset-0 bg-black/45 md:bg-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#1f1610]" />
           </div>
 
-          {/* Modern Horizontal Hotel Search Widget */}
-          <div className="w-full bg-surface-light dark:bg-surface-dark rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 border border-gray-100 dark:border-gray-800">
-            <form onSubmit={handleWhatsApp} className="flex flex-col gap-4">
-              {/* Top Row: Stay Type Tabs */}
-              <div className="flex flex-wrap items-center gap-3 pb-3 border-b border-gray-100 dark:border-gray-800">
-                {['Hotel', 'Resort', 'Villa / Homestay', 'Boutique Stay'].map((type) => (
-                  <button
-                    key={type}
-                    type="button"
-                    onClick={() => setFormData((prev) => ({ ...prev, stayType: type }))}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                      formData.stayType === type
-                        ? 'bg-primary text-white shadow-sm'
-                        : 'bg-background-light dark:bg-background-dark text-text-muted hover:text-text-main'
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
+          <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center">
+            {/* Header Copy */}
+            <div className="text-center text-white max-w-3xl mx-auto mb-6 md:mb-8 animate-fade-in-up">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/20 border border-primary/40 text-orange-200 text-xs font-bold uppercase tracking-wider mb-3">
+                <span className="material-symbols-outlined text-sm">hotel</span>
+                Curated Stays &amp; Group Rooms
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                Group Stays Handpicked for <br className="hidden sm:inline" />
+                <span className="text-primary">Comfort &amp; Community.</span>
+              </h1>
+              <p className="text-sm sm:text-base text-gray-200 mt-2 max-w-xl mx-auto">
+                Skip endless booking tabs. Get handpicked, verified resorts with adjoining rooms and special group rates across India and abroad.
+              </p>
+            </div>
 
-              {/* Horizontal Inputs Grid (Desktop row / Mobile compact) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
-                {/* Destination (lg:col-span-4) */}
-                <div className="lg:col-span-4 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
-                    City / Hotel Location
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-xl">location_on</span>
-                    <input
-                      type="text"
-                      required
-                      name="destination"
-                      list="indian-cities"
-                      value={formData.destination}
-                      onChange={handleChange}
-                      placeholder="Goa, Manali, Bali, Jaipur..."
-                      className="w-full bg-transparent border-none p-0 text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 placeholder:text-gray-400 placeholder:font-normal"
-                    />
-                  </div>
+            {/* Modern Horizontal Hotel Search Widget */}
+            <div
+              id="hotel-search-bar"
+              className="w-full bg-surface-light dark:bg-surface-dark rounded-2xl md:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-white/20 dark:border-white/10 backdrop-blur-md"
+            >
+              <form onSubmit={handleWhatsApp} className="flex flex-col gap-4">
+                {/* Top Row: Stay Type Tabs */}
+                <div className="flex flex-wrap items-center gap-3 pb-3 border-b border-gray-100 dark:border-gray-800">
+                  {['Hotel', 'Resort', 'Villa / Homestay', 'Boutique Stay'].map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, stayType: type }))}
+                      className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+                        formData.stayType === type
+                          ? 'bg-primary text-white shadow-sm'
+                          : 'bg-background-light dark:bg-background-dark text-text-muted hover:text-text-main'
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
                 </div>
 
-                {/* Check-In (lg:col-span-2) */}
-                <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
-                    Check-In
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-xl">calendar_today</span>
-                    <input
-                      type="date"
-                      required
-                      name="checkIn"
-                      value={formData.checkIn}
-                      onChange={handleChange}
-                      className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
-                    />
-                  </div>
-                </div>
-
-                {/* Check-Out (lg:col-span-2) */}
-                <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
-                    Check-Out <span className="text-[10px] lowercase text-gray-400">(optional)</span>
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-xl">event_repeat</span>
-                    <input
-                      type="date"
-                      name="checkOut"
-                      value={formData.checkOut}
-                      onChange={handleChange}
-                      className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
-                    />
-                  </div>
-                </div>
-
-                {/* Guests & Rating (lg:col-span-4) */}
-                <div className="lg:col-span-4 flex flex-col sm:flex-row items-center gap-2">
-                  <div className="w-full bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80">
+                {/* Horizontal Inputs Grid (Desktop row / Mobile compact) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+                  {/* Destination (lg:col-span-4) */}
+                  <div className="lg:col-span-4 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
                     <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
-                      Guests &amp; Rating
+                      City / Hotel Location
                     </label>
-                    <div className="flex items-center gap-3">
-                      <select
-                        name="guests"
-                        value={formData.guests}
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">location_on</span>
+                      <input
+                        type="text"
+                        required
+                        name="destination"
+                        list="indian-cities"
+                        value={formData.destination}
                         onChange={handleChange}
-                        className="bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
-                      >
-                        {[1, 2, 3, 4, 5, 6, 8, '10+ Group'].map((g) => (
-                          <option key={g} value={g}>
-                            {g} {g === 1 ? 'Guest' : 'Guests'}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder="Goa, Manali, Bali, Jaipur..."
+                        className="w-full bg-transparent border-none p-0 text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 placeholder:text-gray-400 placeholder:font-normal"
+                      />
+                    </div>
+                  </div>
 
-                      <span className="text-gray-300">|</span>
-
-                      <select
-                        name="hotelRating"
-                        value={formData.hotelRating}
+                  {/* Check-In (lg:col-span-2) */}
+                  <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      Check-In
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">calendar_today</span>
+                      <input
+                        type="date"
+                        required
+                        name="checkIn"
+                        value={formData.checkIn}
                         onChange={handleChange}
-                        className="bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-primary focus:ring-0 cursor-pointer"
-                      >
-                        <option value="Budget Friendly">Budget Friendly</option>
-                        <option value="3 Star">3 ★ Standard</option>
-                        <option value="4 Star">4 ★ Premium</option>
-                        <option value="5 Star">5 ★ Luxury</option>
-                      </select>
+                        className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Check-Out (lg:col-span-2) */}
+                  <div className="lg:col-span-2 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                      Check-Out <span className="text-[10px] lowercase text-gray-400">(optional)</span>
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-xl">event_repeat</span>
+                      <input
+                        type="date"
+                        name="checkOut"
+                        value={formData.checkOut}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Guests & Rating (lg:col-span-4) */}
+                  <div className="lg:col-span-4 flex flex-col sm:flex-row items-center gap-2">
+                    <div className="w-full bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80">
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-text-muted dark:text-text-muted-dark mb-0.5">
+                        Guests &amp; Rating
+                      </label>
+                      <div className="flex items-center gap-3">
+                        <select
+                          name="guests"
+                          value={formData.guests}
+                          onChange={handleChange}
+                          className="bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-text-main dark:text-text-main-dark focus:ring-0 cursor-pointer"
+                        >
+                          {[1, 2, 3, 4, 5, 6, 8, '10+ Group'].map((g) => (
+                            <option key={g} value={g}>
+                              {g} {g === 1 ? 'Guest' : 'Guests'}
+                            </option>
+                          ))}
+                        </select>
+
+                        <span className="text-gray-300">|</span>
+
+                        <select
+                          name="hotelRating"
+                          value={formData.hotelRating}
+                          onChange={handleChange}
+                          className="bg-transparent border-none p-0 text-xs sm:text-sm font-bold text-primary focus:ring-0 cursor-pointer"
+                        >
+                          <option value="Budget Friendly">Budget Friendly</option>
+                          <option value="3 Star">3 ★ Standard</option>
+                          <option value="4 Star">4 ★ Premium</option>
+                          <option value="5 Star">5 ★ Luxury</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Customer Contact Details */}
-                <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
+                {/* Customer Contact Details (Full Width, outside grid) */}
+                <div className="w-full pt-4 border-t border-gray-100 dark:border-gray-800">
                   <CustomerContactInputs
                     name={formData.name}
                     phone={formData.phone}
@@ -276,8 +303,8 @@ Please share available hotel deals and group discount rates.`;
                   />
                 </div>
 
-                {/* Dual Enquiry Action Buttons */}
-                <div className="pt-2">
+                {/* Dual Enquiry Action Buttons (Full Width, outside grid) */}
+                <div className="w-full pt-2">
                   <EnquiryActionButtons
                     isValid={isFormValid}
                     isSubmitting={isSubmitting}
@@ -288,8 +315,8 @@ Please share available hotel deals and group discount rates.`;
                     dropNumberLabel="Drop Your Number — We'll Reach Out"
                   />
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </section>
 
@@ -312,7 +339,8 @@ Please share available hotel deals and group discount rates.`;
             <div className="group rounded-2xl overflow-hidden bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-xl transition-all">
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src="/assets/Manali.jpg"
+                  src="/assets/packages/manali.jpg"
+                  onError={(e) => { e.currentTarget.src = '/assets/Manali.jpg'; }}
                   alt="Mountain View Cottages in Manali"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -329,16 +357,13 @@ Please share available hotel deals and group discount rates.`;
                 </p>
                 <div className="mt-4 pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between">
                   <span className="text-sm font-bold text-primary">From ₹1,999/night</span>
-                  <a
-                    href={`https://wa.me/918851722264?text=${encodeURIComponent(
-                      'Hi Fly With Friends, I want to enquire about Mountain Cottages in Manali.'
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-bold text-primary hover:underline"
+                  <button
+                    type="button"
+                    onClick={() => scrollToSearch('Manali')}
+                    className="text-xs font-bold text-primary hover:text-orange-600 flex items-center gap-1 cursor-pointer transition-colors"
                   >
                     Enquire Now →
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -346,7 +371,8 @@ Please share available hotel deals and group discount rates.`;
             <div className="group rounded-2xl overflow-hidden bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-xl transition-all">
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src="/assets/Bali.jfif"
+                  src="/assets/packages/bali.jpg"
+                  onError={(e) => { e.currentTarget.src = '/assets/Bali.jfif'; }}
                   alt="Private Pool Villas in Bali"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -363,16 +389,13 @@ Please share available hotel deals and group discount rates.`;
                 </p>
                 <div className="mt-4 pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between">
                   <span className="text-sm font-bold text-primary">From ₹6,499/night</span>
-                  <a
-                    href={`https://wa.me/918851722264?text=${encodeURIComponent(
-                      'Hi Fly With Friends, I want to enquire about Pool Villas in Bali.'
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-bold text-primary hover:underline"
+                  <button
+                    type="button"
+                    onClick={() => scrollToSearch('Bali')}
+                    className="text-xs font-bold text-primary hover:text-orange-600 flex items-center gap-1 cursor-pointer transition-colors"
                   >
                     Enquire Now →
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -380,7 +403,8 @@ Please share available hotel deals and group discount rates.`;
             <div className="group rounded-2xl overflow-hidden bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm hover:shadow-xl transition-all">
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src="/assets/Burj Khalifa.jfif"
+                  src="/assets/packages/dubai.jpg"
+                  onError={(e) => { e.currentTarget.src = '/assets/Burj Khalifa.jfif'; }}
                   alt="City Suites in Dubai"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -397,16 +421,13 @@ Please share available hotel deals and group discount rates.`;
                 </p>
                 <div className="mt-4 pt-3 border-t border-[#f4ece7] dark:border-[#3a2d25] flex items-center justify-between">
                   <span className="text-sm font-bold text-primary">From ₹8,999/night</span>
-                  <a
-                    href={`https://wa.me/918851722264?text=${encodeURIComponent(
-                      'Hi Fly With Friends, I want to enquire about Downtown Suites in Dubai.'
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-bold text-primary hover:underline"
+                  <button
+                    type="button"
+                    onClick={() => scrollToSearch('Dubai')}
+                    className="text-xs font-bold text-primary hover:text-orange-600 flex items-center gap-1 cursor-pointer transition-colors"
                   >
                     Enquire Now →
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

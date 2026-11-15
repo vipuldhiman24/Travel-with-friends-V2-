@@ -242,6 +242,7 @@ export default function AdminLeads({ leads = [], onRefresh, selectedLead, setSel
                       <div className="text-[11px] text-gray-400">
                         {lead.travelDate ? `Date: ${lead.travelDate}` : lead.departureDate ? `Dep: ${lead.departureDate}` : ''}
                         {(lead.travelers || lead.passengers || lead.guests) ? ` · ${lead.travelers || lead.passengers || lead.guests} Pax` : ''}
+                        {lead.budget && lead.budget !== 'Not decided yet' ? ` · Budget: ${lead.budget}` : ''}
                       </div>
                     </td>
 
