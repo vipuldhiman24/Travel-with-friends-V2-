@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AirplaneLoader from './components/AirplaneLoader';
 import DataLists from './components/DataLists';
+import ErrorBoundary from './components/ErrorBoundary';
 
 import Home from './pages/Home';
 import Flights from './pages/Flights';
@@ -14,6 +15,7 @@ import Trips from './pages/Trips';
 import Visa from './pages/Visa';
 import Contact from './pages/Contact';
 import Terms from './pages/Terms';
+import Admin from './pages/Admin';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -34,10 +36,13 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display">
       {/* 1s Airplane Takeoff Loader on Page Load / Route Changes */}
-      <AirplaneLoader />
+      {!isAdminRoute && <AirplaneLoader />}
 
       {/* Global Datalists for City/Airport/Country autocompletion */}
       <DataLists />
@@ -46,61 +51,67 @@ export default function App() {
       <ScrollToTop />
 
       {/* Shared Navigation Header */}
-      <Navbar />
+      {!isAdminRoute && <Navbar />}
 
       {/* Main Page Routing */}
-      <Routes>
-        {/* Home */}
-        <Route path="/" element={<Home />} />
-        <Route path="/index.html" element={<Home />} />
+      <ErrorBoundary>
+        <Routes>
+          {/* Admin Portal */}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/*" element={<Admin />} />
 
-        {/* Flights */}
-        <Route path="/flights" element={<Flights />} />
-        <Route path="/Flights.html" element={<Flights />} />
-        <Route path="/flights.html" element={<Flights />} />
+          {/* Home */}
+          <Route path="/" element={<Home />} />
+          <Route path="/index.html" element={<Home />} />
 
-        {/* Hotels */}
-        <Route path="/hotels" element={<Hotels />} />
-        <Route path="/Hotels.html" element={<Hotels />} />
-        <Route path="/hotels.html" element={<Hotels />} />
+          {/* Flights */}
+          <Route path="/flights" element={<Flights />} />
+          <Route path="/Flights.html" element={<Flights />} />
+          <Route path="/flights.html" element={<Flights />} />
 
-        {/* Bus */}
-        <Route path="/bus" element={<Bus />} />
-        <Route path="/Bus.html" element={<Bus />} />
-        <Route path="/bus.html" element={<Bus />} />
+          {/* Hotels */}
+          <Route path="/hotels" element={<Hotels />} />
+          <Route path="/Hotels.html" element={<Hotels />} />
+          <Route path="/hotels.html" element={<Hotels />} />
 
-        {/* Packages */}
-        <Route path="/trip-packages" element={<TripPackages />} />
-        <Route path="/Trip_packages.html" element={<TripPackages />} />
-        <Route path="/trip_packages.html" element={<TripPackages />} />
-        <Route path="/trip-packages.html" element={<TripPackages />} />
+          {/* Bus */}
+          <Route path="/bus" element={<Bus />} />
+          <Route path="/Bus.html" element={<Bus />} />
+          <Route path="/bus.html" element={<Bus />} />
 
-        {/* Dynamic Package Details */}
-        <Route path="/trips" element={<Trips />} />
-        <Route path="/Trips.html" element={<Trips />} />
-        <Route path="/trips.html" element={<Trips />} />
+          {/* Packages */}
+          <Route path="/trip-packages" element={<TripPackages />} />
+          <Route path="/Trip_packages.html" element={<TripPackages />} />
+          <Route path="/trip_packages.html" element={<TripPackages />} />
+          <Route path="/trip-packages.html" element={<TripPackages />} />
 
-        {/* Visa */}
-        <Route path="/visa" element={<Visa />} />
-        <Route path="/Visa.html" element={<Visa />} />
-        <Route path="/visa.html" element={<Visa />} />
+          {/* Dynamic Package Details */}
+          <Route path="/trips" element={<Trips />} />
+          <Route path="/Trips.html" element={<Trips />} />
+          <Route path="/trips.html" element={<Trips />} />
 
-        {/* Contact */}
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/Contact.html" element={<Contact />} />
-        <Route path="/contact.html" element={<Contact />} />
+          {/* Visa */}
+          <Route path="/visa" element={<Visa />} />
+          <Route path="/Visa.html" element={<Visa />} />
+          <Route path="/visa.html" element={<Visa />} />
 
-        {/* Terms & Policies */}
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/terms.html" element={<Terms />} />
-        <Route path="/Terms.html" element={<Terms />} />
+          {/* Contact */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/Contact.html" element={<Contact />} />
+          <Route path="/contact.html" element={<Contact />} />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          {/* Terms & Policies */}
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/terms.html" element={<Terms />} />
+          <Route path="/Terms.html" element={<Terms />} />
+
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </ErrorBoundary>
 
       {/* Shared Footer */}
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </div>
   );
 }

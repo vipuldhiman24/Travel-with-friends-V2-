@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import WhyChooseUs from '../components/WhyChooseUs';
 import { PHONE_NUMBER } from '../utils/whatsapp';
 
 export default function Terms() {
@@ -260,6 +261,9 @@ export default function Terms() {
             </ul>
           </article>
         </section>
+
+        {/* Why Choose Us USP Section */}
+        <WhyChooseUs />
 
         {/* Contact Assistance CTA */}
         <section className="mt-4 p-6 sm:p-8 rounded-2xl bg-primary/5 border border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">

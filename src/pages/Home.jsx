@@ -1,34 +1,108 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import PackageCard from '../components/PackageCard';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PromoBanner from '../components/PromoBanner';
+import SuccessModal from '../components/SuccessModal';
+import CustomerContactInputs from '../components/CustomerContactInputs';
+import EnquiryActionButtons from '../components/EnquiryActionButtons';
 import { PACKAGES } from '../data/packages';
 import { sendTripEnquiry, PHONE_NUMBER } from '../utils/whatsapp';
+import { fetchHomePagePackages, saveLead } from '../utils/firebase';
 
 export default function Home() {
+  const [packagesList, setPackagesList] = useState(PACKAGES.slice(0, 4));
   const [formData, setFormData] = useState({
     destination: '',
     travelDate: '',
     travelers: 2,
-    duration: '',
+    duration: '3–5 Days',
     style: 'Leisure',
     requests: '',
+    name: '',
+    phone: '',
+    email: '',
   });
-  const [formError, setFormError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
+
+  useEffect(() => {
+    fetchHomePagePackages().then((data) => {
+      if (data && data.length > 0) {
+        setPackagesList(data);
+      }
+    });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleWhatsAppSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.destination.trim() || !formData.travelDate || !formData.travelers || !formData.duration) {
-      setFormError(true);
-      return;
+  const isFormValid = Boolean(
+    formData.destination.trim() &&
+    formData.travelDate &&
+    formData.travelers &&
+    formData.duration &&
+    formData.name?.trim() &&
+    formData.phone?.trim() &&
+    formData.phone.trim().replace(/\D/g, '').length >= 10
+  );
+
+  const getValidationMessage = () => {
+    if (!formData.destination.trim()) return 'Please enter your destination.';
+    if (!formData.travelDate) return 'Please pick travel dates.';
+    if (!formData.duration) return 'Please select trip duration.';
+    if (!formData.name?.trim()) return 'Please enter your name.';
+    if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
+      return 'Please enter a valid 10-digit phone number.';
     }
-    setFormError(false);
+    return '';
+  };
+
+  const handleWhatsAppSubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid) return;
+
     sendTripEnquiry(formData);
+  };
+
+  const handleDropNumber = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const payload = {
+      sourcePage: 'Home',
+      enquiryType: 'Custom Trip Plan Request',
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      destination: formData.destination.trim(),
+      travelDate: formData.travelDate,
+      duration: formData.duration,
+      travelers: formData.travelers,
+      travellers: formData.travelers,
+      style: formData.style,
+      requests: formData.requests || ''
+    };
+
+    const result = await saveLead(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSuccessData({
+        name: formData.name,
+        phone: formData.phone,
+        destination: formData.destination,
+        service: `Custom Trip (${formData.style})`
+      });
+      setSuccessModalOpen(true);
+    } else {
+      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    }
   };
 
   const schema = {
@@ -142,7 +216,7 @@ export default function Home() {
 
             {/* Package cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {PACKAGES.map((pkg) => (
+              {packagesList.map((pkg) => (
                 <PackageCard key={pkg.id} pkg={pkg} />
               ))}
             </div>
@@ -287,91 +361,47 @@ export default function Home() {
                   />
                 </div>
 
-                {formError && (
-                  <p className="text-xs text-red-500 font-semibold text-center">
-                    Please fill destination, date, travelers and duration.
-                  </p>
-                )}
+                {/* Customer Contact Details */}
+                <div className="pt-2 border-t border-gray-100 dark:border-gray-800">
+                  <CustomerContactInputs
+                    name={formData.name}
+                    phone={formData.phone}
+                    email={formData.email}
+                    onChange={handleChange}
+                    horizontal={false}
+                  />
+                </div>
 
-                {/* WhatsApp Button */}
-                <button
-                  type="submit"
-                  className="w-full py-3.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg transition-all"
-                >
-                  Send via WhatsApp
-                </button>
-
-                {/* Call Button */}
-                <a
-                  href={`tel:${PHONE_NUMBER}`}
-                  className="w-full py-3.5 rounded-xl border border-primary/30 text-primary hover:bg-primary/10 font-bold text-base shadow-sm flex items-center justify-center gap-2 transition-all"
-                >
-                  <span className="material-symbols-outlined text-lg">call</span>
-                  Call Us Now
-                </a>
+                {/* Dual Enquiry Action Buttons */}
+                <div className="pt-2">
+                  <EnquiryActionButtons
+                    isValid={isFormValid}
+                    isSubmitting={isSubmitting}
+                    validationMessage={getValidationMessage()}
+                    onWhatsApp={handleWhatsAppSubmit}
+                    onDropNumber={handleDropNumber}
+                    whatsAppLabel="Send Enquiry on WhatsApp"
+                    dropNumberLabel="Drop Your Number — We'll Reach Out"
+                    showCallButton={true}
+                  />
+                </div>
               </form>
             </div>
           </div>
         </div>
 
-        {/* Why Book With Us Section */}
-        <section className="mt-4 py-12 px-6 sm:px-10 rounded-3xl bg-surface-light dark:bg-surface-dark border border-[#f4ece7] dark:border-[#3a2d25] shadow-sm">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-              <span className="material-symbols-outlined text-sm">stars</span>
-              The Fly With Friends Advantage
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-text-main dark:text-text-main-dark">
-              Why Book With Us?
-            </h2>
-            <p className="text-sm sm:text-base text-text-muted dark:text-text-muted-dark">
-              We make group travel effortless, enjoyable, and completely stress-free from start to finish.
-            </p>
-          </div>
+        {/* Promo Offer Banner */}
+        <PromoBanner title="Special Holiday Offers &amp; Group Discounts" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-orange-100 dark:bg-orange-950/40 text-primary flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">groups</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Group-Centric Planning</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                Tailored flight seats, synchronized buses, and multi-room stays so your entire group travels together seamlessly.
-              </p>
-            </div>
+        {/* Why Choose Us USP Section */}
+        <WhyChooseUs />
 
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-blue-100 dark:bg-blue-950/40 text-blue-600 flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">payments</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Transparent Pricing</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                No hidden fees or unexpected charges. Honest rates with negotiated group discounts directly from trusted suppliers.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-green-100 dark:bg-green-950/40 text-[#25D366] flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">support_agent</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">Dedicated Trip Support</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                Direct WhatsApp and call support with travel coordinators who assist your group before and during your journey.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-light dark:bg-background-dark/60 border border-[#f4ece7] dark:border-[#3a2d25] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
-              <div className="size-14 rounded-2xl bg-purple-100 dark:bg-purple-950/40 text-purple-600 flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-3xl">verified</span>
-              </div>
-              <h3 className="text-base font-bold text-text-main dark:text-text-main-dark mb-1.5">End-to-End Service</h3>
-              <p className="text-xs text-text-muted dark:text-text-muted-dark leading-relaxed">
-                From flight bookings, bus transfers, and hotels to visa assistance, all your travel requirements in one place.
-              </p>
-            </div>
-          </div>
-        </section>
-
+        {/* Branded Success Popup */}
+        <SuccessModal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+          data={successData}
+        />
       </main>
     </>
   );

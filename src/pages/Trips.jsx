@@ -1,18 +1,115 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PromoBanner from '../components/PromoBanner';
+import SuccessModal from '../components/SuccessModal';
+import CustomerContactInputs from '../components/CustomerContactInputs';
+import EnquiryActionButtons from '../components/EnquiryActionButtons';
 import { PACKAGES } from '../data/packages';
 import { openWhatsApp, PHONE_NUMBER } from '../utils/whatsapp';
+import { fetchPackages, saveLead } from '../utils/firebase';
 
 export default function Trips() {
   const [searchParams] = useSearchParams();
   const pkgId = Number(searchParams.get('pkg')) || 2; // Default to Manali (ID: 2) if not specified
+  const [packagesList, setPackagesList] = useState(PACKAGES);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    travelDate: '',
+    travelers: 2,
+    notes: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successData, setSuccessData] = useState(null);
 
-  const pkg = PACKAGES.find((p) => p.id === pkgId) || PACKAGES[0];
+  useEffect(() => {
+    fetchPackages().then((data) => {
+      if (data && data.length > 0) setPackagesList(data);
+    });
+  }, []);
 
-  const handleWhatsApp = () => {
-    const message = `Hello Fly With Friends 👋\n\nI want to enquire about the package:\n*${pkg.title}*\nLocation: ${pkg.location}\nDuration: ${pkg.duration}\nPrice: ${pkg.price}\n\nPlease share availability and group discount details.`;
+  const pkg = packagesList.find((p) => Number(p.id) === pkgId) || packagesList[0];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const isFormValid = Boolean(
+    formData.name?.trim() &&
+    formData.phone?.trim() &&
+    formData.phone.trim().replace(/\D/g, '').length >= 10
+  );
+
+  const getValidationMessage = () => {
+    if (!formData.name?.trim()) return 'Please enter your name.';
+    if (!formData.phone?.trim() || formData.phone.trim().replace(/\D/g, '').length < 10) {
+      return 'Please enter a valid 10-digit phone number.';
+    }
+    return '';
+  };
+
+  const handleWhatsApp = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid) return;
+
+    const message = `Hello Fly With Friends 👋
+
+I want to enquire about the package:
+*${pkg.title}*
+Location: ${pkg.location}
+Duration: ${pkg.duration}
+Price: ${pkg.price}
+
+Customer: ${formData.name}
+Phone: ${formData.phone}
+${formData.email ? `Email: ${formData.email}\n` : ''}${formData.travelDate ? `Preferred Date: ${formData.travelDate}\n` : ''}Travelers: ${formData.travelers} Pax
+
+Please share availability and group discount details.`;
+
     openWhatsApp(message);
+  };
+
+  const handleDropNumber = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!isFormValid || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const payload = {
+      sourcePage: 'Trips',
+      enquiryType: 'Package Detail Enquiry',
+      packageId: String(pkg.id),
+      packageTitle: pkg.title,
+      destination: pkg.location,
+      price: pkg.price,
+      duration: pkg.duration,
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email?.trim() || '',
+      travelDate: formData.travelDate || 'Flexible',
+      travelers: formData.travelers,
+      travellers: formData.travelers,
+      notes: formData.notes || ''
+    };
+
+    const result = await saveLead(payload);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setSuccessData({
+        name: formData.name,
+        phone: formData.phone,
+        destination: pkg.location,
+        service: pkg.title
+      });
+      setSuccessModalOpen(true);
+    } else {
+      alert('Unable to submit enquiry right now. Please try sending via WhatsApp or calling directly.');
+    }
   };
 
   const schema = {
@@ -173,22 +270,62 @@ export default function Trips() {
                       <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-bold">Best Deal</span>
                     </div>
 
-                    <div className="flex flex-col gap-3">
-                      <button
-                        onClick={handleWhatsApp}
-                        className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 px-6 rounded-xl shadow-lg flex items-center justify-center gap-3 transition-all"
-                      >
-                        <span className="material-symbols-outlined">chat</span>
-                        <span>Send Enquiry via WhatsApp</span>
-                      </button>
+                    {/* Customer Enquiry Form */}
+                    <div className="space-y-3 pt-2 border-t border-gray-100 dark:border-gray-800">
+                      <CustomerContactInputs
+                        name={formData.name}
+                        phone={formData.phone}
+                        email={formData.email}
+                        onChange={handleChange}
+                        horizontal={false}
+                      />
 
-                      <a
-                        href={`tel:${PHONE_NUMBER}`}
-                        className="w-full py-3.5 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow transition-all"
-                      >
-                        <span className="material-symbols-outlined">call</span>
-                        <span>Call Us: +91 88517 22264</span>
-                      </a>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-background-light dark:bg-background-dark/70 rounded-xl p-2.5 border border-gray-200 dark:border-gray-700/80">
+                          <label className="block text-[10px] font-bold uppercase tracking-wider text-text-muted mb-0.5">
+                            Date <span className="lowercase font-normal">(optional)</span>
+                          </label>
+                          <input
+                            type="date"
+                            name="travelDate"
+                            value={formData.travelDate}
+                            onChange={handleChange}
+                            className="w-full bg-transparent border-none p-0 text-xs font-bold text-text-main dark:text-white focus:ring-0"
+                          />
+                        </div>
+
+                        <div className="bg-background-light dark:bg-background-dark/70 rounded-xl p-2.5 border border-gray-200 dark:border-gray-700/80">
+                          <label className="block text-[10px] font-bold uppercase tracking-wider text-text-muted mb-0.5">
+                            Travelers
+                          </label>
+                          <select
+                            name="travelers"
+                            value={formData.travelers}
+                            onChange={handleChange}
+                            className="w-full bg-transparent border-none p-0 text-xs font-bold text-text-main dark:text-white focus:ring-0 cursor-pointer"
+                          >
+                            {[1, 2, 3, 4, 6, 8, 10, '12+ Group'].map((t) => (
+                              <option key={t} value={t}>
+                                {t} {t === 1 ? 'Traveler' : 'Travelers'}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Dual Action Buttons */}
+                    <div className="pt-2">
+                      <EnquiryActionButtons
+                        isValid={isFormValid}
+                        isSubmitting={isSubmitting}
+                        validationMessage={getValidationMessage()}
+                        onWhatsApp={handleWhatsApp}
+                        onDropNumber={handleDropNumber}
+                        whatsAppLabel="Send Enquiry on WhatsApp"
+                        dropNumberLabel="Drop Your Number — We'll Reach Out"
+                        showCallButton={true}
+                      />
                     </div>
                   </div>
                 </div>
@@ -215,6 +352,19 @@ export default function Trips() {
             </div>
           </div>
         </div>
+
+        {/* Promo Banner */}
+        <PromoBanner title="Special Group Discount" className="mt-12" />
+
+        {/* Why Choose Us */}
+        <WhyChooseUs />
+
+        {/* Branded Success Popup */}
+        <SuccessModal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+          data={successData}
+        />
       </main>
     </>
   );

@@ -14,6 +14,13 @@ export default function PackageCard({ pkg }) {
           alt={pkg.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            if (/vaishno/i.test(pkg.title)) e.currentTarget.src = '/assets/packages/vaishno-devi.jpg';
+            else if (/manali/i.test(pkg.title)) e.currentTarget.src = '/assets/packages/manali.jpg';
+            else if (/dubai/i.test(pkg.title)) e.currentTarget.src = '/assets/packages/dubai.jpg';
+            else if (/bali/i.test(pkg.title)) e.currentTarget.src = '/assets/packages/bali.jpg';
+          }}
         />
         {pkg.badge && (
           <span className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-white text-xs font-semibold px-2.5 py-1 rounded-full">

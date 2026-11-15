@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import WhyChooseUs from '../components/WhyChooseUs';
+import PromoBanner from '../components/PromoBanner';
 import { openWhatsAppQuick, PHONE_NUMBER } from '../utils/whatsapp';
 
 export default function Contact() {
@@ -297,6 +299,12 @@ export default function Contact() {
             </div>
           </div>
         </section>
+
+        {/* Promo Banner */}
+        <PromoBanner title="Special Group Booking Offers" />
+
+        {/* Why Choose Us */}
+        <WhyChooseUs />
       </main>
     </>
   );
