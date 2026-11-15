@@ -179,7 +179,7 @@ Please share the document checklist, processing timeline, and visa fees.`;
               id="visa-search-bar"
               className="w-full bg-surface-light dark:bg-surface-dark rounded-2xl md:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 border border-white/20 dark:border-white/10 backdrop-blur-md"
             >
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <form onSubmit={handleWhatsApp} className="flex flex-col gap-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
                   {/* Your Destination (lg:col-span-4) */}
                   <div className="lg:col-span-4 bg-background-light dark:bg-background-dark/70 rounded-xl p-3 border border-gray-200 dark:border-gray-700/80 hover:border-primary/50 transition-colors">
